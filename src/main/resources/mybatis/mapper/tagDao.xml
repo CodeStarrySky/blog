@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wch.blog.dao.TagDao">
+    <resultMap id="TagMap" type="com.wch.blog.bean.Tag">
+        <id property="id" column="id" jdbcType="BIGINT"></id>
+        <result property="tagName" column="tag_name" jdbcType="VARCHAR"></result>
+    </resultMap>
+    <select id="selectAll" resultMap="TagMap">
+        select * from tag;
+    </select>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="TagMap">
+        select * from tag where id=#{id};
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="TagMap">
+        select * from tag where tag_name=#{tagName};
+    </select>
+
+    <insert id="saveTag" parameterType="com.wch.blog.bean.Tag">
+        insert into tag(id,tag_name) values(#{tag.id},#{tag.tagName});
+    </insert>
+
+    <update id="updateTag" parameterType="com.wch.blog.bean.Tag">
+        update tag set tag_name=#{tag.tagName} where id=#{tag.id};
+    </update>
+
+    <delete id="deleteTag" parameterType="java.lang.Long">
+        delete from tag where id=#{id};
+    </delete>
+</mapper>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!-- 头部分  -->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>[[${title}]]</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}"/>
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link href="../static/css/jq22.css" th:href="@{/css/jq22.css}" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<!--导航条-->
+<nav th:fragment="top" class="navbar navbar-default row text-center thumbnail m-box-shadow-mini m-margin-none m-padded-none" role="navigation" style="height:66px;margin-bottom: 0px">
+    <div class="content">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="" href="#">
+                    <div class="form-inline navbar-btn ">
+                        <img class="m-div-imag-size m-padded-none" src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" style="border-radius: 55%;">
+                        <b class="m-opacity-big m-font-color-blue">Wchaohui</b>
+                    </div>
+
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1" style="padding-top: 6px">
+                <ul class="nav navbar-nav ">
+                    <li><a href="#" style="font-size: 18px;margin-left: 52px" ><span class="glyphicon glyphicon-home"
+                                                                                    style="padding-right: 6px"
+                                                                                    aria-hidden="true">&ensp;首页</span> </a></li>
+                    <li><a href="#" style="font-size: 18px;margin-left: 52px"><span class="glyphicon glyphicon-th-list"
+                                                                                    style="padding-right: 6px"
+                                                                                    aria-hidden="true">&ensp;分类 </span></a></li>
+                    <li><a href="#" style="font-size: 18px;margin-left: 52px"><span class="glyphicon glyphicon-time"
+                                                                                    style="padding-right: 6px"
+                                                                                    aria-hidden="true">&ensp;归档 </span></a></li>
+                    <li><a href="#" style="font-size: 18px;margin-left: 52px"><span class="glyphicon glyphicon-tags"
+                                                                                    style="padding-right: 6px"
+                                                                                    aria-hidden="true">&ensp;标签</span> </a></li>
+                    <li><a href="#" style="font-size: 18px;margin-left: 52px "><span class="glyphicon glyphicon-user"
+                                                                                     style="" aria-hidden="true">&ensp;关于我</span>
+                    </a></li>
+
+
+
+                </ul>
+                <div class="navbar-form navbar-right" >
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="搜索">
+                        <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                   </span>
+                    </div><!-- /input-group -->
+                </div><!-- /.col-lg-6 -->
+
+
+            </div>
+
+        </div>
+    </div>
+
+</nav>
+
+<!-- 左侧 -->
+<div th:fragment="left" class="col-md-3"  >
+    <nav class="collapse navbar-collapse m-padded-none " id="collapse-2" style="margin-top: 52px;padding-top: 0px;">
+        <div class="panel panel-default panel-body m-border-radius m-box-shadow-mini  m-padded-none text-center" >
+            <!--                头像、介绍-->
+            <div class="row m-middle">
+                <!--                    头像-->
+                <div class="col-md-6 center-block">
+                    <img src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" class="img-responsive m-margin-large">
+                </div>
+                <!-- 介绍-->
+                <div class="col-md-6   m-opacity-big text-center">
+                    <div class="m-margin-tb-big" >
+                        <h5>喜欢编程的菜鸟</h5>
+                        <h5>喜欢编程的菜鸟</h5>
+                        <h5>喜欢编程的菜鸟</h5>
+                    </div>
+                </div>
+            </div>
+            <!-- 个人信息 -->
+            <div class="row text-center m-font-lined ">
+                <h3 class="m-opacity" style="margin-top: 0px;"><b>Wchaohui</b></h3>
+                <h5>Rookie & Developer</h5>
+                <h5 class="m-opacity-big"  style="margin-bottom: 0px" ><span class="glyphicon glyphicon-map-marker"aria-hidden="true"></span> 湖南·长沙</h5>
+                <button type="button" class="btn btn-info m-border-radius m-padded-lr-mini m-margin-tb-mini" style="background-color: dodgerblue;outline: none">点击关注我吧</button>
+            </div>
+            <!--                 博客 、 标签 -->
+            <hr class="m-margin-none">
+            <div class="row ">
+
+                <!-- 博客 -->
+                <div class="col-md-6 m-padded-none m-opacity-mini m-padded-tb" style="border-right: 1px solid #E6E3E3">
+                    <h3 class="m-font-mimi m-margin-none m-font-lined-mini">52</h3>
+                    <h3 class="m-font-mini m-margin-none m-font-lined-mini">文章</h3>
+                </div>
+
+
+                <!-- 标签 -->
+                <div class="col-md-6 m-padded-none m-opacity-mini m-padded-tb" >
+                    <h3 class="m-font-mimi m-margin-none m-font-lined-mini">52</h3>
+                    <h3 class="m-font-mini m-margin-none m-font-lined-mini">标签</h3>
+                </div>
+
+            </div>
+            <hr class="m-margin-none" style="padding-left: 0;padding-right:0">
+            <div class="row m-opacity-big m-margin-tiny m-div-min-height-mini">
+                <h5>友情链接......</h5>
+            </div>
+
+
+
+        </div>
+    </nav>
+</div>
+
+<!-- 右侧 -->
+<div th:fragment="right" class="col-md-3 " >
+    <div class="m-padded-none " style="margin-top: 52px;padding-top: 0px;" >
+        <!--            分类-->
+        <div class="panel panel-default panel-body m-border-radius m-box-shadow-mini " >
+            <div class=" page-header m-padded-none m-margin-none" style="padding-left: 25px">
+                <h3 class="row m-opacity-mini m-font-spaced ">
+                    <b class="col-md-5">分类</b>
+                    <a class="col-md-2 col-md-offset-5" href="#"><span class="glyphicon glyphicon-forward text-right " style="color: darkgray;margin-bottom: 5px" aria-hidden="true"></span></a>
+                </h3>
+            </div>
+            <!-- 分类具体内容 -->
+            <div class="col-md-10 col-md-offset-1 text-center m-opacity-mini m-div-min-height">
+                <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini ">
+                    <h4 class="m-center-block m-font-lined-mini">
+                        <div class="col-md-10 m-font-spaced-tiny " style="padding-bottom: 8px">技术框架</div>
+                        <span class="col-md-2  label label-info " style="margin-bottom: 10px">13</span>
+                    </h4>
+                </div>
+                <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini">
+                    <h4>
+                        <div class="col-md-10 m-font-spaced-tiny" style="padding-bottom: 8px">bug经验分享</div>
+                        <span class="col-md-2  label label-info" style="margin-bottom: 10px">13</span>
+                    </h4>
+                </div>
+
+                <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini">
+                    <h4>
+                        <div class="col-md-10 m-font-spaced-tiny" style="padding-bottom: 8px">技术框架</div>
+                        <span class="col-md-2  label label-info" style="margin-bottom: 10px">13</span>
+                    </h4>
+                </div>
+                <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini">
+                    <h4>
+                        <div class="col-md-10 m-font-spaced-tiny" style="padding-bottom: 8px">技术框架</div>
+                        <span class="col-md-2  label label-info" style="margin-bottom: 10px">13</span>
+                    </h4>
+                </div>
+                <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini">
+                    <h4>
+                        <div class="col-md-10 m-font-spaced-tiny" style="padding-bottom: 8px">技术框架</div>
+                        <span class="col-md-2  label label-info" style="margin-bottom: 10px">13</span>
+                    </h4>
+                </div>
+
+            </div>
+        </div>
+        <!--            标签-->
+        <div class="panel panel-default panel-body m-border-radius m-box-shadow-mini m-margin-tb ">
+            <div class=" page-header m-padded-none m-margin-none" style="padding-left: 25px">
+                <h3 class="row m-opacity-mini m-font-spaced ">
+                    <b class="col-md-5">标签</b>
+                    <a class="col-md-2 col-md-offset-5" href="#"><span class="glyphicon glyphicon-forward text-right " style="color: darkgray;margin-bottom: 5px" aria-hidden="true"></span></a>
+                </h3>
+            </div>
+            <!-- 标签具体内容 -->
+            <div class="m-opacity-mini m-div-min-height  m-margin-none text-center" >
+                <!--                    <div class="col-md-5 m-margin-tiny "><h3 ><span class="label label-info">spring boot</span></h3></div>-->
+                <span class="btn btn-info m-margin-large">spring boot&nbsp;&nbsp;<span class="badge">3</span> </span>
+                <span class="btn btn-info m-margin-large">spring boot&nbsp;&nbsp;<span class="badge">3</span> </span>
+                <span class="btn btn-info m-margin-large">spring boot&nbsp;&nbsp;<span class="badge">3</span> </span>
+                <span class="btn btn-info m-margin-large">spring boot&nbsp;&nbsp;<span class="badge">3</span> </span>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--底部footer-->
+<footer th:fragment="footer"   class="thumbnail text-center  m-box-shadow m-padded-none m-margin-none" style="background-color: ghostwhite" >
+    <div class="content">
+
+        <div class="col-md-12 m-font-spaced">
+            <div class="row  m-padded-none m-margin-tb-mini" style="padding-top: 52px;">
+
+                <div class="col-md-3 m-div-min-height-large " style="border-right: 2px solid #E6E3E3">
+                    <img src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" class="m-box-shadow" style="width: 166px; height: 166px">
+                </div>
+                <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #E6E3E3">
+                    <h3>最新博客</h3>
+                    <div class="m-margin-tb-mini " >
+                        <h5 ><a href="#" style="color: deepskyblue">最新博客1</a></h5>
+                        <h5><a href="#" style="color: deepskyblue">最新博客2</a></h5>
+                        <h5><a href="#" style="color: deepskyblue">最新博客3</a></h5>
+                    </div>
+
+                </div>
+                <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #e6e3e3">
+                    <h3>联系我</h3>
+                    <div class="m-margin-tb-mini m-font-color-blue">
+                        <h5>QQ: 2574576066</h5>
+                        <h5>邮箱: wchaohui@foxmail.com</h5>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3 m-div-min-height-large m-opacity-tiny m-font-spaced">
+                    <h3>Blog</h3>
+                    <h5 class="m-font-lined m-font-color-blue ">这是我的个人博客，会分享关于编程、思考相关的任何内容，主要用来帮助提升自己。</h5>
+                </div>
+            </div>
+        </div>
+        <div class="row m-margin-tb m-margin-none">
+            <div class="col-md-6 col-md-offset-3">
+                <!-- 分割线               <div class="m-aline "></div>-->
+                <div>
+                    <h5 class="m-opacity-mini">Copyright © 2020-2022 Wchaohui 版权所有</h5>
+                    <div style="width:300px;margin:auto;">
+                        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43132202001055"
+                           style="display:inline-block;text-decoration:none;">
+                            <img src="../static/images/备案图标.png" th:src="@{/images/备案图标.png}" style="float:left;"/>
+                            <p style="float:left;margin: 5px 0px 0px 5px; color:#939393;">湘公网安备 43132202001055号</p>
+                        </a>
+                    </div>
+                    <h5 ><a href="http://www.beian.miit.gov.cn" style="color: #939393">滇ICP备20003052号-1</a></h5>
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+</footer>
+
+
+<!-- script部分 -->
+<th:block th:fragment="script">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../static/js/jq22.js" th:src="@{/js/jq22.js}"></script>
+</th:block>
+</body>
+</html>

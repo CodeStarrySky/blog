@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wch.blog.dao.BlogDao">
+   <resultMap id="BlogMap" type="com.wch.blog.bean.Blog">
+       <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
+       <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
+       <result          property="content"           column="content"           jdbcType="LONGVARCHAR"></result>
+       <result          property="firstFigure"       column="first_figure"     jdbcType="VARCHAR"></result>
+       <result          property="ifOriginal"        column="if_original"      jdbcType="BIT"></result>
+       <result          property="views"              column="views"             jdbcType="INTEGER"></result>
+       <result          property="appreciates"       column="appreciates"       jdbcType="BIT"></result>
+       <result          property="shareStatement"    column="share_statement"   jdbcType="BIT"></result>
+       <result          property="commentabled"      column="commentabled"      jdbcType="BIT"></result>
+       <result          property="published"         column="published"          jdbcType="BIT"></result>
+       <result          property="recommend"         column="recommend"          jdbcType="BIT"></result>
+       <result          property="createTime"        column="create_time"        jdbcType="DATE"></result>
+       <result          property="updateTime"        column="update_time"        jdbcType="DATE"></result>
+       <result          property="flag"               column="flag"               jdbcType="VARCHAR"></result>
+       <association     property="user"             column="id"     select="com.wch.blog.dao.UserDao.selectById"    fetchType="lazy"></association>
+       <association     property="type"             column="id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
+       <collection      property="comments"         column="id"     ofType="com.wch.blog.bean.Comment"      select="com.wch.blog.CommentDao.comselectByBlogId"  fetchType="lazy"></collection>
+       <collection      property="tags"             column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
+   </resultMap>
+    <sql id="ifNullSql">
+        <if  test="id!=null">id=#{id}</if>
+        <if  test="title!=null"> title=#{title}</if>
+        <if  test="content!=null"> content=#{content}</if>
+        <if  test="firstFigure!=null"> first_figure=#{firstFigure}</if>
+        <if  test="ifOriginal!=null"> if_original=#{ifOriginal}</if>
+        <if  test="views!=null"> views=#{views}</if>
+        <if  test="appreciates!=null"> appreciates=#{appreciates}</if>
+        <if  test="shareStatement!=null"> share_statement=#{shareStatement}</if>
+        <if  test="commentabled!=null"> commentabled=#{commentabled}</if>
+        <if  test="published!=null"> published=#{published}</if>
+        <if  test="recommend!=null"> recommend=#{recommend}</if>
+        <if  test="createTime!=null"> create_time=#{createTime}</if>
+        <if  test="updateTime!=null"> update_time=#{updateTime}</if>
+        <if  test="flag!=null"> flag=#{flag}</if>
+        <if  test="flag!=null"> flag=#{user.id}</if>
+        <if  test="flag!=null"> flag=#{type.id}</if>
+    </sql>
+    <select id="selectAll" resultMap="BlogMap">
+        select * from blog;
+    </select>
+
+    <select id="selectById" resultMap="BlogMap" parameterType="java.lang.Long">
+        select * from blog where id=#{id};
+    </select>
+
+    <select id="selectByTitle" resultMap="BlogMap" parameterType="java.lang.String">
+        select * from blog where title=#{title}
+    </select>
+
+    <update id="updateBlog" parameterType="com.wch.blog.bean.Blog">
+        update blog
+        <set>
+            <include refid="ifNullSql"></include>
+        </set>
+    </update>
+    <update id="saveBlog" parameterType="com.wch.blog.bean.Blog">
+        insert into blog values (#{blog.title},#{blog.content},#{blog.title},#{blog.firstFigure},
+                                    #{blog.ifOriginal},#{blog.views},#{blog.appreciates},#{blog.shareStatement},
+                                    #{blog.commentabled},#{blog.published},#{blog.recommend},#{blog.createTime},#{blog.updateTime},#{blog.flag});
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from blog where id=#{id};
+    </delete>
+
+
+
+
+
+
+</mapper>

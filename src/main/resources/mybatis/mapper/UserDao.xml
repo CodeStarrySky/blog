@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wch.blog.dao.UserDao">
+        <resultMap id="UserMap" type="com.wch.blog.bean.User">
+            <id     column="id"                 jdbcType="BIGINT"       property="id"></id>
+            <result column="nickname"           jdbcType="VARCHAR"      property="nickname"></result>
+            <result column="username"           jdbcType="VARCHAR"      property="username"></result>
+            <result column="password"           jdbcType="VARCHAR"      property="password"></result>
+            <result column="address"            jdbcType="VARCHAR"      property="address"></result>
+            <result column="email"              jdbcType="VARCHAR"      property="email"></result>
+            <result column="qq"                 jdbcType="VARCHAR"      property="qq"></result>
+            <result column="wechat"             jdbcType="VARCHAR"      property="weChat"></result>
+            <result column="head_portrait"      jdbcType="VARCHAR"      property="headPortrait"></result>
+            <result column="type"               jdbcType="INTEGER"      property="type"></result>
+            <result column="create_time"        jdbcType="DATE"         property="createTime"></result>
+            <result column="update_time"        jdbcType="DATE"         property="updateTime"></result>
+            <result column="public_qrcode"      jdbcType="VARCHAR"      property="publicQrCode"></result>
+            <result column="collection_qrcode"  jdbcType="VARCHAR"      property="collectionQrCode"></result>
+            <result column="introduce_myself"   jdbcType="LONGVARCHAR"  property="introduceMyself"></result>
+            <result column="blog_intro"         jdbcType="LONGVARCHAR"  property="blogIntro"></result>
+            <result column="profession"         jdbcType="VARCHAR"      property="profession"></result>
+            <result column="intro1"             jdbcType="VARCHAR"      property="intro1"></result>
+            <result column="intro2"             jdbcType="VARCHAR"      property="intro2"></result>
+            <result column="intro3"             jdbcType="VARCHAR"      property="intro3"></result>
+        </resultMap>
+    <select id="selectList" resultMap="UserMap">
+        select * from user;
+    </select>
+    <select id="selectById" resultType="com.wch.blog.bean.User">
+
+    </select>
+    <select id="selectByCondition"  resultMap="UserMap">
+        select * from user where username=#{username} and password=#{password}
+    </select>
+
+</mapper>

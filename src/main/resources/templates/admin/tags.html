@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/admin-commons::admin-head('标签管理')">
+</head>
+<body>
+<!--导航条-->
+<nav th:replace="admin/admin-commons::admin-nav"></nav>
+<div class="modal fade" tabindex="-1" role="dialog" id="tag_add_modal" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="tag_title">新增标签</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <input  type="hidden" name="id" id="tag_id" value="">
+                    <div class="form-group">
+                        <label for="tag_name" class="col-sm-3 control-label" id="tag_info">请输入标签的名称：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="tag_name" name="tagName" >
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="tag_save_btn">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div class="content text-center">
+    <div class="col-md-8 col-md-offset-2 m-padded-tb-big" id="tag_content">
+
+        <div class="text-right" style="margin-bottom: 15px">
+            <button type="button" class="btn btn-primary" style="outline: none" id="add_btn">新增</button>
+
+        </div>
+        <!-- 博客表格 -->
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover" >
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width: 52px">序号</th>
+                        <th class="text-center">标签名称</th>
+                        <th class="text-center" style="width: 199px">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="tag,tagStat:${tags}">
+                        <td style="display:table-cell;vertical-align: middle" th:text="${tagStat.count}">1</td>
+                        <td style="display:table-cell;vertical-align: middle" th:text="${tag.tagName}">spring boot</td>
+                        <td style="display:table-cell;vertical-align: middle">
+                            <button type="button" class="btn btn-info tag_edit" style="outline: none" th:href="@{/admin/tag/}+${tag.id}">编辑</button>
+                            <button type="button" class="btn btn-danger tag_delete" style="outline: none" th:href="@{/admin/tag/}+${tag.id}">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous">
+</script>
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+    ctxPath = /*[[@{/}]]*/ '';
+    /*]]>*/
+    $('.dropdown-toggle').dropdown();
+
+    $('#add_btn,.tag_edit').click(function () {
+
+
+        if($(this).attr('id')==undefined){
+            $.get(
+                $(this).attr('href'),
+                function (result) {
+                    $('#tag_id').val(result.extend.tag.id);
+                    $('#tag_title').text("修改分类");
+                    $('#tag_info').text("请修改分类：");
+                    $('#tag_name').val(result.extend.tag.tagName)
+                }
+            )
+        }else{
+            $('#tag_title').text("添加分类");
+            $('#tag_info').text("请输入分类名称：");
+            $('#tag_name').val("");
+        }
+        //打开模态框
+        $('#tag_add_modal').modal();
+        return false;
+    });
+    $('#tag_add_modal').on('hidden.bs.modal', function (e) {
+        //1、清空模态框表单
+        $('#tag_add_modal form')[0].reset();
+        $('#tag_save_btn').removeClass("active disabled")
+        $('#tag_name').parent().removeClass("has-success has-error")
+        $('#tag_name').next().remove();
+    })
+    //校验表单
+    $('#tag_name').change(function () {
+        //清空错误样式
+        $('#tag_save_btn').removeClass("active disabled")
+        $('#tag_name').parent().removeClass("has-success has-error")
+        $('#tag_name').next().remove();
+        var tagname = $(this).val();
+        $.getJSON(
+            ctxPath+'admin/checkTagName',
+            "tagName="+tagname,
+            function (result) {
+
+                if(result.code==100){
+                    $('#tag_name').parent().addClass("has-success")
+                    $('#tag_save_btn').addClass("active")
+                }else{
+
+                    $('#tag_save_btn').addClass("disabled")
+
+                    $('#tag_name').parent().addClass("has-error").append($("<p style='color: #aa2222'></p>").text(result.extend.vi))
+                }
+            }
+
+        )
+    })
+    $('#tag_save_btn').click(function () {
+        if($('#tag_id').val()>0){
+            $.ajax({
+                url: ctxPath+"admin/tag",
+                type: 'PUT',
+                data: $("#tag_add_modal form").serialize(),
+                success: function (result) {
+                    if(result.code==100){
+                        $("#tag_add_modal").modal('hide');
+                        location.reload();
+                    }else{
+                        $("#tag_add_modal").modal('hide');
+                    }
+                }
+            })
+        }else{
+            $.ajax({
+                url: ctxPath+"admin/tag",
+                type: 'POST',
+                data: $("#tag_add_modal form").serialize(),
+                success: function (result) {
+                    if(result.code==100){
+                        $('#tag_add_modal').modal('hide');
+                        //刷新页面
+                        location.reload();
+                    }else{
+                        $("#tag_add_modal").modal('hide');
+                    }
+                }
+            })
+        }
+
+    })
+    $('tbody').delegate(".tag_delete","click",function () {
+        $.ajax({
+            url: $(this).attr('href'),
+            type: 'DELETE',
+            success: function (result) {
+                if(result.code==100){
+                    console.log("deleteTag",result.extend.vi);
+                    location.reload();
+                }else{
+                    console.log("deleteTag",result.extend.vi);
+                    location.reload();
+                }
+            }
+        })
+    })
+
+
+</script>
+</body>
+</html>

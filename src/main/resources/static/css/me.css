@@ -1,0 +1,370 @@
+
+
+a:link {
+    color: black;
+    text-decoration:none;
+}
+/* 未访问链接*/
+a:visited {
+    color: black;
+    text-decoration:none;
+}
+
+/* 已访问链接 */
+a:hover {
+    color: orange;
+    text-decoration:none;
+}  /* 鼠标移动到链接上 */
+a:active {
+    color:orange;
+    text-decoration:none;
+}
+
+.m-imag-size {
+    width: 100%;
+    height: 100%;
+}
+.m-padded-mini {
+    padding: 9px 5px 9px 5px;
+}
+
+.m-imag-size-max {
+    width: 100%;
+    height: 100%;
+}
+.m-div-imag-size {
+    width: 52px;
+    height: 52px;
+}.m-div-imag-tiny {
+     width: 180px;
+     height: 180px;
+ }
+.m-padded-none {
+    padding: 0px;
+}
+.m-div-min-height-mini {
+
+    min-height: 52px;
+
+}
+.m-div-min-height-large {
+
+    min-height: 199px;
+
+}
+.m-div-min-height {
+    min-height: 366px;
+
+}
+.m-tag-color {
+    background-color: aliceblue;
+    color: black;
+}
+
+.m-margin-none{
+    margin: 0px;
+}
+
+
+.m-margin-top {
+    margin-top: 25px;
+}
+.m-margin-tb-mini {
+    margin-top: 19px;
+    margin-bottom: 19px;
+}
+.m-margin-tb-tiny {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.m-margin-tb {
+    margin-top: 52px;
+    margin-bottom: 52px;
+}
+.m-margin-tb-big {
+    margin-top: 66px;
+    margin-bottom: 66px;
+}
+.m-margin-big {
+    margin: 52px 52px 52px 52px;
+}
+.m-margin-tiny {
+    margin: 5px 10px 5px 10px;
+}
+.m-margin-large{
+    margin: 10px 10px 10px 10px;
+}
+.m-box-shadow {
+    box-shadow:2px 2px 8px #9C9C9C;
+}
+.m-box-shadow-mini {
+    box-shadow:2px 2px 6px #9C9C9C;
+}
+.m-margin-min{
+    margin: 10px 10px 10px 10px;
+
+}
+.m-margin-lr {
+    margin:0px 9px 0px 9px !important;
+}
+
+.m-padded-lr-mini {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.m-padded-lr {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.m-padded-right {
+    padding-right: 1em;
+}
+
+.m-padded-tb-mini {
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+.m-padded-tb-tiny {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+.m-padded-tb-small {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.m-padded-tb {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.m-padded-tb-large {
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+.m-padded-tb-big {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+.m-padded-tb-huge {
+    padding-top: 4em;
+    padding-bottom:4em;
+}
+.m-padded-tb-massive {
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+
+.m-font-padded-left{
+    padding-left: 9px;
+}
+.m-font-thin {
+    font-width: 300px;
+}
+.m-font-spaced-mini {
+    letter-spacing: 4px;
+}
+.m-font-spaced {
+    letter-spacing: 1px;
+}
+.m-font-spaced-large {
+    letter-spacing: 3px;
+}
+.m-font-spaced-tiny {
+    letter-spacing: 5px;
+}
+.m-font-lined {
+    line-height: 1.8;
+}
+.m-font-lined-mini {
+    line-height: 1.5;
+}
+.m-font-color-blue {
+    color: deepskyblue;
+}
+/**
+转载
+ */
+.m-reprint {
+    color: brown;
+    border-color: brown;
+}
+/**
+转载
+ */
+.m-original {
+    color: deepskyblue;
+    border-color: deepskyblue;
+
+}
+
+
+/*
+    透明度
+ */
+.m-opacity-mini {
+    opacity: 0.8;
+}
+.m-opacity {
+    opacity: 0.90;
+}
+.m-opacity-tiny {
+    opacity: 0.7;
+}
+.m-opacity-big {
+    opacity: 0.6;
+}
+/*
+圆角
+ */
+.m-border-radius {
+    border-radius: 25px;
+}
+
+.m-border-radius-tiny {
+    border-radius: 15px;
+}
+
+/*
+竖线
+ */
+.m-vLine {
+    float:left;
+    margin-top: 0px;
+    width: 1px;
+    height: 88px;
+    background: #E6E3E3;
+}
+/*
+    横线
+ */
+.m-aline {
+    background-color:#E6E3E3;
+    height:2px;
+
+}
+body {
+    -webkit-text-size-adjust : 100% ;
+    -moz-text-size-adjust : 100% ;
+    -ms-text-size-adjust : 100% ;
+    text-size-adjust : 100%;
+    background-color: ghostwhite;
+}
+/*
+垂直居中
+ */
+.m-middle {
+    float: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.content {
+    max-width: 1666px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/**
+横虚线
+ */
+.m-cross-dotted {
+    border-bottom-style: dotted;
+    border-width: 2px;
+    border-color: #9C9C9C;
+    margin-top: 29px;
+    margin-bottom: 29px;
+    opacity: 0.29;
+
+}
+.m-padded-max {
+    padding-left:25px;
+    padding-right:25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/*
+上下居中
+ */
+.m-vCenter {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/*
+赏
+ */
+.m-btn-admire {
+    border-radius: 55%;
+    width: 99px;
+    height:99px;
+    margin:auto;
+    font-size: 52px;
+
+}
+
+.node {
+    width: 12px;
+    color: #fff;
+    height: 12px;
+    border-radius: 50%;
+    margin: 11px 0 0 -8px;
+    display: inline-block;
+    background-color: #38b7ea;
+}
+
+
+/* 提示框小角的小方块 */
+
+.m-inner{
+
+    background-color:#FFF;
+
+    width:10px;
+
+    height:10px;
+
+    border:1px solid #ddd;
+
+    /* 旋转小方块并调整位置形成尖角 */
+
+    position:relative;
+
+    left: -20px;
+    top: -5px;
+
+    transform:rotate(-45deg);
+
+    border-right:0px;
+
+    border-bottom:0px;
+
+
+}
+
+.m-but-blue {
+    color: deepskyblue;
+    border-color: deepskyblue;
+    border-width: 1px;
+}
+
+
+
+.media .media-body .media {
+    background-color: ghostwhite;
+}
+
+
+.media-body>*{
+    margin: 2px 2px 2px 2px;
+}
+
+.media-body>span,.media-body a {
+    opacity: 80%;
+}
+
+
+
+
+
+
+

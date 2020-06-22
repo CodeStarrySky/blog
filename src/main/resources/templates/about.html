@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons::head('关于我')"></head>
+<body>
+<!-- 导航栏 -->
+<!--<div th:include="commons/top::topNav"></div>-->
+<!--导航条-->
+<nav th:replace="commons::top"></nav>
+
+
+<div class="content">
+    <!--内容主体-->
+    <div class="row m-margin-none " style="padding-top: 12px">
+        <!-- 左侧 -->
+        <div th:replace="commons::left"></div>
+
+
+        <!--    中间-->
+        <div class="col-md-6" >
+            <!--        header-->
+            <!--        <div class="panel panel-default panel-body m-padded-tb-mini" style="margin-bottom: 0px">-->
+            <!--            <div class="row text-center">-->
+            <!--                <div class="col-md-2" style="color: aqua"><h3>博客</h3></div>-->
+            <!--                <h3 class="col-md-2 col-md-offset-8" >共 <strong style="color: darkorange">14</strong> 篇</h3>-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <!--        中间内容-->
+            <div>
+                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px;padding:25px">
+                    <div>
+                        <!--            标题-->
+                        <div class="m-padded-tb-mini  m-font-padded-left"><h1 class="m-margin-none m-font-color-blue">Wchaohui</h1></div>
+                        <div class="m-cross-dotted"  style="margin-top: 10px"></div>
+                        <!-- 文章内容 -->
+                        <div class="m-opacity">
+                            <h3><b>关于作者</b></h3>
+                            <div>
+                                <br><br> <br><br><br><br> <br><br><br><br> <br><br><br><br> <br><br>
+                            </div>
+
+                        </div>
+
+                        <!-- 虚线分割线 -->
+                        <div class="m-cross-dotted"></div>
+                        <!-- 联系方式 -->
+                        <div class="m-opacity">
+                            <h3><b>联系作者</b></h3>
+                            <div>
+                                <br><br> <br><br><br><br> <br><br><br><br> <br><br><br><br> <br><br>
+                            </div>
+
+                        </div>
+                        <!-- 虚线分割线 -->
+                        <div class="m-cross-dotted"></div>
+
+                        <!--  赞赏 -->
+                        <div class="text-center m-margin-tb-tiny">
+                            <span type="button" class="btn btn-warning m-btn-admire" style="outline: none"
+                                  data-toggle="popover" data-trigger="hover" data-placement="top">赏</span>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧 -->
+        <div th:replace="commons::right"></div>
+    </div>
+</div>
+<!--底部footer-->
+<footer th:replace="commons::footer"></footer>
+
+<!--/*/<th:block th:replace="commons::script"></th:block>/*/-->
+<script th:inline="javascript">
+
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            title: "如果觉得本文对您有帮助，您可以鼓励一下博主！",
+            animation: true,
+            html: true,
+            container: "body",
+            content:  "<div>"+
+                "<img class='img-responsive' src='/images/headProtrait.jpg'>" +
+                "</div>"
+
+
+        });
+    })
+
+
+
+
+
+
+</script>
+</body>
+</html>

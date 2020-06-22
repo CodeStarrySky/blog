@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://8.129.222.219:3306/blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    cache: false
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+logging:
+  level:
+    root: info
+    com.wch.blog: debug
+  file:
+    name: log/blog-dev.log
+

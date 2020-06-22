@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head('error')"></head>
+<body>
+
+<!--导航条-->
+<nav th:replace="commons::top"></nav>
+
+<div class="content m-padded-tb-massive">
+    <br><br><br><br><br><br>
+    <!--内容主体-->
+    <div class="row col-md-6 col-md-offset-3 " style="padding-top: 12px" >
+        <div class="panel panel-danger">
+            <div class="panel-body">
+                <h1>ERROR</h1>
+            </div>
+            <div class="panel-footer"><h2>有错误</h2></div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--/*/<th:block th:replace="commons::script"></th:block>/*/-->
+<div>
+    <div th:utext="'&lt;!--'" th:remove="tag"></div>
+    <div th:utext="'Failed Request URL : ' + ${url}" th:remove="tag"></div>
+    <div th:utext="'Exception message : ' + ${exception.message}" th:remove="tag"></div>
+    <ul th:remove="tag">
+        <li th:each="st : ${exception.stackTrace}" th:remove="tag"><span th:utext="${st}" th:remove="tag"></span></li>
+    </ul>
+    <div th:utext="'--&ge;'" th:remove="tag"></div>
+</div>
+
+
+
+</body>
+</html>

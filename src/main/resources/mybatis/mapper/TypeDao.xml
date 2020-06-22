@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wch.blog.dao.TypeDao">
+        <resultMap id="TypeMap" type="com.wch.blog.bean.Type">
+                <id property="id" jdbcType="BIGINT" column="id"></id>
+                <result property="typeName" jdbcType="VARCHAR" column="type_name"></result>
+        </resultMap>
+    <insert id="insertType" parameterType="com.wch.blog.bean.Type">
+        insert into type(type_name) values (#{typeName});
+    </insert>
+    <update id="updateType" parameterType="com.wch.blog.bean.Type">
+        update type
+        <set>
+            <if test="typeName != null">
+                type_name = #{typeName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <delete id="deleteType" parameterType="java.lang.Long">
+        delete from type where id=#{id};
+    </delete>
+    <select id="selectList" resultMap="TypeMap">
+        select * from type;
+    </select>
+    <select id="selectById" parameterType="java.lang.Long" resultMap="TypeMap">
+        select * from type where id=#{id}
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="TypeMap">
+        select * from type where type_name=#{typeName};
+    </select>
+
+
+</mapper>

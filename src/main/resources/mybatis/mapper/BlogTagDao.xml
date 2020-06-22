@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wch.blog.dao.BlogTagDao">
+    <resultMap id="BlogMap" type="com.wch.blog.bean.Blog">
+        <result column="id" property="id" jdbcType="BIGINT"></result>
+        <result column="title" property="title" jdbcType="BIGINT"></result>
+    </resultMap>
+    <select id="selectByTagId" resultMap="BlogMap" parameterType="java.lang.Long">
+        select blog.id,blog.title  from blog,blog_tag where  blog_tag.tag_id=#{tag_id} and blog.id=blog_tag.blog_id ;
+    </select>
+
+    <resultMap id="TagMap" type="com.wch.blog.bean.Tag">
+        <result column="id" property="id" jdbcType="BIGINT"></result>
+        <result column="tag_name" property="tagName" jdbcType="VARCHAR"></result>
+    </resultMap>
+    <select id="selectByBlogId" resultMap="TagMap" parameterType="java.lang.Long">
+        select tag.id,tag.tag_name  from tag,blog_tag where  blog_tag.blog_id=#{blog_id} and tag.id=blog_tag.tag_id ;
+    </select>
+</mapper>
