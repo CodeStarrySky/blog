@@ -45,32 +45,25 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         <div>
-            <form class="form-inline">
+            <form class="form-inline" th:action="@{/admin/search}" th:method="POST">
                 <div class="form-group">
         <!--            <label class="sr-only" for="title">标题</label>-->
-                    <input type="text" class="form-control" id="title" placeholder="标题">
+                    <input type="text" class="form-control" id="title" placeholder="标题" name="title">
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="form-group">
-                    <div class="dropdown">
-        <!--            <label class="sr-only" for="classify">分类</label>-->
-                        <input type="text" class="form-control" id="classify" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="分类">
-                        <ul class="dropdown-menu  m-opacity" aria-labelledby="classify" style="min-width: 100%" >
-                            <li><a>技术框架</a></li>
-                            <li><a>心得体会</a></li>
-                            <li><a>技术框架</a></li>
-                            <li><a>心得体会</a></li>
-                        </ul>
-                    </div>
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select class="form-control"  name="type.id" aria-haspopup="true" aria-expanded="false" style="min-width: 200px">
+                        <option disabled selected value hidden></option>
+                        <option value="1" th:each="type:${types}" th:text="${type.typeName}" th:value="${type.id}">hahah1</option>
+                    </select>
+                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox"> 推荐
+                        <input type="checkbox" name="recommend" value="true"> 推荐
                     </label>
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-info "  style="color:deepskyblue;background-color: white;outline: none">
+                <button type="submit" class="btn btn-info m-box-shadow-mini"  style="color:deepskyblue;background-color: white;outline: none" >
                     <span class="glyphicon glyphicon-search" aria-hidden="true" style="outline: none"></span> 搜索
                 </button>
             </form>
@@ -96,7 +89,7 @@
                     <tr th:each="blog,blogStat:${blogs}">
                         <td style="display:table-cell;vertical-align: middle" th:text="${blogStat.count}">1</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.title}">我的博客</td>
-                        <td style="display:table-cell;vertical-align: middle" th:text="${blog.type}">技术</td>
+                        <td style="display:table-cell;vertical-align: middle" th:text="${blog.type==null}?'':${blog.type.typeName}">技术</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.recommend}?'是':'否'">是</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.updateTime}">2020-5-20 05：20</td>
                         <td style="display:table-cell;vertical-align: middle">
@@ -127,7 +120,12 @@
         crossorigin="anonymous">
 </script>
 <script>
-    $('.dropdown-toggle').dropdown();
+    // $('.dropdown-toggle').dropdown();
+    $('[data-toggle="dropdown"]').dropdown();
+    $('.dropdown ul').delegate('ul li','click',function () {
+            var type_id = $(this).val();
+            $('.dropdown input').val(type_id)
+    })
     $('#blog_add_btn').click(function () {
         $('#blog_modal').modal({
             dragDrop: 'static'

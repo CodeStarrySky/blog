@@ -16,10 +16,10 @@
        <result          property="createTime"        column="create_time"        jdbcType="DATE"></result>
        <result          property="updateTime"        column="update_time"        jdbcType="DATE"></result>
        <result          property="flag"               column="flag"               jdbcType="VARCHAR"></result>
-       <association     property="user"             column="id"     select="com.wch.blog.dao.UserDao.selectById"    fetchType="lazy"></association>
-       <association     property="type"             column="id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
-       <collection      property="comments"         column="id"     ofType="com.wch.blog.bean.Comment"      select="com.wch.blog.CommentDao.comselectByBlogId"  fetchType="lazy"></collection>
-       <collection      property="tags"             column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
+       <association     property="user"              column="user_id"     select="com.wch.blog.dao.UserDao.selectById"    fetchType="lazy"></association>
+       <association     property="type"              column="type_id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
+<!--       <collection      property="comments"          column="id"     ofType="com.wch.blog.bean.Comment"      select="com.wch.blog.dao.CommentDao.selectByBlogId"  fetchType="lazy"></collection>-->
+       <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
    </resultMap>
     <sql id="ifNullSql">
         <if  test="id!=null">id=#{id}</if>
@@ -39,8 +39,18 @@
         <if  test="flag!=null"> flag=#{user.id}</if>
         <if  test="flag!=null"> flag=#{type.id}</if>
     </sql>
+
     <select id="selectAll" resultMap="BlogMap">
         select * from blog;
+    </select>
+    <select id="selectByBlog" parameterType="com.wch.blog.bean.Blog" resultMap="BlogMap">
+        select * from blog
+        <where>
+            <if test="title!=null">title like '%${title}%'</if>
+            <if test="type!=null">and type_id=#{type.id}</if>
+            <if test="recommend!=false">and recommend=#{recommend}</if>
+        </where>
+
     </select>
 
     <select id="selectById" resultMap="BlogMap" parameterType="java.lang.Long">

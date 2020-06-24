@@ -22,6 +22,6 @@ public interface BlogDao {
     //逻辑删除
     public int deleteById(@Param("id") Long id);
 
-
+    public List<Blog> selectByBlog(Blog blog);
 
 }

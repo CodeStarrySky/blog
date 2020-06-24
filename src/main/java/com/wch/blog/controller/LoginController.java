@@ -39,10 +39,6 @@ public class LoginController {
 
     }
 
-    @GetMapping("/blogs")
-    public String blogs(){
-        return "admin/blogs";
-    }
 
 
 }
