@@ -72,7 +72,7 @@
             <button type="button" class="btn btn-primary" style="outline: none" id="blog_add_btn">新增</button>
         </div>
         <!-- 博客表格 -->
-        <div class="table-responsive">
+        <div class="table-responsive" style="min-height: 399px">
 
             <table class="table table-bordered table-hover" >
                 <thead>
@@ -86,16 +86,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="blog,blogStat:${blogs}">
+                    <tr th:each="blog,blogStat:${page.list}">
                         <td style="display:table-cell;vertical-align: middle" th:text="${blogStat.count}">1</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.title}">我的博客</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.type==null}?'':${blog.type.typeName}">技术</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.recommend}?'是':'否'">是</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.updateTime}">2020-5-20 05：20</td>
                         <td style="display:table-cell;vertical-align: middle">
-                            <button type="button" class="btn btn-info blog_edit_btn" style="outline: none" th:href="@{/admin/blog/}+${blog.id}">编辑</button>
-                            <button type="button" class="btn btn-danger blog_delete_btn" style="outline: none" th:href="@{/admin/blog/}+${blog.id}">删除</button>
+                            <button type="button" class="btn btn-info blog_edit_btn" style="outline: none" th:attr="edit_url=@{/admin/blog/}+${blog.id}">编辑</button>
+                            <button type="button" class="btn btn-danger blog_delete_btn" style="outline: none" th:attr="del_url=@{/admin/blog/}+${blog.id}+'?pn='+${page.pageNum}">删除</button>
                         </td>
+
                     </tr>
                 </tbody>
             </table>
@@ -104,14 +105,17 @@
         <!-- 页面跳转 -->
         <nav aria-label="Page navigation">
             <ul class="pager text-center m-margin-tb-tiny" style="margin-bottom: 99px">
-                <li class="previous " ><a href="#" class="m-box-shadow"><span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a></li>
-                <li><span class="btn btn-lg disabled " style="border-radius: 35%;margin-top: 3px;box-shadow: 2px 2px 8px #9C9C9C"><h3 class="m-margin-none m-font-color-blue">15</h3></span></li>
-                <li class="next"><a class="m-box-shadow" href="#"> <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span></a></li>
+                <li class="previous " th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{/admin/blogs?pn=}+${page.pageNum-1}" class="m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''"><span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a></li>
+                <li><span class="btn btn-lg disabled " style="border-radius: 35%;margin-top: 3px;box-shadow: 2px 2px 8px #9C9C9C"><h3 class="m-margin-none m-font-color-blue">[[${page.pageNum}]]</h3></span></li>
+                <li class="next" th:classappend="${page.pageNum==page.pages}?'disabled':''"><a class="m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{/admin/blogs?pn=}+${page.pageNum+1}"> <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span></a></li>
             </ul>
         </nav>
     </div>
 
 </div>
+<form id="deleteBlogForm" method="POST">
+    <input type="hidden" name="_method" value="DELETE"/>
+</form>
 
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
@@ -131,6 +135,11 @@
             dragDrop: 'static'
         })
     })
+    $('.blog_delete_btn').click(function () {
+        $('#deleteBlogForm').attr("action",$(this).attr("del_url")).submit();
+        return false;
+    })
+
 </script>
 </body>
 </html>

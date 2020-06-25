@@ -24,4 +24,10 @@ public class BlogServiceImpl implements BlogService {
         return blogDao.selectByBlog(blog);
     }
 
+    @Override
+    public int deleteBlog(Long id) {
+        return blogDao.deleteById(id);
+    }
+
+
 }

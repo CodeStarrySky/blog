@@ -3,3 +3,13 @@ spring:
     cache: false
   profiles:
     active: dev
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

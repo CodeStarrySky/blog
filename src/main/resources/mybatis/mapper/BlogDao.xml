@@ -41,12 +41,13 @@
     </sql>
 
     <select id="selectAll" resultMap="BlogMap">
-        select * from blog;
+        select * from blog where flag=1
     </select>
     <select id="selectByBlog" parameterType="com.wch.blog.bean.Blog" resultMap="BlogMap">
         select * from blog
         <where>
-            <if test="title!=null">title like '%${title}%'</if>
+            flag=1
+            <if test="title!=null">and title like '%${title}%'</if>
             <if test="type!=null">and type_id=#{type.id}</if>
             <if test="recommend!=false">and recommend=#{recommend}</if>
         </where>
@@ -54,11 +55,11 @@
     </select>
 
     <select id="selectById" resultMap="BlogMap" parameterType="java.lang.Long">
-        select * from blog where id=#{id};
+        select * from blog where flag=1 and id=#{id};
     </select>
 
     <select id="selectByTitle" resultMap="BlogMap" parameterType="java.lang.String">
-        select * from blog where title=#{title}
+        select * from blog where flag=1 and title=#{title}
     </select>
 
     <update id="updateBlog" parameterType="com.wch.blog.bean.Blog">
@@ -73,9 +74,9 @@
                                     #{blog.commentabled},#{blog.published},#{blog.recommend},#{blog.createTime},#{blog.updateTime},#{blog.flag});
     </update>
 
-    <delete id="deleteById" parameterType="java.lang.Long">
-        delete from blog where id=#{id};
-    </delete>
+    <update id="deleteById" parameterType="java.lang.Long">
+        update blog set flag=0 where id=#{id};
+    </update>
 
 
 
