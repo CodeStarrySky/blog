@@ -21,14 +21,14 @@
         delete from type where id=#{id};
     </delete>
     <select id="selectList" resultMap="TypeMap">
-        select * from type;
+        select * from type
     </select>
     <select id="selectById" parameterType="java.lang.Long" resultMap="TypeMap">
         select * from type where id=#{id}
     </select>
 
     <select id="selectByName" parameterType="java.lang.String" resultMap="TypeMap">
-        select * from type where type_name=#{typeName};
+        select * from type where type_name=#{typeName}
     </select>
 
 

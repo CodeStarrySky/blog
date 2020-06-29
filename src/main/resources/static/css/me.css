@@ -363,7 +363,9 @@ body {
 }
 
 
-
+button {
+    outline: none !important;
+}
 
 
 

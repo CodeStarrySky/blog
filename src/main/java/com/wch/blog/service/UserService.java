@@ -10,5 +10,6 @@ import java.util.List;
 public interface UserService {
     public List<User> selectList();
 
+    public User finUser(String username);
     User checkUser(String username, String password);
 }

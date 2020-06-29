@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.awt.print.Pageable;
+import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -25,26 +26,26 @@ public class Blog {
     //首图地址
     private String firstFigure;
     //标记是否原创
-    private boolean ifOriginal;
+    private boolean ifOriginal=true;
     //浏览次数
-    private Integer views;
+    private Integer views=0;
     //赞赏开关
-    private boolean appreciates;
+    private boolean appreciates=false;
 
     //版权开关
-    private boolean shareStatement;
+    private boolean shareStatement=false;
     //评论开关
-    private boolean commentabled;
+    private boolean commentabled=false;
     //是否发布
-    private boolean published;
+    private boolean published=true;
     //推荐开关
-    private boolean recommend;
+    private boolean recommend=false;
     //创建时间
     private Date createTime;
     //更新时间
     private Date updateTime;
     //标记是否删除 0表示已删除，1表示未删除
-    private Integer flag;
+    private Integer flag=1;
 
     private Type type;
 
@@ -56,6 +57,8 @@ public class Blog {
     //标签
     private List<Tag> tags;
 
+
+    private String tagIds;
 
 
 

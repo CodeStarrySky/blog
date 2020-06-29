@@ -13,8 +13,8 @@
        <result          property="commentabled"      column="commentabled"      jdbcType="BIT"></result>
        <result          property="published"         column="published"          jdbcType="BIT"></result>
        <result          property="recommend"         column="recommend"          jdbcType="BIT"></result>
-       <result          property="createTime"        column="create_time"        jdbcType="DATE"></result>
-       <result          property="updateTime"        column="update_time"        jdbcType="DATE"></result>
+       <result          property="createTime"        column="create_time"        ></result>
+       <result          property="updateTime"        column="update_time"      ></result>
        <result          property="flag"               column="flag"               jdbcType="VARCHAR"></result>
        <association     property="user"              column="user_id"     select="com.wch.blog.dao.UserDao.selectById"    fetchType="lazy"></association>
        <association     property="type"              column="type_id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
@@ -41,7 +41,7 @@
     </sql>
 
     <select id="selectAll" resultMap="BlogMap">
-        select * from blog where flag=1
+        select * from blog where flag=1 order by update_time desc
     </select>
     <select id="selectByBlog" parameterType="com.wch.blog.bean.Blog" resultMap="BlogMap">
         select * from blog
@@ -51,29 +51,36 @@
             <if test="type!=null">and type_id=#{type.id}</if>
             <if test="recommend!=false">and recommend=#{recommend}</if>
         </where>
+        order by update_time desc
 
     </select>
 
     <select id="selectById" resultMap="BlogMap" parameterType="java.lang.Long">
-        select * from blog where flag=1 and id=#{id};
+        select * from blog where flag=1 and id=#{id}
     </select>
 
     <select id="selectByTitle" resultMap="BlogMap" parameterType="java.lang.String">
         select * from blog where flag=1 and title=#{title}
     </select>
 
-    <update id="updateBlog" parameterType="com.wch.blog.bean.Blog">
+    <update id="updateBlog" parameterType="com.wch.blog.bean.Blog" >
         update blog
         <set>
             <include refid="ifNullSql"></include>
         </set>
     </update>
-    <update id="saveBlog" parameterType="com.wch.blog.bean.Blog">
-        insert into blog values (#{blog.title},#{blog.content},#{blog.title},#{blog.firstFigure},
+    <insert id="saveBlog" parameterType="com.wch.blog.bean.Blog" useGeneratedKeys="true" keyProperty="id">
+        insert into blog(title,content,first_figure,if_original,views,appreciates,share_statement,commentabled,published,recommend,create_time,update_time,flag,type_id,user_id)
+                            values (#{blog.title},#{blog.content},#{blog.firstFigure},
                                     #{blog.ifOriginal},#{blog.views},#{blog.appreciates},#{blog.shareStatement},
-                                    #{blog.commentabled},#{blog.published},#{blog.recommend},#{blog.createTime},#{blog.updateTime},#{blog.flag});
-    </update>
-
+                                    #{blog.commentabled},#{blog.published},#{blog.recommend},#{blog.createTime},#{blog.updateTime},#{blog.flag},#{blog.type.id},#{blog.user.id});
+    </insert>
+    <insert id="saveBatchBlogTag">
+        insert into blog_tag(blog_id,tag_id) values
+        <foreach collection="blogTags" item="blogTag" separator=",">
+            (#{blogTag.blogId},#{blogTag.tagId})
+        </foreach>
+    </insert>
     <update id="deleteById" parameterType="java.lang.Long">
         update blog set flag=0 where id=#{id};
     </update>

@@ -26,11 +26,15 @@
     <select id="selectList" resultMap="UserMap">
         select * from user;
     </select>
-    <select id="selectById" resultType="com.wch.blog.bean.User">
-
+    <select id="selectById" resultType="com.wch.blog.bean.User" parameterType="java.lang.Long">
+        select * from user where id=#{id}
     </select>
     <select id="selectByCondition"  resultMap="UserMap">
         select * from user where username=#{username} and password=#{password}
+    </select>
+
+    <select id="selectByName" resultMap="UserMap">
+        select * from user where username=#{username}
     </select>
 
 </mapper>

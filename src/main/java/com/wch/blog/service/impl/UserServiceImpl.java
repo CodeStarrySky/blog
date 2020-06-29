@@ -33,4 +33,9 @@ public class UserServiceImpl implements UserService {
         User user = userDao.selectByCondition(username, MD5AndSHAUtils.md5AndSHA(password));
         return user;
     }
+
+    @Override
+    public User finUser(String username) {
+        return userDao.selectByName(username);
+    }
 }
