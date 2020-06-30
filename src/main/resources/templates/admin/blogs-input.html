@@ -13,7 +13,7 @@
                 <a  class="btn btn-default btn-lg" style="outline: none" th:href="@{/admin/blogs}">&nbsp;列表&nbsp;</a>
             </div>
         </div>
-        <form th:action="@{/admin/blog}" method="post" id="save-blog-form" >
+        <form th:action="@{/admin/blog}" th:method="${blog}!=null?'put':'post'" id="save-blog-form" >
             <input th:if="${blog}!=null" type="hidden" name="id" th:value="${blog.id}">
             <input type="hidden" name="ifOriginal" id="if_original" th:value="${blog}!=null?${blog.ifOriginal}:true" >
         <div class="input-group input-group-lg" style="position: relative;margin-bottom: 19px">

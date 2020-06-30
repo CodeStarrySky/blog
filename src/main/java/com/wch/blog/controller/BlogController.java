@@ -101,7 +101,7 @@ public class BlogController {
     }
 
     @GetMapping("/blog/{id}")
-    public String blogEdit(@PathVariable Long id, Model model){
+    public String blogEditPage(@PathVariable Long id, Model model){
         Blog blog = blogService.findById(id);
         System.out.println(blog);
         if(blog==null){
@@ -115,6 +115,12 @@ public class BlogController {
         model.addAttribute("types",types);
         model.addAttribute("tags",tags);
         return "admin/blogs-input";
+    }
+
+    @PutMapping("/blog")
+    public String blogUpdate(Blog blog) throws ParseException {
+        blogService.updateBlog(blog);
+        return "redirect:/admin/blogs";
     }
 
 

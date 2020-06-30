@@ -27,6 +27,8 @@ public class BlogServiceImpl implements BlogService {
     @Resource
     BlogDao blogDao;
 
+    @Resource
+    BlogTagDao blogTagDao;
 
     @Resource
     TagDao tagDao;
@@ -91,4 +93,35 @@ public class BlogServiceImpl implements BlogService {
 
         return i;
     }
+
+    @Transactional
+    @Override
+    public int updateBlog(Blog blog) throws ParseException {
+        //1.更新blog_tag的关联关系
+        blogDao.deleteBlogTagByBlogId(blog.getId());
+        String tagIds = blog.getTagIds();
+        String[] tagIdArr = tagIds.split(",");
+        List<BlogTag> blogTags = new ArrayList<>();
+        for(String tagId : tagIdArr){
+            BlogTag blogTag = new BlogTag();
+            blogTag.setBlogId(blog.getId());
+            blogTag.setTagId(Long.parseLong(tagId));
+            blogTags.add(blogTag);
+        }
+        blogDao.saveBatchBlogTag(blogTags);
+        //2.更新时间
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String format = simpleDateFormat.format(date);
+        blog.setUpdateTime(simpleDateFormat.parse(format));
+        blogDao.updateBlog(blog);
+        return 1;
+    }
+
+
+
+
+
+
+
 }

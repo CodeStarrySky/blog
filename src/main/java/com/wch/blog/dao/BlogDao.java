@@ -22,11 +22,18 @@ public interface BlogDao {
 
     public int saveBatchBlogTag(@Param("blogTags") List<BlogTag> blogTags );
 
+    public int updateBatchBlogTag(@Param("blogTags") List<BlogTag> blogTags);
+
+    public List<BlogTag> selectBlogTagByBlogId(@Param("blogId") Long blogId);
 
     //逻辑删除
     public int deleteById(@Param("id") Long id);
 
     public List<Blog> selectByBlog(Blog blog);
+
+    public int deleteBlogTagByBlogId(@Param("blogId") Long blogId);
+
+    public List<Blog> selectByUserId(@Param("userId") Long userId);
 
 
 }

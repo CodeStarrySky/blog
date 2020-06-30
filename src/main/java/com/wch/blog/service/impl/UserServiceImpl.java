@@ -6,6 +6,7 @@ import com.wch.blog.service.UserService;
 import com.wch.blog.utils.MD5AndSHAUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Transactional
     @Override
     public User finUser(String username) {
         return userDao.selectByName(username);

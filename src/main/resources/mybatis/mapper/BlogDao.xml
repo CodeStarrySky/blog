@@ -22,23 +22,25 @@
        <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
    </resultMap>
     <sql id="ifNullSql">
-        <if  test="id!=null">id=#{id}</if>
-        <if  test="title!=null"> title=#{title}</if>
-        <if  test="content!=null"> content=#{content}</if>
-        <if  test="firstFigure!=null"> first_figure=#{firstFigure}</if>
-        <if  test="ifOriginal!=null"> if_original=#{ifOriginal}</if>
-        <if  test="views!=null"> views=#{views}</if>
-        <if  test="appreciates!=null"> appreciates=#{appreciates}</if>
-        <if  test="shareStatement!=null"> share_statement=#{shareStatement}</if>
-        <if  test="commentabled!=null"> commentabled=#{commentabled}</if>
-        <if  test="published!=null"> published=#{published}</if>
-        <if  test="recommend!=null"> recommend=#{recommend}</if>
-        <if  test="createTime!=null"> create_time=#{createTime}</if>
-        <if  test="updateTime!=null"> update_time=#{updateTime}</if>
-        <if  test="flag!=null"> flag=#{flag}</if>
-        <if  test="flag!=null"> flag=#{user.id}</if>
-        <if  test="flag!=null"> flag=#{type.id}</if>
+        <if  test="title!=null"> title=#{title},</if>
+        <if  test="content!=null"> content=#{content},</if>
+        <if  test="firstFigure!=null"> first_figure=#{firstFigure},</if>
+        <if  test="ifOriginal!=null"> if_original=#{ifOriginal},</if>
+        <if  test="appreciates!=null"> appreciates=#{appreciates},</if>
+        <if  test="shareStatement!=null"> share_statement=#{shareStatement},</if>
+        <if  test="commentabled!=null"> commentabled=#{commentabled},</if>
+        <if  test="published!=null"> published=#{published},</if>
+        <if  test="recommend!=null"> recommend=#{recommend},</if>
+        <if  test="updateTime!=null"> update_time=#{updateTime},</if>
+         <if test="type.id!=null">type_id=#{type.id}</if>
     </sql>
+    <resultMap id="ByUserBlog" type="com.wch.blog.bean.Blog">
+        <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
+        <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
+    </resultMap>
+    <select id="selectByUserId" parameterType="java.lang.Long" resultMap="ByUserBlog">
+        select id,title from blog where flag=1 and user_id=#{userId} order by update_time desc
+    </select>
 
     <select id="selectAll" resultMap="BlogMap">
         select * from blog where flag=1 order by update_time desc
@@ -68,6 +70,7 @@
         <set>
             <include refid="ifNullSql"></include>
         </set>
+        where id=#{id}
     </update>
     <insert id="saveBlog" parameterType="com.wch.blog.bean.Blog" useGeneratedKeys="true" keyProperty="id">
         insert into blog(title,content,first_figure,if_original,views,appreciates,share_statement,commentabled,published,recommend,create_time,update_time,flag,type_id,user_id)
@@ -84,10 +87,31 @@
     <update id="deleteById" parameterType="java.lang.Long">
         update blog set flag=0 where id=#{id};
     </update>
+    
+    <update id="updateBatchBlogTag">
+       update blog_tag
+       <trim prefix="set" suffixOverrides=",">
+           <trim prefix="tag_id=case" suffix="end," >
+               <foreach collection="blogTags" item="blogTag" index="index">
+                   <if test = "blogTag!=null">
+                       when id=#{blogTag.id} then #{blogTag.tagId}
+                   </if>
+               </foreach>
+           </trim>
+       </trim>
+       where
+        <foreach collection="blogTags" separator="or" item="blogTag" index="index">
+            id=#{blogTag.id}
+        </foreach>
+    </update>
 
+    <select id="selectBlogTagByBlogId" resultMap="com.wch.blog.dao.BlogTagDao.BlogTagMap">
+        select * from blog_tag where blog_id=#{blogId};
+    </select>
 
-
-
+    <delete id="deleteBlogTagByBlogId" parameterType="java.lang.Long">
+        delete from blog_tag where blog_id=#{blogId}
+    </delete>
 
 
 </mapper>

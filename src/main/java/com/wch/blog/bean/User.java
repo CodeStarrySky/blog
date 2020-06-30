@@ -48,6 +48,9 @@ public class User {
     //自我介绍
     private String introduceMyself;
 
+    //联系我
+    private String contactMe;
+
     //个人博客网站介绍
     private String blogIntro;
 

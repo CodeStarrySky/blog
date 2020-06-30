@@ -5,6 +5,11 @@
         <result column="id" property="id" jdbcType="BIGINT"></result>
         <result column="title" property="title" jdbcType="BIGINT"></result>
     </resultMap>
+    <resultMap id="BlogTagMap" type="com.wch.blog.bean.BlogTag">
+        <id column="id" property="id" jdbcType="BIGINT"></id>
+        <result column="blog_id" property="blogId" jdbcType="BIGINT"></result>
+        <result column="tag_id" property="tagId" jdbcType="BIGINT"></result>
+    </resultMap>
     <select id="selectByTagId" resultMap="BlogMap" parameterType="java.lang.Long">
         select blog.id,blog.title  from blog,blog_tag where  blog_tag.tag_id=#{tag_id} and blog.id=blog_tag.blog_id ;
     </select>
@@ -16,4 +21,8 @@
     <select id="selectByBlogId" resultMap="TagMap" parameterType="java.lang.Long">
         select tag.id,tag.tag_name  from tag,blog_tag where  blog_tag.blog_id=#{blog_id} and tag.id=blog_tag.tag_id ;
     </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from blog_tag where id=#{id}
+    </delete>
 </mapper>

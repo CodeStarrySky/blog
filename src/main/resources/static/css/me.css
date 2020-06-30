@@ -262,7 +262,6 @@ body {
     margin-right: auto;
     margin-left: auto;
 }
-
 /**
 横虚线
  */
@@ -365,6 +364,11 @@ body {
 
 button {
     outline: none !important;
+}
+
+.admin-pim input {
+    outline: none;
+    border:none;
 }
 
 

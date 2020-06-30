@@ -6,42 +6,27 @@ import com.wch.blog.service.UserService;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("admin")
 public class UserController {
 
-//    @Autowired
-//    UserService userService;
-//
-//    @ResponseBody
-//    @GetMapping("/user/list")
-//    public List<User> selectUsers(){
-//        List<User> users = userService.selectList();
-//        return users;
-//    }
-//
-//    @GetMapping("/blogs")
-//    public String goBlogs(){
-//
-//
-//        return "admin/blogs";
-//    }
-//    @GetMapping("/blogs-input")
-//    public String goinput(){
-//
-//
-//        return "admin/blogs-input";
-//    }
-//    @GetMapping("/blog")
-//    public String goBlog(){
-//
-//
-//        return "blog";
-//    }
+    @Resource
+    UserService userService;
+
+    @GetMapping("/pim")
+    public String goPimPage(Model model, HttpSession session){
+        User user = userService.finUser((String)session.getAttribute("loginUser"));
+        model.addAttribute("user",user);
+        return "admin/pim";
+    }
+
 
 }

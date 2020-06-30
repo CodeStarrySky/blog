@@ -16,4 +16,6 @@ public interface BlogService {
     public int  save(Blog blog) throws ParseException;
 
     public Blog findById(Long id);
+
+    public int updateBlog(Blog blog) throws ParseException;
 }
