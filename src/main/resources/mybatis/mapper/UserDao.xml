@@ -39,4 +39,11 @@
         select * from user where username=#{username}
     </select>
 
+    <update id="updateUserField">
+        update user set ${feildName}=#{feildValue} where id=#{id}
+    </update>
+
+    <select id="selectByFieldName"  resultType="java.lang.String">
+        select ${fieldName} from user where id=#{id}
+    </select>
 </mapper>

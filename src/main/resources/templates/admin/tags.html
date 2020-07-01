@@ -5,32 +5,7 @@
 <body>
 <!--导航条-->
 <nav th:replace="admin/admin-commons::admin-nav"></nav>
-<div class="modal fade" tabindex="-1" role="dialog" id="tag_add_modal" data-backdrop="static">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="tag_title">新增标签</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal">
-                    <input  type="hidden" name="id" id="tag_id" value="">
-                    <div class="form-group">
-                        <label for="tag_name" class="col-sm-3 control-label" id="tag_info">请输入标签的名称：</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="tag_name" name="tagName" >
-                        </div>
-                    </div>
-                </form>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" id="tag_save_btn">保存</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 <div class="content text-center">
     <div class="col-md-8 col-md-offset-2 m-padded-tb-big" id="tag_content">
 
@@ -64,7 +39,32 @@
 
 
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="tag_add_modal" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="tag_title">新增标签</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <input  type="hidden" name="id" id="tag_id" value="">
+                        <div class="form-group">
+                            <label for="tag_name" class="col-sm-3 control-label" id="tag_info">请输入标签的名称：</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="tag_name" name="tagName" >
+                            </div>
+                        </div>
+                    </form>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="tag_save_btn">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>
 
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>

@@ -4,6 +4,7 @@ package com.wch.blog.bean;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
 public class Type {
 
     private Long id;
+    @NotBlank(message = "分类名称不能为空")
     private String typeName;
 
     private List<Blog> blogs;

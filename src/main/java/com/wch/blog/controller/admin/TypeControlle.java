@@ -1,4 +1,4 @@
-package com.wch.blog.controller;
+package com.wch.blog.controller.admin;
 
 import com.wch.blog.bean.Msg;
 import com.wch.blog.bean.Type;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -53,7 +54,7 @@ public class TypeControlle {
 
     @PostMapping("/type")
     @ResponseBody
-    public Msg addType(Type type) {
+    public Msg addType(@Valid Type type) {
         System.out.println(type);
         String name = type.getTypeName().trim();
         if(name==null||name==""){
@@ -74,7 +75,7 @@ public class TypeControlle {
     }
     @PutMapping("/type")
     @ResponseBody
-    public Msg editType(Type type) {
+    public Msg editType(@Valid Type type) {
         System.out.println(type);
         String name = type.getTypeName().trim();
         if(name==null||name==""){

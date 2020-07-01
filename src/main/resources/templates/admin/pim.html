@@ -12,6 +12,7 @@
     <!--内容主体-->
     <div class="row m-margin-none " style="padding-top: 12px">
         <!-- 左侧 -->
+
         <div class="col-md-3"  >
             <nav class="collapse navbar-collapse m-padded-none " id="collapse-2" style="margin-top: 52px;padding-top: 0px;">
                 <div class="panel panel-default panel-body m-border-radius m-box-shadow-mini  m-padded-none text-center" >
@@ -25,15 +26,15 @@
                         <div class="col-md-6   m-opacity-big text-center">
                             <div class="m-margin-tb-big" >
                                 <h5><input type="text" class="text-center" name="intro1" th:value="${user.intro1}" ></h5>
-                                <h5><input type="text" class="text-center" name="intro2" th:value="${user.intro1}" ></h5>
-                                <h5><input type="text" class="text-center" name="intro3" th:value="${user.intro1}" ></h5>
+                                <h5><input type="text" class="text-center" name="intro2" th:value="${user.intro2}" ></h5>
+                                <h5><input type="text" class="text-center" name="intro3" th:value="${user.intro3}" ></h5>
                             </div>
                         </div>
                     </div>
                     <!-- 个人信息 -->
                     <div class="row text-center m-font-lined ">
-                        <h3 class="m-opacity" style="margin-top: 0px;"><b><input type="text" name="nickname" class="text-center" th:value="${user.nickname}"> </b></h3>
-                        <h5><input type="text" class="text-center" name="profession" th:value=" ${user.profession}"></h5>
+                        <h3 class="m-opacity-tiny" style="margin-top: 0px;" ><strong><input type="text" name="nickname" class="text-center" th:value="${user.nickname}" style="min-width: 199px"> </strong></h3>
+                        <h5 class="m-opacity"><input type="text" class="text-center" name="profession" th:value=" ${user.profession}"></h5>
                         <h5 class="m-opacity-big"  style="margin-bottom: 0px" >
                             <span class="glyphicon glyphicon-map-marker"aria-hidden="true"></span>
                             <input type="text" name="address"  th:value="${user.address}" style="max-width:66px">
@@ -70,6 +71,7 @@
         </div>
 
 
+
         <!--    中间-->
         <div class="col-md-6" >
             <div>
@@ -82,7 +84,7 @@
                         <div class="m-opacity">
                             <h3><b>关于作者</b></h3>
                             <div>
-                                <textarea class="form-control  " name="introduceMyself" rows="9" th:placeholder="${user.introduceMyself}"></textarea>
+                                <textarea class="form-control m-font-spaced m-font-lined" style="font-size: 19px;padding: 10px 19px 10px 19px" name="introduce_myself" rows="6" th:text="${user.introduceMyself}"></textarea>
                             </div>
 
                         </div>
@@ -93,7 +95,7 @@
                         <div class="m-opacity">
                             <h3><b>联系作者</b></h3>
                             <div>
-                                <textarea class="form-control  " name="contactMe" rows="9" th:placeholder="${user.contactMe}"></textarea>
+                                <textarea class="form-control  m-font-spaced m-font-lined " style="font-size: 19px;padding: 10px 19px 10px 19px"  name="contact_me" rows="9" th:text="${user.contactMe}"></textarea>
                             </div>
 
                         </div>
@@ -102,8 +104,7 @@
 
                         <!--  赞赏 -->
                         <div class="text-center m-margin-tb-tiny">
-                            <span type="button" class="btn btn-warning m-btn-admire" style="outline: none"
-                                  data-toggle="popover" data-trigger="hover" data-placement="top">赏</span>
+                            <span type="button" class="btn btn-warning m-btn-admire" style="outline: none">赏</span>
                         </div>
                         <br>
                     </div>
@@ -135,9 +136,10 @@
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #e6e3e3">
                     <h3>联系我</h3>
                     <div class="m-margin-tb-mini m-font-color-blue text-center">
-                        <h5>QQ: <input class="text-left" type="text" name="qq" th:value="${user.qq}"></h5>
+                        <h5 class="text-center">QQ: <input class="text-left" type="text" name="qq" th:value="${user.qq}" ></h5>
+                        <h5>微信:<input class="text-left" type="text" name="wechat" th:value="${user.weChat}"></h5>
                         <h5>邮箱: <input class="text-left" type="text" name="email" th:value="${user.email}"></h5>
-                        <h5>微信:<input class="text-left" type="text" name="weChat" th:value="${user.weChat}"></h5>
+
                     </div>
 
                 </div>
@@ -145,7 +147,7 @@
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny m-font-spaced">
                     <h3>Blog</h3>
                     <h5 class="m-font-lined m-font-color-blue ">
-                        <textarea class="form-control m-font-color-blue text-center" name="blogIntro" rows="3" th:placeholder="${user.blogIntro}"></textarea>
+                        <textarea class="form-control m-font-color-blue text-center m-font-spaced m-font-lined" name="blog_intro" rows="3" th:text="${user.blogIntro}" style="padding:10px 19px 10px 19px"></textarea>
                     </h5>
                 </div>
             </div>
@@ -182,6 +184,26 @@
 <script th:inline="javascript">
 
     $(function () {
+
+        //让输入框的宽度随文字变化而变化
+        var searchinput=$("input:not('nav input')");
+        var textWidth = function (text) {
+            var sensor = $('<pre>' + text + '</pre>').css({display: 'none'});
+            $('body').append(sensor);
+            var width = sensor.width();
+            sensor.remove();
+            return width;
+        };
+        searchinput.unbind('keyup ').bind('keyup ', function () {
+            console.log($(this).val())
+            $(this).width(textWidth($(this).val() + 10));
+        });
+        searchinput.each(function () {
+            $(this).width(textWidth($(this).val()+10));
+        })
+
+
+
         $('[data-toggle="popover"]').popover({
             title: "如果觉得本文对您有帮助，您可以鼓励一下博主！",
             animation: true,
@@ -193,6 +215,30 @@
 
 
         });
+
+
+        $('input:not(nav input),textarea').change(function () {
+            var $this = $(this);
+            var fieldName = $(this).attr("name");
+            var fieldValue = $(this).val();
+
+            console.log(fieldName);
+            console.log(fieldValue);
+            $.ajax({
+                url:"/admin/pim",
+                type: "put",
+                data:"fieldName="+fieldName+"&"+"fieldValue="+fieldValue,
+                success:function (result) {
+                    if(result.code==200){
+                        $this.next('p').remove();
+                        $this.after("<p style='color: #dd5555'>该项不能为空</p>");
+                        $this.val(result.extend.fieldValue)
+                    }else{
+                        $this.next('p').remove();
+                    }
+                }
+            })
+        })
     })
 
 

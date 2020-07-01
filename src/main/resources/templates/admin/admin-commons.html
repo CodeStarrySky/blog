@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="admin-head(title)">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,7 +25,7 @@
 <body>
 
 <!--导航条-->
-<nav th:fragment="admin-nav" class="navbar navbar-default row text-center thumbnail m-box-shadow-mini m-margin-none m-padded-none" role="navigation" style="height:66px;margin-bottom: 0px">
+<nav th:fragment="admin-nav" class="navbar navbar-default row text-center thumbnail m-box-shadow-mini m-margin-none m-padded-none" role="navigation" style="height:60px;margin-bottom: 0px">
     <div class="content">
 
         <div class="container-flui ">
@@ -55,17 +55,17 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="#">
-                    <div class="form-inline navbar-btn">
+                    <div class="form-inline navbar-btn" style="margin-top: 3px">
                         <img class="col-md-2 m-div-imag-size m-padded-none" src="../../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" style="border-radius: 55%;">
                         <div class="col-md-6 dropdown text-left" style="margin-top: 19px">
                             <a id="dLabel" style="color: deepskyblue" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                Wchaohui
+                                [[${#session.getAttribute('loginUser')}]]
                                 <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu " aria-labelledby="dLabel">
-                                <li><a href="#" style="color: deepskyblue">修改密码</a></li>
-                                <li><a href="#" style="color: deepskyblue;">退出登录</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#change_pwd_modal" style="color: deepskyblue">修改密码</a></li>
+                                <li><a href="#" th:href="@{/admin/logout}" style="color: deepskyblue;">退出登录</a></li>
                             </ul>
                         </div>
                     </div>
@@ -77,7 +77,35 @@
 
         </div>
     </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="change_pwd_modal" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="type_title">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="old_password" class="col-sm-3 control-label">请输入旧密码：</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="old_password" placeholder="Old Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="new_password" class="col-sm-3 control-label">请输入新密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="new_password" placeholder="New Password">
+                        </div>
+                    </div>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="type_save_btn">保存</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </nav>
 
 

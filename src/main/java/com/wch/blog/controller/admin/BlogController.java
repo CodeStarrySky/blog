@@ -1,4 +1,4 @@
-package com.wch.blog.controller;
+package com.wch.blog.controller.admin;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
 
@@ -84,7 +85,7 @@ public class BlogController {
     }
 
     @PostMapping("/blog")
-    public String addBlog(Blog blog, HttpSession session, RedirectAttributes attributes) throws ParseException {
+    public String addBlog(@Valid Blog blog, HttpSession session, RedirectAttributes attributes) throws ParseException {
         User user = userService.finUser((String)session.getAttribute("loginUser"));
         if(user==null){
             attributes.addFlashAttribute("message","请先登录...");
@@ -118,7 +119,7 @@ public class BlogController {
     }
 
     @PutMapping("/blog")
-    public String blogUpdate(Blog blog) throws ParseException {
+    public String blogUpdate(@Valid Blog blog) throws ParseException {
         blogService.updateBlog(blog);
         return "redirect:/admin/blogs";
     }

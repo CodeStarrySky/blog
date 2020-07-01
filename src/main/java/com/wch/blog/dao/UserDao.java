@@ -20,4 +20,9 @@ public interface UserDao{
 
 
     public User selectByCondition(String username, String password);
+
+
+    public int updateUserField(@Param("feildName") String FeildName,@Param("feildValue") String FeildValue,@Param("id") Long id);
+
+    public String selectByFieldName(@Param("fieldName") String fieldName,@Param("id") Long id);
 }

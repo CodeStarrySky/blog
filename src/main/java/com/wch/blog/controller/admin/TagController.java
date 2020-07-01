@@ -1,4 +1,4 @@
-package com.wch.blog.controller;
+package com.wch.blog.controller.admin;
 
 import com.wch.blog.bean.Msg;
 
@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 @Controller
 @RequestMapping("admin")
@@ -54,7 +55,7 @@ public class TagController {
 
     @PostMapping("/tag")
     @ResponseBody
-    public Msg addTag(Tag tag) {
+    public Msg addTag(@Valid Tag tag) {
         System.out.println(tag);
         String name = tag.getTagName().trim();
         if(name==null||name==""){
@@ -75,7 +76,7 @@ public class TagController {
     }
     @PutMapping("/tag")
     @ResponseBody
-    public Msg editTag(Tag tag) {
+    public Msg editTag(@Valid Tag tag) {
         System.out.println(tag);
         String name = tag.getTagName().trim();
         if(name==null||name==""){

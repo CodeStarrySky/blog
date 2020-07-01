@@ -1,4 +1,4 @@
-package com.wch.blog.controller;
+package com.wch.blog.controller.admin;
 
 import com.wch.blog.bean.User;
 import com.wch.blog.service.UserService;
@@ -37,6 +37,12 @@ public class LoginController {
             return "redirect:/admin";
         }
 
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.removeAttribute("loginUser");
+        return "redirect:/admin";
     }
 
 

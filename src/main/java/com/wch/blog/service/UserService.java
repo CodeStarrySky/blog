@@ -1,6 +1,7 @@
 package com.wch.blog.service;
 
 import com.wch.blog.bean.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.security.NoSuchAlgorithmException;
@@ -11,5 +12,9 @@ public interface UserService {
     public List<User> selectList();
 
     public User finUser(String username);
-    User checkUser(String username, String password);
+    public User checkUser(String username, String password);
+
+    public int updateUserField(String fieldName,String fieldValue,Long id);
+
+    public String selectByFieldName(String fieldName, Long id);
 }

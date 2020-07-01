@@ -17,6 +17,11 @@ public class UserDaoTest {
 
     }
 
+    @Test
+    public void updateUserFieldTest(){
+        System.out.println(userDao.updateUserField("nickname","wchaohui",3L));
+    }
+
 
 
 
