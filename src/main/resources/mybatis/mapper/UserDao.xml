@@ -46,4 +46,12 @@
     <select id="selectByFieldName"  resultType="java.lang.String">
         select ${fieldName} from user where id=#{id}
     </select>
+
+    <select id="selectByPassword" resultMap="UserMap">
+        select * from user where id=#{id} and password=#{pwd};
+    </select>
+
+    <update id="updatePwd">
+        update user set password=#{newPwd} where id=#{id}
+    </update>
 </mapper>

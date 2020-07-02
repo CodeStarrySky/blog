@@ -82,30 +82,131 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="type_title">修改密码</h4>
+                    <h3 class="modal-title m-font-color-blue" id="type_title">修改密码</h3>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="old_password" class="col-sm-3 control-label">请输入旧密码：</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" id="old_password" placeholder="Old Password">
+                    <form class="form-horizontal" id="change_pwd_form" th:action="@{/admin/changePwd}" th:method="put">
+                        <div class="form-group row">
+                            <label for="old_password" class="col-sm-3 control-label">输入旧密码：</label>
+                            <div class="col-sm-9 text-left">
+                                <input type="password" class="form-control nav-input " name="oldPwd" id="old_password" placeholder="Old Password">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="new_password" class="col-sm-3 control-label">请输入新密码：</label>
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="new_password" placeholder="New Password">
+                        <div class="form-group row">
+                            <label for="new_password" class="col-sm-3 control-label">输入新密码：</label>
+                            <div class="col-sm-9 text-left">
+                                <input type="password" class="form-control nav-input " name="newPwd" id="new_password" placeholder="New Password">
+                            </div>
                         </div>
-                    </div>
-
+                        <div class="form-group row ">
+                            <label for="new_password" class="col-sm-3 control-label">确认新密码：</label>
+                            <div class="col-sm-9 text-left">
+                                <input type="password" class="form-control nav-input " name="confirmPwd" id="confirm_new_password" placeholder="Confirm New Password">
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="type_save_btn">保存</button>
+                    <button type="submit" class="btn btn-danger disabled" id="change_pwd_btn">保存</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('#change_pwd_modal').on('hidden.bs.modal', function (e) {
+                //1、清空模态框表单
+                $('#change_pwd_modal form')[0].reset();
+                $('#change_pwd_btn').removeClass("active disabled")
+                $('#change_pwd_btn').addClass("disabled")
+                $('#change_pwd_modal input').parent().removeClass("has-success has-error")
+                $('#change_pwd_modal input').next('span').remove();
+                console.log($('#change_pwd_modal input').next())
+            })
+            $('#old_password').change(function () {
+                if(!ifInputNotNull($("#old_password"))){
+                    return;
+                };
+                $.get(
+                    "/admin/confirmPwd",
+                    "pwd="+$('#old_password').val(),
+                    function (result) {
+                        if(result.code==200){
+                            $('#old_password').parent('div').addClass('has-error');
+                            $('#old_password').after("<span style='margin:0;color: #dd5555'>密码输入有误</span>");
+
+                        }else{
+                            $('#old_password').parent('div').addClass('has-success');
+                            btnStatus();
+                        }
+                    }
+
+                )
+            })
+            $('#new_password').change(function () {
+                    if(ifInputNotNull($(this))){
+                        $('#new_password').parent('div').addClass('has-success');
+                    };
+                    if($('#confirm_new_password').val()==null||$('#confirm_new_password').val()==''){
+                        return;
+                    }else{
+                        ifPwdEqual();
+                        btnStatus();
+                    }
+                    
+            })
+            $('#confirm_new_password').change(function () {
+                if(!ifInputNotNull($(this))){
+                    return;
+                }
+                ifPwdEqual();
+                btnStatus();
+            })
+            
+            function ifPwdEqual() {
+                var newPwd = $('#new_password').val();
+                var confrimPwd = $('#confirm_new_password').val();
+                if(newPwd!=confrimPwd){
+                    $("#confirm_new_password").next('span').remove();
+                    $('#confirm_new_password').parent('div').addClass('has-error');
+                    $('#confirm_new_password').after("<span style='margin:0;color: #dd5555'>两次输入的密码不一致！</span>");
+
+                    return;
+                }else{
+                    $('#confirm_new_password').parent('div').addClass('has-success');
+
+                }
+            }
+            
+            function ifInputNotNull($input) {
+                $input.parent('div').removeClass('has-error has-success');
+                $input.next('span').remove();
+                var pwd = $input.val()
+                if(pwd.trim()==''||pwd==null){
+                    $input.parent('div').addClass('has-error');
+                    $input.after("<span style='margin:0;color: #dd5555'>密码不能是空字符串</span>");
+                    return false;
+                };
+                return true;
+            }
+            
+            function btnStatus() {
+                //判断所有div的has-success属性是否与相关input属性一样多（不含隐藏域）
+                console.log($('#change_pwd_modal div.has-success').length,$('#change_pwd_modal input').length,$('#change_pwd_modal input'))
+                    if($('#change_pwd_modal div.has-success').length==$('#change_pwd_modal input').length-1){
+                        $("#change_pwd_btn").removeClass('disabled');
+                        $("#change_pwd_btn").addClass("active");
+                    }
+            }
+            //修改密码
+            $("#change_pwd_btn").click(function () {
+                $('#change_pwd_form').submit();
+            })
+        })
+    </script>
+
 </nav>
 
 

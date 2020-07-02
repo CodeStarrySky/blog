@@ -5,6 +5,7 @@ package com.wch.blog.dao;
 import com.wch.blog.bean.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PutMapping;
 
 
 import java.util.List;
@@ -25,4 +26,8 @@ public interface UserDao{
     public int updateUserField(@Param("feildName") String FeildName,@Param("feildValue") String FeildValue,@Param("id") Long id);
 
     public String selectByFieldName(@Param("fieldName") String fieldName,@Param("id") Long id);
+
+    public User selectByPassword(@Param("pwd") String pwd, @Param("id") Long id);
+
+    public int updatePwd(@Param("newPwd") String pwd,@Param("id") Long id);
 }

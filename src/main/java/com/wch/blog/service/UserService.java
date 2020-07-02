@@ -17,4 +17,8 @@ public interface UserService {
     public int updateUserField(String fieldName,String fieldValue,Long id);
 
     public String selectByFieldName(String fieldName, Long id);
+
+    public User confirmByPassword(String pwd, Long id);
+
+    public int changePwd(String newPwd,Long id);
 }

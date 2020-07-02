@@ -366,7 +366,7 @@ button {
     outline: none !important;
 }
 
-.admin-pim input:not(nav){
+.admin-pim input:not(.nav-input){
     outline: none;
     border:none;
 }

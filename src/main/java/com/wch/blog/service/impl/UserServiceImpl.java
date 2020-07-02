@@ -51,4 +51,15 @@ public class UserServiceImpl implements UserService {
     public String selectByFieldName(String fieldName, Long id) {
         return userDao.selectByFieldName(fieldName,id);
     }
+
+    @Override
+    public User confirmByPassword(String pwd, Long id) {
+        return userDao.selectByPassword(MD5AndSHAUtils.md5AndSHA(pwd),id);
+    }
+
+    @Transactional
+    @Override
+    public int changePwd(String newPwd, Long id) {
+        return userDao.updatePwd(newPwd,id);
+    }
 }
