@@ -10,15 +10,20 @@ import com.wch.blog.utils.MD5AndSHAUtils;
 import org.apache.ibatis.annotations.Param;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import java.io.File;
 import java.util.List;
 
 @Controller
@@ -27,6 +32,9 @@ public class UserController {
 
     @Resource
     UserService userService;
+
+    @Value("${resources-path}")
+    String resourcePath;
 
     @GetMapping("/pim")
     public String goPimPage(Model model, HttpSession session){
@@ -88,6 +96,47 @@ public class UserController {
         session.removeAttribute("loginUser");
         redirectAttributes.addFlashAttribute("message","密码修改成功！请重新登录...");
         return "redirect: /admin";
+    }
+
+    @ResponseBody
+    @PostMapping("/changeImage")
+    public Msg changeHeadPro(@RequestParam("img") MultipartFile file,@RequestParam("fieldName") String fieldName, HttpSession session){
+        if(file.isEmpty()){
+            return Msg.fail().add("vi","文件不能为空");
+        }
+        String fileType = file.getContentType();
+        if(!("image/gif".equals(fileType)||"image/jpeg".equals(fileType)||"image/png".equals(fileType))){
+            return Msg.fail().add("vi","文件类型不匹配");
+        }
+        String fileName = file.getOriginalFilename();
+        if(fileName.indexOf("\\") != -1){
+            fileName = fileName.substring(fileName.lastIndexOf("\\"));
+        }
+        User user = userService.finUser((String)session.getAttribute("loginUser"));
+        try{
+            String uploadPath = resourcePath+"images/headProtrait";
+            File fileDir = new File(uploadPath);
+            String path = fileDir.getAbsolutePath();
+            System.out.println(path);
+            if(!fileDir.exists()){
+                fileDir.mkdirs();
+            }
+            try{
+                file.transferTo(new File(path,fileName));
+                System.out.println(path);
+                int i= userService.updateUserField(fieldName,path+File.separator+fileName,user.getId());
+                if(i!=1){
+                    return Msg.fail().add("vi","数据库更新出错！");
+                }
+                return Msg.success();
+            }catch (Exception e){
+                e.printStackTrace();
+                return Msg.fail().add("vi","修改失败！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Msg.fail().add("vi","文件路径未找到！");
+        }
     }
 
 }

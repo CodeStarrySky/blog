@@ -92,7 +92,10 @@ a:active {
     margin: 5px 10px 5px 10px;
 }
 .m-margin-large{
-    margin: 10px 10px 10px 10px;
+    margin: 10px 0px 10px 10px;
+    width: 188px !important;
+    height: 188px !important;
+    border-radius: 10px;
 }
 .m-box-shadow {
     box-shadow:2px 2px 8px #9C9C9C;
@@ -369,6 +372,30 @@ button {
 .admin-pim input:not(.nav-input){
     outline: none;
     border:none;
+}
+.mask {
+     position: absolute;
+     top:10px;
+     left:20px;
+     width:188px;
+     height: 188px;
+     background: rgba(0,0,0,0.5);
+     color: #f5f1e5;
+     text-align: center;
+     border-radius: 10px;
+     display: none;
+ }
+.footer-mask {
+    position: absolute;
+    top:10px;
+    left:113px;
+    width:189px;
+    height: 189px;
+    background: rgba(0,0,0,0.5);
+    color: #f5f1e5;
+    text-align: center;
+    border-radius: 10px;
+    display: none;
 }
 
 

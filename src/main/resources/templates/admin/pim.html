@@ -19,11 +19,15 @@
                     <!--                头像、介绍-->
                     <div class="row m-middle">
                         <!--                    头像-->
-                        <div class="col-md-6 center-block">
-                            <img src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" class="img-responsive m-margin-large">
+                        <div class="col-md-6 text-center "  style="position: relative;" id="head_protrait">
+                            <img src="../static/images/headProtrait.jpg"   th:src="${user.headPortrait}" class=" m-margin-large img-responsive">
+                            <div class="mask text-center" >
+                                <input style="top:72px;left:59px;opacity: 0;width:88px;height:32px;position: absolute;" name="head_portrait" id="head_upload"  type="file" accept="image/gif,image/jpeg,image/png" />
+                                <button type="button" class="btn btn-info m-border-radius" id="head_btn" style="position:absolute;top:72px;left:59px;width: 88px;height:32px">修改</button>
+                            </div>
                         </div>
                         <!-- 介绍-->
-                        <div class="col-md-6   m-opacity-big text-center">
+                        <div class="col-md-6  m-opacity-big text-center">
                             <div class="m-margin-tb-big" >
                                 <h5><input type="text" class="text-center" name="intro1" th:value="${user.intro1}" ></h5>
                                 <h5><input type="text" class="text-center" name="intro2" th:value="${user.intro2}" ></h5>
@@ -122,8 +126,14 @@
         <div class="col-md-12 m-font-spaced">
             <div class="row  m-padded-none m-margin-tb-mini" style="padding-top: 52px;">
 
-                <div class="col-md-3 m-div-min-height-large " style="border-right: 2px solid #E6E3E3">
-                    <img src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" class="m-box-shadow" style="width: 166px; height: 166px">
+                <div class="col-md-3 m-div-min-height-large  text-center" style="border-right: 2px solid #E6E3E3;">
+                    <div class="col-md-7" style="position: relative;" id="footer_img">
+                        <img src="../static/images/headProtrait.jpg"  th:src="${user.publicQrCode}" class="m-margin-large img-responsive m-box-shadow" style="margin-left: 99px">
+                        <div class="footer-mask text-center" >
+                            <input style="top:72px;left:59px;opacity: 0;width:88px;height:32px;position: absolute;" id="footer_img_upload" name="public_qrcode"  type="file" accept="image/gif, image/jpeg, image/png" />
+                            <button type="button" class="btn btn-info m-border-radius" id="footer_img_btn" style="position:absolute;top:72px;left:59px;width: 88px;height:32px">修改</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #E6E3E3">
                     <h3>最新博客</h3>
@@ -139,7 +149,6 @@
                         <h5 class="text-center">QQ: <input class="text-left" type="text" name="qq" th:value="${user.qq}" ></h5>
                         <h5>微信:<input class="text-left" type="text" name="wechat" th:value="${user.weChat}"></h5>
                         <h5>邮箱: <input class="text-left" type="text" name="email" th:value="${user.email}"></h5>
-
                     </div>
 
                 </div>
@@ -186,7 +195,7 @@
     $(function () {
 
         //让输入框的宽度随文字变化而变化
-        var searchinput=$("input:not('nav input')");
+        var searchinput=$("input:not('nav input,#head_upload,#footer_img_upload')");
         var textWidth = function (text) {
             var sensor = $('<pre>' + text + '</pre>').css({display: 'none'});
             $('body').append(sensor);
@@ -217,7 +226,7 @@
         });
 
 
-        $('input:not(nav input),textarea').change(function () {
+        $('input:not("nav input,#head_upload,#footer_img_upload"),textarea').change(function () {
             var $this = $(this);
             var fieldName = $(this).attr("name");
             var fieldValue = $(this).val();
@@ -239,6 +248,60 @@
                 }
             })
         })
+        $("#head_protrait").mouseover(function () {
+            $(".mask").show();
+        });
+        $("#head_protrait").mouseout(function () {
+            $(".mask").hide();
+        })
+
+        $("#head_btn").click(function () {
+            $('#head_upload').trigger("click");
+        })
+
+        $("#footer_img").mouseover(function () {
+            $(".footer-mask").show();
+        });
+        $("#footer_img").mouseout(function () {
+            $(".footer-mask").hide();
+        })
+
+        $("#footer_img_btn").click(function () {
+            $('#footer_img_upload').trigger("click");
+        })
+        $('#head_upload,#footer_img_upload').change(function () {
+            var form = new FormData();
+            form.append("img",this.files[0]);
+            form.append("fieldName",$(this).attr("name"));
+            var $this = $(this);
+            $.ajax({
+                url:"/admin/changeImage",
+                data:form,
+                cache: false,
+                async: false,
+                type:"POST",
+                dataType:'json',
+                processData:false,
+                contentType:false,
+                success: function (result) {
+                    if(result.code==200){
+                        $this.parent('div').next('p').remove();
+                        $this.parent('div').after("<p style='color: #dd5555'>修改头像失败！</p>");
+                        console.log("11111111111111111111111")
+                    }else {
+                        $this.parent('div').next('p').remove();
+                        console.log("修改成功！");
+                    }
+                }
+            })
+        })
+
+
+
+
+
+
+
     })
 
 

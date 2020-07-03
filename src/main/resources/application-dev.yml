@@ -16,4 +16,5 @@ logging:
     com.wch.blog: debug
   file:
     name: log/blog-dev.log
+resources-path: G:/blog/
 

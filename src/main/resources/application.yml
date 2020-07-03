@@ -7,6 +7,13 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+#文件上传配置
+  servlet:
+    multipart:
+      enabled: true                   #启用文件上传，默认为true
+      file-size-threshold: 0KB       #文件大于该阈值时，将写入磁盘（KB/MB）
+      max-file-size: 10MB            #单个文件最大值（KB/MB）
+      max-request-size: 10MB        #单个请求多个文件的最大值（KB/MB）
 #pagehelper分页插件
 pagehelper:
   helperDialect: mysql
