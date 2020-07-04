@@ -3,9 +3,11 @@ package com.wch.blog.bean;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -77,4 +79,24 @@ public class User {
 
     //评论
     private List<Comment> comments;
+
+    public String getHeadPortrait(){
+        return setPath(headPortrait);
+    }
+    public String getPublicQrCode(){
+        return setPath(publicQrCode);
+    }
+
+
+
+    private String setPath(String path){
+        System.out.println(path);
+        if("".equals(path)||path==null){
+            return path;
+        }
+        String newPath = path.replace("G:\\blog\\images\\user\\", "/blog/images/user/");
+        return newPath;
+    }
+
+
 }

@@ -33,7 +33,7 @@ public class UserController {
     @Resource
     UserService userService;
 
-    @Value("${resources-path}")
+    @Value("${user-resources-path}")
     String resourcePath;
 
     @GetMapping("/pim")
@@ -114,8 +114,7 @@ public class UserController {
         }
         User user = userService.finUser((String)session.getAttribute("loginUser"));
         try{
-            String uploadPath = resourcePath+"images/headProtrait";
-            File fileDir = new File(uploadPath);
+            File fileDir = new File(resourcePath);
             String path = fileDir.getAbsolutePath();
             System.out.println(path);
             if(!fileDir.exists()){
@@ -128,7 +127,7 @@ public class UserController {
                 if(i!=1){
                     return Msg.fail().add("vi","数据库更新出错！");
                 }
-                return Msg.success();
+                return Msg.success().add("path","/blog/images/user/"+fileName);
             }catch (Exception e){
                 e.printStackTrace();
                 return Msg.fail().add("vi","修改失败！");

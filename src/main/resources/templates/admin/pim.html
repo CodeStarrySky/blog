@@ -20,7 +20,7 @@
                     <div class="row m-middle">
                         <!--                    头像-->
                         <div class="col-md-6 text-center "  style="position: relative;" id="head_protrait">
-                            <img src="../static/images/headProtrait.jpg"   th:src="${user.headPortrait}" class=" m-margin-large img-responsive">
+                            <img src="../static/images/headProtrait.jpg"   th:src="@{${user.headPortrait}}" class=" m-margin-large img-responsive">
                             <div class="mask text-center" >
                                 <input style="top:72px;left:59px;opacity: 0;width:88px;height:32px;position: absolute;" name="head_portrait" id="head_upload"  type="file" accept="image/gif,image/jpeg,image/png" />
                                 <button type="button" class="btn btn-info m-border-radius" id="head_btn" style="position:absolute;top:72px;left:59px;width: 88px;height:32px">修改</button>
@@ -128,7 +128,7 @@
 
                 <div class="col-md-3 m-div-min-height-large  text-center" style="border-right: 2px solid #E6E3E3;">
                     <div class="col-md-7" style="position: relative;" id="footer_img">
-                        <img src="../static/images/headProtrait.jpg"  th:src="${user.publicQrCode}" class="m-margin-large img-responsive m-box-shadow" style="margin-left: 99px">
+                        <img src="../static/images/headProtrait.jpg"  th:src="@{${user.publicQrCode}}" class="m-margin-large img-responsive m-box-shadow" style="margin-left: 99px">
                         <div class="footer-mask text-center" >
                             <input style="top:72px;left:59px;opacity: 0;width:88px;height:32px;position: absolute;" id="footer_img_upload" name="public_qrcode"  type="file" accept="image/gif, image/jpeg, image/png" />
                             <button type="button" class="btn btn-info m-border-radius" id="footer_img_btn" style="position:absolute;top:72px;left:59px;width: 88px;height:32px">修改</button>
@@ -290,6 +290,8 @@
                         console.log("11111111111111111111111")
                     }else {
                         $this.parent('div').next('p').remove();
+                        $this.parent('div').prev('img').attr("src",result.extend.path);
+                        console.log(result.extend.path);
                         console.log("修改成功！");
                     }
                 }

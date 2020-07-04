@@ -9,14 +9,17 @@ import com.wch.blog.service.BlogService;
 import com.wch.blog.service.TagService;
 import com.wch.blog.service.TypeService;
 import com.wch.blog.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
 import java.text.ParseException;
 import java.util.List;
 
@@ -92,6 +95,13 @@ public class BlogController {
             return "redirect:/admin";
         }
         blog.setUser(user);
+        String path = blog.getFirstFigure();
+        if("".equals(path)||path==null){
+
+        }else{
+            blog.setFirstFigure(path.replace("/blog/images/blog/",resourcePath));
+        }
+        System.out.println(blog);
         int i = blogService.save(blog);
         if(i>0){
             return "redirect:/admin/blogs";
@@ -120,11 +130,54 @@ public class BlogController {
 
     @PutMapping("/blog")
     public String blogUpdate(@Valid Blog blog) throws ParseException {
+        String path = blog.getFirstFigure();
+        if("".equals(path)||path==null){
+
+        }else{
+            blog.setFirstFigure(path.replace("/blog/images/blog/",resourcePath));
+        }
+        System.out.println(blog);
         blogService.updateBlog(blog);
         return "redirect:/admin/blogs";
     }
+    @Value("${blog-resources-path}")
+    String resourcePath;
 
-
+    //首图
+    @ResponseBody
+    @PostMapping("/addAndEditFirstFigure")
+    public Msg changeHeadPro(@RequestParam("file") MultipartFile file){
+        if(file.isEmpty()||file==null){
+            return Msg.fail().add("vi","文件不能为空");
+        }
+        String fileType = file.getContentType();
+        if(!("image/gif".equals(fileType)||"image/jpeg".equals(fileType)||"image/png".equals(fileType))){
+            return Msg.fail().add("vi","文件类型不匹配");
+        }
+        String fileName = file.getOriginalFilename();
+        if(fileName.indexOf("\\") != -1){
+            fileName = fileName.substring(fileName.lastIndexOf("\\"));
+        }
+        try{
+            File fileDir = new File(resourcePath);
+            String path = fileDir.getAbsolutePath();
+            System.out.println("11111111111111111111"+path);
+            if(!fileDir.exists()){
+                fileDir.mkdirs();
+            }
+            try{
+                file.transferTo(new File(path,fileName));
+                System.out.println("222222222222222222"+path);
+                return Msg.success().add("path","/blog/images/blog/"+fileName);
+            }catch (Exception e){
+                e.printStackTrace();
+                return Msg.fail().add("vi","修改失败！");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return Msg.fail().add("vi","文件路径未找到！");
+        }
+    }
 
 
 

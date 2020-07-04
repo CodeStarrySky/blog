@@ -19,8 +19,14 @@ public class LoginController {
     @Resource
     private UserService userService;
     @GetMapping
-    public String loginPage() {
-        return "admin/login";
+    public String loginPage(HttpSession session) {
+        Object loginUser = session.getAttribute("loginUser");
+        if(loginUser==null){
+            return "admin/login";
+        }else{
+            return "redirect:/admin/blogs";
+        }
+
     }
     @PostMapping("/login")
     public String login(@RequestParam("username") String username,

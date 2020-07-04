@@ -55,9 +55,22 @@
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
-        <div class="col-lg-6 input-group input-group-lg" style="margin-top: 16px;padding-right: 16px">
-            <span class="input-group-addon" >首图</span>
-            <input type="text" name="firstFigure" class="form-control" placeholder="地址"  aria-describedby="sizing-addon1" th:value="${blog}!=null?${blog.firstFigure}:''">
+        <div class="text-left" style="margin-top: 16px;padding-right: 16px;position: relative">
+            <span class="btn btn-warning btn-lg" style="margin-bottom: 16px" >首图</span>
+            <input type="hidden" name="firstFigure" id="first_figure_id" th:value="${blog!=null}?${blog.firstFigure}:''">
+            <input style="top:52px;left:88px;opacity: 0;width:0px;height:0px;position: absolute" id="first_figure_upload" name="first_figure"  type="file" accept="image/gif, image/jpeg, image/png" />
+            <button type="button" th:style="'opacity:'+(${blog==null||blog.firstFigure==''||blog.firstFigure==null}?'1':'0')+';width: 96px;height:96px;left:12px;font-size: 33px'"  class="glyphicon glyphicon-cloud-upload" style="" id="first_figure_btn" ></button>
+            <div id="head_portrait_div"  th:style="'display:'+(${blog==null||blog.firstFigure==''||blog.firstFigure==null}?'none':'inline')">
+                <img  id="first_figure_img" src="../static/images/headProtrait.jpg"  th:src="@{${blog.firstFigure}}"
+                     class="m-border-radius-mini img-responsive m-box-shadow" style="width: 102px;height:102px;top:0px;left:83px;position: absolute">
+<!--                     th:src="(${blog}!=null||${blog.firstFigure}!=null||${blog.firstFigure}!='')?${blog.firstFigure}:'#'"-->
+
+                <div class="mask-mini text-center" >
+                    <button type="button" class="btn btn-info m-border-radius" id="first_change_btn" style="position:absolute;top:22px;left:22px;width: 66px;height:25px">修改</button>
+                    <button type="button" class="btn btn-danger m-border-radius" id="first_delete_btn" style="position:absolute;top:55px;left:22px;width: 66px;height:25px">删除</button>
+                </div>
+            </div>
+            <!--            <input type="file" name="firstFigure" class="form-control" placeholder="地址"  aria-describedby="sizing-addon1" th:value="${blog}!=null?${blog.firstFigure}:''">-->
         </div>
         <div class="text-left" style="margin-top:16px;font-size: 16px;color: #00bbff" >
             <label class="checkbox-inline">
@@ -91,10 +104,10 @@
 
 
         <div class="text-right" style="position:relative;">
-            <input type="hidden" name="published" value="true"/>
-            <button type="button" id="goBack-btn" class="btn btn-danger btn-lg m-padded-lr m-margin-large"  style="outline: none">返回</button>
-            <button type="button" id="save-btn"   class="btn btn-default btn-lg m-padded-lr m-margin-large"  style="outline: none">保存</button>
-            <button type="button" id="published-btn" class="btn btn-info btn-lg m-padded-lr m-margin-large"  style="outline: none" th:text="${blog}!=null?'更新':'发布'">发布</button>
+            <input  type="hidden" name="published" value="true"/>
+            <button type="button" id="goBack-btn"  class="btn btn-danger btn-lg m-padded-lr m-margin-min"   style="outline: none">返回</button>
+            <button type="button" id="save-btn"    class="btn btn-default btn-lg m-padded-lr m-margin-min"  style="outline: none">保存</button>
+            <button type="button" id="published-btn" class="btn btn-info btn-lg m-padded-lr m-margin-min"   style="outline: none" th:text="${blog}!=null?'更新':'发布'">发布</button>
         </div>
         </form>
     </div>
@@ -139,7 +152,6 @@
                 $("#iftype").addClass("btn-info");
                 $("#iftype").html("原创&ensp;").append("<span class='caret'></span>");
                 $("#if_original").val("true");
-
             }else {
                 return ;
             }
@@ -150,9 +162,31 @@
             return false;
         });
         $("#published-btn").click(function(){
-            $("[name='published']").val(true);
-            $("#save-blog-form").submit();
-            return false;
+            var form = new FormData();
+            form.append("file",$("#first_figure_upload")[0].files[0]);
+            var $this = $("#head_portrait_div");
+            $.ajax({
+                url:"/admin/addAndEditFirstFigure",
+                data:form,
+                cache: false,
+                async: false,
+                type:"POST",
+                dataType:'json',
+                processData:false,
+                contentType:false,
+                success: function (result) {
+                    if(result.code==200){
+                        $this.next('p').remove();
+                        $this.after("<p style='color: #dd5555'>修改头像失败！</p>");
+                        console.log("11111111111111111111111")
+                    }else {
+                        $this.next('p').remove();
+                        $("#first_figure_id").val(result.extend.path);
+                        $("[name='published']").val(true);
+                        $("#save-blog-form").submit();
+                    }
+                }
+            })
         });
         $("#goBack-btn").click(function () {
             $("#confirm_return_modal").modal();
@@ -169,17 +203,90 @@
             return false;
         })
         function save(){
-            $("[name='published']").val(false);
-            $("#save-blog-form").submit();
+            var form = new FormData();
+            form.append("file",$("#first_figure_upload")[0].files[0]);
+            var $this = $("#head_portrait_div");
+            $.ajax({
+                url:"/admin/addAndEditFirstFigure",
+                data:form,
+                cache: false,
+                async: false,
+                type:"POST",
+                dataType:'json',
+                processData:false,
+                contentType:false,
+                success: function (result) {
+                    if(result.code==200){
+                        $this.next('p').remove();
+                        $this.after("<p style='color: #dd5555'>修改头像失败！</p>");
+                        console.log("11111111111111111111111")
+                    }else {
+                        $this.next('p').remove();
+                        $("#first_figure_id").val(result.extend.path);
+                        $("[name='published']").val(false);
+                        $("#save-blog-form").submit();
+                    }
+                }
+            })
         }
 
         //对select下拉列表进行初始化
         $('.selectpicker>option').each(function (i) {
             $(this).attr("data-content","<span class='label label-info'>"+$(this).text()+"</span>")
         })
+
+        //上传图片
+
+        $("#head_portrait_div").mouseover(function () {
+            $(".mask-mini").show();
+        });
+        $("#head_portrait_div").mouseout(function () {
+            $(".mask-mini").hide();
+        })
+
+        $("#first_change_btn,#first_figure_btn").click(function () {
+            $('#first_figure_upload').trigger("click");
+        })
+
+        $('#first_figure_upload').change(function () {
+                var file = $(this).val();
+                if(file==''||file==null){
+                    $("#first_figure_btn").css('opacity','1');
+                    $("#first_figure_btn").removeClass("disabled");
+                    $("#head_portrait_div").css('display','none');
+                }else{
+                    preImg(this.id,'first_figure_img');
+                    $("#first_figure_btn").css('opacity','0');
+                    $("#first_figure_btn").removeClass("disabled");
+                    $("#head_portrait_div").css('display','inline');
+                    $("#first_figure_btn").addClass("disabled");
+                }
+        })
+        $('#first_delete_btn').click(function () {
+            $('#first_figure_upload').val('');
+            $("#first_figure_btn").css('opacity','1');
+            $("#first_figure_btn").removeClass("disabled");
+            $("#head_portrait_div").css('display','none');
+        })
+
+        //图片即时预览
+        function getFileUrl(sourceId) {
+            var url;
+            if (navigator.userAgent.indexOf("MSIE")>=1) { // IE
+                url = document.getElementById(sourceId).value;
+            } else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+            } else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+            }
+            return url;
+        }
+        function preImg(sourceId, targetId) {
+            var url = getFileUrl(sourceId);
+            var imgPre = document.getElementById(targetId);
+            imgPre.src = url;
+        }
     })
-
-
 </script>
 <script type="text/javascript">
     var contentEditor;

@@ -3,6 +3,7 @@ package com.wch.blog.bean;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -45,16 +46,16 @@ public class Blog {
     //推荐开关
     private boolean recommend=false;
     //创建时间
-    @NotBlank(message = "生成创建事间有误")
+//    @NotNull(message = "生成创建事间有误")
     private Date createTime;
     //更新时间
-    @NotBlank(message = "生成更新事件有误")
+//    @NotNull(message = "生成更新事件有误")
     private Date updateTime;
     //标记是否删除 0表示已删除，1表示未删除
     private Integer flag=1;
     @NotNull(message = "需要一个分类")
     private Type type;
-    @NotNull(message = "属于一个用户")
+//    @NotNull(message = "属于一个用户")
     private User user;
     //评论
     private List<Comment> comments;
@@ -66,6 +67,15 @@ public class Blog {
 
     private String tagIds;
 
+    public String getFirstFigure(){
+        if(firstFigure==null||"".equals(firstFigure)){
+            System.out.println("3fffffffffffff"+firstFigure);
+            return firstFigure;
+        }
+        System.out.println("1xxxxxxxxxxxxxxxxxxxxx"+firstFigure);
+        System.out.println("2*********************"+firstFigure.replace("G:\\blog\\images\\blog\\", "/blog/images/blog/"));
+        return firstFigure.replace("G:/blog/images/blog/", "/blog/images/blog/");
+    }
 
 
 
