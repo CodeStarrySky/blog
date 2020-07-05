@@ -100,6 +100,9 @@ public class BlogServiceImpl implements BlogService {
         //1.更新blog_tag的关联关系
         blogDao.deleteBlogTagByBlogId(blog.getId());
         String tagIds = blog.getTagIds();
+        if(tagIds==null||tagIds.equals("")){
+            throw new ValidationException("至少选择一个标签");
+        }
         String[] tagIdArr = tagIds.split(",");
         List<BlogTag> blogTags = new ArrayList<>();
         for(String tagId : tagIdArr){

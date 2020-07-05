@@ -28,6 +28,10 @@ public class Blog {
     //内容
     @NotBlank(message = "内容不能为空")
     private String  content;
+
+    //简介
+    @NotBlank(message = "博客简介不能为空")
+    private String introduction;
     //首图地址
     private String firstFigure;
     //标记是否原创

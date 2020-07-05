@@ -26,8 +26,12 @@ import java.util.List;
 @RequestMapping("admin")
 @Controller
 public class BlogController {
-    private final  Integer PAGE_SIZE = 10;
-    private final  Integer NAVIGATE_PAGES = 1;
+//    private final  Integer PAGE_SIZE = 10;
+//    private final  Integer NAVIGATE_PAGES = 1;
+    @Value("${page-size}")
+    Integer PAGE_SIZE;
+    @Value("${navigate-pages}")
+    Integer NAVIGATE_PAGES;
     @Resource
     BlogService blogService;
     @Resource
@@ -68,6 +72,8 @@ public class BlogController {
     @PostMapping("/search")
     public String search(Blog blog,@RequestParam(value="pn",required = false,defaultValue = "1") Integer pn,Model model){
 
+        //回显查询条件
+        model.addAttribute("queryConditions",blog);
         List<Type> types = typeService.getAll();
         model.addAttribute("types",types);
         PageHelper.startPage(pn, PAGE_SIZE);

@@ -97,6 +97,9 @@ a:active {
     height: 188px !important;
     border-radius: 10px;
 }
+.m-margin-large-mini{
+    margin: 10px 10px 10px 10px;
+}
 .m-box-shadow {
     box-shadow:2px 2px 8px #9C9C9C;
 }

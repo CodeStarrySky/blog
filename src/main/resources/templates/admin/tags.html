@@ -60,7 +60,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="tag_save_btn">保存</button>
+                    <button type="button" class="btn btn-primary disabled" id="tag_save_btn">保存</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -104,14 +104,15 @@
     $('#tag_add_modal').on('hidden.bs.modal', function (e) {
         //1、清空模态框表单
         $('#tag_add_modal form')[0].reset();
-        $('#tag_save_btn').removeClass("active disabled")
-        $('#tag_name').parent().removeClass("has-success has-error")
+        $('#tag_save_btn').removeClass(" disabled");
+        $('#tag_save_btn').addClass(" disabled");
+        $('#tag_name').parent().removeClass("has-success has-error");
         $('#tag_name').next().remove();
     })
     //校验表单
     $('#tag_name').change(function () {
         //清空错误样式
-        $('#tag_save_btn').removeClass("active disabled")
+        $('#tag_save_btn').removeClass(" disabled")
         $('#tag_name').parent().removeClass("has-success has-error")
         $('#tag_name').next().remove();
         var tagname = $(this).val();
@@ -122,7 +123,7 @@
 
                 if(result.code==100){
                     $('#tag_name').parent().addClass("has-success")
-                    $('#tag_save_btn').addClass("active")
+
                 }else{
 
                     $('#tag_save_btn').addClass("disabled")

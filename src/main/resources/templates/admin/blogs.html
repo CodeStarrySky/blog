@@ -18,18 +18,18 @@
             <form class="form-inline" th:action="@{/admin/search}" th:method="POST">
                 <div class="form-group">
         <!--            <label class="sr-only" for="title">标题</label>-->
-                    <input type="text" class="form-control" id="title" placeholder="标题" name="title">
+                    <input type="text" class="form-control" id="title" placeholder="标题" name="title" th:value="${queryConditions}!=null?${queryConditions.title}:''">
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="form-group">
                     <select class="form-control"  name="type.id" aria-haspopup="true" aria-expanded="false" style="min-width: 200px">
                         <option disabled selected value hidden></option>
-                        <option value="1" th:each="type:${types}" th:text="${type.typeName}" th:value="${type.id}">hahah1</option>
+                        <option value="1" th:each="type:${types}" th:text="${type.typeName}" th:value="${type.id}" th:selected="${queryConditions!=null}?${queryConditions.type!=null?queryConditions.type.id:false}==${type.id}:false">hahah1</option>
                     </select>
                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="recommend" value="true"> 推荐
+                        <input type="checkbox" name="recommend" value="true" th:checked="${queryConditions!=null}?${queryConditions.recommend}:false"> 推荐
                     </label>
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -65,7 +65,7 @@
                         <td style="display:table-cell;vertical-align: middle" th:text="${blog.recommend}?'是':'否'">是</td>
                         <td style="display:table-cell;vertical-align: middle" th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm:ss')}">2020-5-20 05：20</td>
                         <td style="display:table-cell;vertical-align: middle">
-                            <a  class="btn btn-info blog_edit_btn " style="outline: none" th:href="@{/admin/blog/}+${blog.id}" th:attr="edit_url=@{/admin/blog/}+${blog.id}">编辑</a>
+                            <a  class="btn btn-info blog_edit_btn " style="outline: none;color: #ffffff" th:href="@{/admin/blog/}+${blog.id}" th:attr="edit_url=@{/admin/blog/}+${blog.id}">编辑</a>
                             <button type="button" class="btn btn-danger blog_delete_btn" style="outline: none" th:attr="del_url=@{/admin/blog/}+${blog.id}+'?pn='+${page.pageNum}">删除</button>
                         </td>
                     </tr>

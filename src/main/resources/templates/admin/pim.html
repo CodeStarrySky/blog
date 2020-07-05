@@ -20,7 +20,7 @@
                     <div class="row m-middle">
                         <!--                    头像-->
                         <div class="col-md-6 text-center "  style="position: relative;" id="head_protrait">
-                            <img src="../static/images/headProtrait.jpg"   th:src="@{${user.headPortrait}}" class=" m-margin-large img-responsive">
+                            <img src="../static/images/headProtrait.jpg"   th:src="@{${user.headPortrait}}" class=" m-margin-large-mini img-responsive">
                             <div class="mask text-center" >
                                 <input style="top:72px;left:59px;opacity: 0;width:88px;height:32px;position: absolute;" name="head_portrait" id="head_upload"  type="file" accept="image/gif,image/jpeg,image/png" />
                                 <button type="button" class="btn btn-info m-border-radius" id="head_btn" style="position:absolute;top:72px;left:59px;width: 88px;height:32px">修改</button>
@@ -153,7 +153,7 @@
 
                 </div>
 
-                <div class="col-md-3 m-div-min-height-large m-opacity-tiny m-font-spaced">
+                <div class="col-md-3 m-div-min-height-large  m-opacity-tiny m-font-spaced">
                     <h3>Blog</h3>
                     <h5 class="m-font-lined m-font-color-blue ">
                         <textarea class="form-control m-font-color-blue text-center m-font-spaced m-font-lined" name="blog_intro" rows="3" th:text="${user.blogIntro}" style="padding:10px 19px 10px 19px"></textarea>

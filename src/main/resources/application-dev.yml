@@ -19,4 +19,6 @@ logging:
 
 user-resources-path: G:/blog/images/user/
 blog-resources-path: G:/blog/images/blog/
+page-size: 10
+navigate-pages: 1
 

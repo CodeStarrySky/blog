@@ -60,7 +60,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="type_save_btn">保存</button>
+                    <button type="button" class="btn btn-primary disabled" id="type_save_btn">保存</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -104,14 +104,15 @@
     $('#type_add_modal').on('hidden.bs.modal', function (e) {
         //1、清空模态框表单
         $('#type_add_modal form')[0].reset();
-        $('#type_save_btn').removeClass("active disabled")
+        $('#type_save_btn').removeClass("disabled");
+        $('#type_save_btn').addClass("disabled");
         $('#type_name').parent().removeClass("has-success has-error")
         $('#type_name').next().remove();
     })
     //校验表单
     $('#type_name').change(function () {
         //清空错误样式
-        $('#type_save_btn').removeClass("active disabled")
+        $('#type_save_btn').removeClass("disabled")
         $('#type_name').parent().removeClass("has-success has-error")
         $('#type_name').next().remove();
         var typename = $(this).val();
@@ -122,7 +123,6 @@
 
                 if(result.code==100){
                     $('#type_name').parent().addClass("has-success")
-                    $('#type_save_btn').addClass("active")
                 }else{
 
                     $('#type_save_btn').addClass("disabled")

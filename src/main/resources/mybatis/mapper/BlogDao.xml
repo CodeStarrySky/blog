@@ -5,6 +5,7 @@
        <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
        <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
        <result          property="content"           column="content"           jdbcType="LONGVARCHAR"></result>
+       <result          property="introduction"      column="introduction"     jdbcType="LONGVARCHAR"></result>
        <result          property="firstFigure"       column="first_figure"     jdbcType="VARCHAR"></result>
        <result          property="ifOriginal"        column="if_original"      jdbcType="BIT"></result>
        <result          property="views"              column="views"             jdbcType="INTEGER"></result>
@@ -24,6 +25,7 @@
     <sql id="ifNullSql">
         <if  test="title!=null"> title=#{title},</if>
         <if  test="content!=null"> content=#{content},</if>
+        <if  test="introduction!=null"> introduction=#{introduction},</if>
         <if  test="firstFigure!=null"> first_figure=#{firstFigure},</if>
         <if  test="ifOriginal!=null"> if_original=#{ifOriginal},</if>
         <if  test="appreciates!=null"> appreciates=#{appreciates},</if>
@@ -73,8 +75,8 @@
         where id=#{id}
     </update>
     <insert id="saveBlog" parameterType="com.wch.blog.bean.Blog" useGeneratedKeys="true" keyProperty="id">
-        insert into blog(title,content,first_figure,if_original,views,appreciates,share_statement,commentabled,published,recommend,create_time,update_time,flag,type_id,user_id)
-                            values (#{blog.title},#{blog.content},#{blog.firstFigure},
+        insert into blog(title,content,introduction,first_figure,if_original,views,appreciates,share_statement,commentabled,published,recommend,create_time,update_time,flag,type_id,user_id)
+                            values (#{blog.title},#{blog.content},#{blog.introduction},#{blog.firstFigure},
                                     #{blog.ifOriginal},#{blog.views},#{blog.appreciates},#{blog.shareStatement},
                                     #{blog.commentabled},#{blog.published},#{blog.recommend},#{blog.createTime},#{blog.updateTime},#{blog.flag},#{blog.type.id},#{blog.user.id});
     </insert>

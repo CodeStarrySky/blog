@@ -9,7 +9,7 @@
     <div class="col-md-8 col-md-offset-2" >
         <div class="m-margin-tb-tiny">
             <div class="btn-group" role="group" aria-label="...">
-                <a  class="btn btn-default btn-lg active" style="outline: none" th:href="@{/admin/blogs-input}">&nbsp;发布&nbsp;</a>
+                <a  class="btn btn-default btn-lg active" style="outline: none" href="javascript:void(0)">&nbsp;发布&nbsp;</a>
                 <a  class="btn btn-default btn-lg" style="outline: none" th:href="@{/admin/blogs}">&nbsp;列表&nbsp;</a>
             </div>
         </div>
@@ -25,18 +25,20 @@
                     <li class="text-center "><span style="color: firebrick;">转载</span></li>
                 </ul>
             </div><!-- /btn-group -->
-            <input type="text" class="form-control" name="title" th:value="${blog}!=null?${blog.title}:''" aria-label="..." placeholder="      请输入标题..." style="font-size: 18px">
+            <input type="text" class="form-control" id="title_input" name="title" th:value="${blog}!=null?${blog.title}:''" aria-label="..." placeholder="      请输入标题..." style="font-size: 18px">
         </div><!-- /input-group -->
 
+        <div class="input-group input-group-lg m-margin-tb-mini">
+            <span class="input-group-addon" id="introduction_span" style="background-color: #fc66ff;color: #ffffff">博客简介</span>
+            <input type="text" class="form-control" name="introduction" id="introduction_input" th:value="${blog}==null?'':${blog.introduction}"
+                   placeholder="   请输入文章的简介..." aria-describedby="introduction_span">
+        </div>
         <div class="layout" style="position:relative;z-index: 99">
             <div id="m-editormd">
-                <textarea style="display:none;" name="content" th:text="${blog}!=null?${blog.content}:''">
+                <textarea style="display:none;" name="content" id="content_text" th:text="${blog}!=null?${blog.content}:''">
                 </textarea>
             </div>
-
         </div>
-
-
         <div class="row " style="position:relative;">
             <div class="col-lg-6">
                 <div class="input-group input-group-lg">
@@ -49,21 +51,21 @@
             </div><!-- /.col-lg-6 -->
             <div class="col-lg-6">
                 <div class="input-group  input-group-lg" >
-                    <select class="selectpicker" multiple data-max-options="3" data-multiple-separator=" " data-title="标 签"  name="tagIds" >
+                    <select class="selectpicker" multiple data-max-options="3" data-multiple-separator=" " data-title="标 签" id="tags_select"  name="tagIds" >
                         <option value="1" class="option_tag" th:each="tag:${tags}" th:selected="${blog}!=null?${#strings.contains(blog.tagIds,tag.id+',')}:false" th:value="${tag.id}" th:text="${tag.tagName}" data-content="<span class='label label-info content-option-tag'>[[${tag.tagName}]]</span>">spring boot</option>
                     </select>
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
         </div><!-- /.row -->
+
         <div class="text-left" style="margin-top: 16px;padding-right: 16px;position: relative">
             <span class="btn btn-warning btn-lg" style="margin-bottom: 16px" >首图</span>
             <input type="hidden" name="firstFigure" id="first_figure_id" th:value="${blog!=null}?${blog.firstFigure}:''">
             <input style="top:52px;left:88px;opacity: 0;width:0px;height:0px;position: absolute" id="first_figure_upload" name="first_figure"  type="file" accept="image/gif, image/jpeg, image/png" />
             <button type="button" th:style="'opacity:'+(${blog==null||blog.firstFigure==''||blog.firstFigure==null}?'1':'0')+';width: 96px;height:96px;left:12px;font-size: 33px'"  class="glyphicon glyphicon-cloud-upload" style="" id="first_figure_btn" ></button>
             <div id="head_portrait_div"  th:style="'display:'+(${blog==null||blog.firstFigure==''||blog.firstFigure==null}?'none':'inline')">
-                <img  id="first_figure_img" src="../static/images/headProtrait.jpg"  th:src="@{${blog.firstFigure}}"
+                <img  id="first_figure_img" src="../static/images/headProtrait.jpg"  th:src="@{${blog==null||blog.firstFigure==''||blog.firstFigure==null?'':blog.firstFigure}}"
                      class="m-border-radius-mini img-responsive m-box-shadow" style="width: 102px;height:102px;top:0px;left:83px;position: absolute">
-<!--                     th:src="(${blog}!=null||${blog.firstFigure}!=null||${blog.firstFigure}!='')?${blog.firstFigure}:'#'"-->
 
                 <div class="mask-mini text-center" >
                     <button type="button" class="btn btn-info m-border-radius" id="first_change_btn" style="position:absolute;top:22px;left:22px;width: 66px;height:25px">修改</button>
@@ -162,7 +164,15 @@
             return false;
         });
         $("#published-btn").click(function(){
+            if(!form_checkout()){
+                return;
+            }
             var form = new FormData();
+            if($("#first_figure_upload")[0].files[0]==null||$("#first_figure_upload")[0].files[0]==''){
+                $("[name='published']").val(true);
+                $("#save-blog-form").submit();
+                return;
+            }
             form.append("file",$("#first_figure_upload")[0].files[0]);
             var $this = $("#head_portrait_div");
             $.ajax({
@@ -176,11 +186,11 @@
                 contentType:false,
                 success: function (result) {
                     if(result.code==200){
-                        $this.next('p').remove();
-                        $this.after("<p style='color: #dd5555'>修改头像失败！</p>");
+                        $this.parent('div').next('p').remove();
+                        $this.parent('div').after("<p style='color: #dd5555'>"+result.extend.vi+"</p>");
                         console.log("11111111111111111111111")
                     }else {
-                        $this.next('p').remove();
+                        $this.parent('div').next('p').remove();
                         $("#first_figure_id").val(result.extend.path);
                         $("[name='published']").val(true);
                         $("#save-blog-form").submit();
@@ -203,7 +213,16 @@
             return false;
         })
         function save(){
+            if(!form_checkout()){
+                return;
+            }
+            console.log("save............")
             var form = new FormData();
+            if($("#first_figure_upload")[0].files[0]==null||$("#first_figure_upload")[0].files[0]==''){
+                $("[name='published']").val(false);
+                $("#save-blog-form").submit();
+                return;
+            }
             form.append("file",$("#first_figure_upload")[0].files[0]);
             var $this = $("#head_portrait_div");
             $.ajax({
@@ -217,11 +236,11 @@
                 contentType:false,
                 success: function (result) {
                     if(result.code==200){
-                        $this.next('p').remove();
-                        $this.after("<p style='color: #dd5555'>修改头像失败！</p>");
+                        $this.parent('div').next('p').remove();
+                        $this.parent('div').after("<p style='color: #dd5555'>"+result.extend.vi+"</p>");
                         console.log("11111111111111111111111")
                     }else {
-                        $this.next('p').remove();
+                        $this.parent('div').next('p').remove();
                         $("#first_figure_id").val(result.extend.path);
                         $("[name='published']").val(false);
                         $("#save-blog-form").submit();
@@ -243,18 +262,68 @@
         $("#head_portrait_div").mouseout(function () {
             $(".mask-mini").hide();
         })
+        //提交前先校验表单数据
+        function form_checkout(){
+            var title = $('#title_input').val().trim();
+            var content = $('#content_text').val().trim();
+            var tags = $('#tags_select').val();
+            var introduction = $('#introduction_input').val().trim();
+            var flag = true;
+            console.log(title,content,tags,introduction);
+            $('#title_input').parent('div').removeClass("has-error");
+            $('#title_input').attr('placeholder','');
+            $('#m-editormd').next('p').remove();
+            $('#introduction_input').parent('div').removeClass("has-error");
+            $('#introduction_input').attr('placeholder','');
+            $('#tags_select').parent('div').parent('div').next('span').remove();
+            if(title==null||title==''){
+                $('#title_input').parent('div').addClass("has-error");
+                $('#title_input').attr('placeholder','   标题不能为空哦');
+                $('#title_input').val('');
+                flag=false;
+            }
+            if(content==null||content==''){
+                $('#m-editormd').after("<p style='color: #dd5555'>内容不能为空哦！</p>");
+                flag=false;
+            }
+            if(introduction==null||introduction==''){
+                $('#introduction_input').parent('div').addClass("has-error");
+                $('#introduction_input').attr('placeholder','   简介不能为空哦')
+                $('#introduction_input').val('');
+                flag=false;
+            }
+            if(tags==null||tags==''){
+                $('#tags_select').parent('div').parent('div').after("<span style='color: #dd5555'>标签内容不能为空哦！</span>");
+                flag=false;
+            }
+            return flag;
+
+        }
 
         $("#first_change_btn,#first_figure_btn").click(function () {
             $('#first_figure_upload').trigger("click");
         })
 
+
         $('#first_figure_upload').change(function () {
                 var file = $(this).val();
                 if(file==''||file==null){
                     $("#first_figure_btn").css('opacity','1');
+                    $("#first_figure_upload").parent('div').next('p').remove();
                     $("#first_figure_btn").removeClass("disabled");
                     $("#head_portrait_div").css('display','none');
                 }else{
+                    if(!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file)) {
+                        $('#first_figure_upload').val('');
+                        $("#first_figure_id").val('');
+                        $("#first_figure_upload").parent('div').next('p').remove();
+                        $("#first_figure_btn").css('opacity','1');
+                        $("#first_figure_btn").removeClass("disabled");
+                        $("#head_portrait_div").css('display','none');
+                        $("#first_figure_upload").parent('div').after("<p style='color: #dd5555'>请选择图片类文件</p>");
+                        return false;
+                    }
+                    $("#first_figure_upload").parent('div').next('p').remove();
                     preImg(this.id,'first_figure_img');
                     $("#first_figure_btn").css('opacity','0');
                     $("#first_figure_btn").removeClass("disabled");
@@ -264,6 +333,8 @@
         })
         $('#first_delete_btn').click(function () {
             $('#first_figure_upload').val('');
+            $("#first_figure_id").val('');
+            $("#first_figure_upload").parent('div').next('p').remove();
             $("#first_figure_btn").css('opacity','1');
             $("#first_figure_btn").removeClass("disabled");
             $("#head_portrait_div").css('display','none');
