@@ -183,6 +183,9 @@ a:active {
 .m-font-lined-mini {
     line-height: 1.5;
 }
+.m-font-lined-tiny {
+    line-height: 1.2;
+}
 .m-font-color-blue {
     color: deepskyblue;
 }

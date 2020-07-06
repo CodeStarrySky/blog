@@ -17,8 +17,13 @@ logging:
   file:
     name: log/blog-dev.log
 
-user-resources-path: G:/blog/images/user/
-blog-resources-path: G:/blog/images/blog/
-page-size: 10
-navigate-pages: 1
+user-resources-path: G:/blog/images/user/     #用户头像、二维码等上传到服务器的路径
+blog-resources-path: G:/blog/images/blog/     #博客首图等上传到服务器的路径
+page-size: 10                                  #博客管理页面分页时每页显示数量
+
+blog-username: wchaohui                            #博客访客浏览页面查询博客的用户名
+navigate-pages: 1                                   #导航条页码数量
+right-type-number: 6                                #右边分类栏显示分类的个数
+right-tag-number: 10                                 #右边标签栏显示标签的个数
+
 

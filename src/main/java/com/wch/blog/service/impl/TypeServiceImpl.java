@@ -6,6 +6,7 @@ import com.wch.blog.exception.NotFoundException;
 import com.wch.blog.service.TypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -49,5 +50,11 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public Type checkTypeName(String typeName) {
         return typeDao.selectByName(typeName);
+    }
+
+    @Transactional
+    @Override
+    public List<Type> getLimitType(Integer number){
+        return typeDao.selectByLimit(number);
     }
 }

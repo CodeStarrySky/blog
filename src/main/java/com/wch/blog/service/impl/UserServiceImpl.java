@@ -38,7 +38,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User finUser(String username) {
-        return userDao.selectByName(username);
+        User user = userDao.selectByName(username);
+        user.setPassword("");
+        user.setCreateTime(null);
+        user.setUpdateTime(null);
+        return user;
     }
 
     @Transactional

@@ -1,6 +1,7 @@
 package com.wch.blog.dao;
 
 import com.wch.blog.bean.Tag;
+import com.wch.blog.bean.Type;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,6 +22,7 @@ public interface TagDao {
 
     public int deleteTag(@Param("id") Long id);
 
+    public List<Tag> selectByLimit(@Param("number") Integer number);
 
 
 }

@@ -18,4 +18,6 @@ public interface BlogService {
     public Blog findById(Long id);
 
     public int updateBlog(Blog blog) throws ParseException;
+
+    public List<Blog> getShowAll();
 }

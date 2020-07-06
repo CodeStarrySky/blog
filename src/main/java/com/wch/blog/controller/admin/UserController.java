@@ -39,6 +39,7 @@ public class UserController {
     @GetMapping("/pim")
     public String goPimPage(Model model, HttpSession session){
         User user = userService.finUser((String)session.getAttribute("loginUser"));
+        System.out.println("pim++++++++++++"+user);
         model.addAttribute("user",user);
         return "admin/pim";
     }

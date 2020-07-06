@@ -21,6 +21,8 @@ public class Tag {
     @NotBlank(message = "标签名称不能为空")
     private String tagName;
 
+    //含该标签的blog数。
+    private Integer count;
     //博客
     private List<Blog> blogs;
 

@@ -1,9 +1,11 @@
 package com.wch.blog.service.impl;
 
 import com.wch.blog.bean.Tag;
+import com.wch.blog.bean.Type;
 import com.wch.blog.dao.TagDao;
 import com.wch.blog.service.TagService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -40,5 +42,11 @@ public class TagServiceImpl implements TagService {
     @Override
     public Tag checkTagName(String tagName) {
         return tagDao.selectByName(tagName);
+    }
+
+    @Transactional
+    @Override
+    public List<Tag> getLimitTag(Integer number){
+        return tagDao.selectByLimit(number);
     }
 }

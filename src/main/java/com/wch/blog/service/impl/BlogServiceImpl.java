@@ -45,6 +45,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int deleteBlog(Long id) {
+
         return blogDao.deleteById(id);
     }
 
@@ -121,7 +122,11 @@ public class BlogServiceImpl implements BlogService {
         return 1;
     }
 
-
+    @Transactional
+    @Override
+    public List<Blog> getShowAll(){
+        return blogDao.selectByShowAll();
+    }
 
 
 

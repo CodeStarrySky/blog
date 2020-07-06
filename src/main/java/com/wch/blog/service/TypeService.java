@@ -17,4 +17,6 @@ public interface TypeService {
     public int deleteType(Long id);
 
     public Type checkTypeName(String typeName);
+
+    public  List<Type> getLimitType(Integer number);
 }

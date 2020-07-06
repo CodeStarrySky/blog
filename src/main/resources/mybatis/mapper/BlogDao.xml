@@ -40,6 +40,10 @@
         <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
         <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
     </resultMap>
+
+    <select id="selectByShowAll" parameterType="java.lang.Long" resultMap="BlogMap">
+        select * from blog where flag=1 and published=1 order by recommend,update_time desc
+    </select>
     <select id="selectByUserId" parameterType="java.lang.Long" resultMap="ByUserBlog">
         select id,title from blog where flag=1 and user_id=#{userId} order by update_time desc
     </select>

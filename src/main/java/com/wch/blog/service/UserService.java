@@ -1,5 +1,7 @@
 package com.wch.blog.service;
 
+import com.wch.blog.bean.Tag;
+import com.wch.blog.bean.Type;
 import com.wch.blog.bean.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
@@ -21,4 +23,6 @@ public interface UserService {
     public User confirmByPassword(String pwd, Long id);
 
     public int changePwd(String newPwd,Long id);
+
+
 }

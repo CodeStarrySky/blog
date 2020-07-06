@@ -28,4 +28,12 @@
     <delete id="deleteTag" parameterType="java.lang.Long">
         delete from tag where id=#{id};
     </delete>
+    <resultMap id="TagAddCountMap" type="com.wch.blog.bean.Tag">
+        <id property="id" column="id" jdbcType="BIGINT"></id>
+        <result property="tagName" column="tag_name" jdbcType="VARCHAR"></result>
+        <result property="count" column="count" jdbcType="INTEGER"></result>
+    </resultMap>
+    <select id="selectByLimit" resultMap="TagAddCountMap" parameterType="java.lang.Integer">
+        SELECT tag.id,tag.tag_name,count(DISTINCT blog_tag.id) count FROM tag LEFT JOIN blog_tag on tag.id=blog_tag.tag_id GROUP BY tag.id order by count(DISTINCT blog_tag.id) DESC LIMIT #{number}
+   </select>
 </mapper>

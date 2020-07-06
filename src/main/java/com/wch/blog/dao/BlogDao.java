@@ -35,5 +35,5 @@ public interface BlogDao {
 
     public List<Blog> selectByUserId(@Param("userId") Long userId);
 
-
+    public List<Blog> selectByShowAll();
 }

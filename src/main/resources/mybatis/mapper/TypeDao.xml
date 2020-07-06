@@ -31,5 +31,14 @@
         select * from type where type_name=#{typeName}
     </select>
 
+    <resultMap id="TypeAddCountMap" type="com.wch.blog.bean.Type">
+        <id property="id" column="id" jdbcType="BIGINT"></id>
+        <result property="typeName" column="type_name" jdbcType="VARCHAR"></result>
+        <result property="count" column="count" jdbcType="INTEGER"></result>
+    </resultMap>
+    <select id="selectByLimit" resultMap="TypeAddCountMap" parameterType="java.lang.Integer">
+        select type.id,type.type_name,count(distinct blog.id) count  from type left join blog on type.id=blog.type_id group by type.id order by COUNT(DISTINCT blog.id) desc LIMIT #{number}
+    </select>
+
 
 </mapper>
