@@ -16,11 +16,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BlogShowController {
@@ -50,33 +54,52 @@ public class BlogShowController {
     private Integer TAG_NUMBER;
     @Value("${blog-username}")
     private String BLOG_USERNAME;
+
+    /**
+     * 将常用的数据放到session中
+     * @param session
+     */
+    @ModelAttribute
+    public void getPublicData(HttpSession session){
+        if(session.getAttribute("data")==null){
+            User user = userService.finUser(BLOG_USERNAME);
+            user.setUsername("");
+            List<Type> types = typeService.getLimitType(TYPE_NUMBER);
+            List<Tag> tags = tagService.getLimitTag(TAG_NUMBER);
+            Map<String,Object> data = new HashMap<>();
+            data.put("user",user);
+            data.put("types",types);
+            data.put("tags",tags);
+            session.setAttribute("data",data);
+        }
+
+
+    }
+
+    /**
+     * 显示博客列表
+     * @param pn
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String index(@RequestParam(value="pn",required = false,defaultValue = "1") Integer pn, Model model){
-        System.out.println(BLOG_USERNAME);
-        User user = userService.finUser(BLOG_USERNAME);
-        user.setUsername("");
-        model.addAttribute("user",user);
-        ////////////////////////////////////////////////////
         PageHelper.startPage(pn, PAGE_SIZE);
         List<Blog> blogs = blogService.getShowAll();
-        List<Blog> showBlogs = new ArrayList<>();
-        for(Blog blog : blogs){
-            blog.setUser(null);
-            blog.setCreateTime(null);
-            showBlogs.add(blog);
-        }
-        PageInfo page = new PageInfo(showBlogs,NAVIGATE_PAGES);
+        System.out.println(blogs.size());
+        PageInfo page = new PageInfo(blogs,NAVIGATE_PAGES);
         model.addAttribute("page",page);
-        //////////////////////////////////////////////////////
-        List<Type> types = typeService.getLimitType(TYPE_NUMBER);
-        model.addAttribute("types",types);
-
-        /////////////////////////////////////////////////////
-        List<Tag> tags = tagService.getLimitTag(TAG_NUMBER);
-        model.addAttribute("tags",tags);
         return "index";
     }
 
+    @GetMapping("/archive")
+    public String archive(){
+
+
+
+
+        return "archive";
+    }
 
 
 

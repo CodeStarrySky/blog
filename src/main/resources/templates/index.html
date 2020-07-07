@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="commons::head('首页')"></head>
 <body>
 <!--导航条-->
@@ -23,115 +23,51 @@
             <!--        </div>-->
             <!--        中间内容-->
             <div>
-                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px">
+                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px" th:each="blog : ${page.list}">
                     <!--            标题-->
-                    <div class="m-padded-tb-mini m-font-spaced-mini m-font-padded-left m-opacity"><h2 class="m-margin-none">你真的理解什么是财富自由吗？</h2></div>
-                    <div class="row container-fluid m-opacity" style="margin-top: 8px;">
-                        <div class="text-left" style="margin-top:6px;margin-right: 3px" >
-                            <span class="glyphicon glyphicon-calendar m-padded-lr-mini"  style="padding-right:0.3em" aria-hidden="true">2020-05-20</span>
-                            <span class=" glyphicon glyphicon-eye-open m-padded-lr-mini" style="padding-top: 0.1em;padding-right:0.3em" aria-hidden="true">520</span>
-                            <span class="label label-info ">spring boot</span>
-                            <span class="label label-info ">spring</span>
-                            <span class="label label-info ">spring cloud</span>
+                    <div class="m-padded-tb-min m-font-spaced-mini m-font-padded-left m-opacity "><h2 class="m-margin-none m-font-lined-mini" th:text="${blog.title}">你真的理解什么是财富自由吗？</h2></div>
+                    <div class="row container-fluid m-opacity-tiny" style="padding-left: 25px">
+                        <div class="text-left " style="margin-top:6px;margin-right: 3px" >
+                            <span style="margin-right:12px;font-size: 15px" >
+                                <span class="glyphicon glyphicon-calendar " aria-hidden="true" ></span>
+                                <span>
+                                    [[${#dates.format(blog.updateTime,'yyyy-MM-dd')}]]
+                                </span>
+                            </span>
+
+                            <span style="margin-right:12px;font-size: 15px">
+                                <span class=" glyphicon glyphicon-eye-open"
+                                        aria-hidden="true">
+                                </span>
+                                <span>[[${blog.views}]]</span>
+                            </span>
+                            <span class="label label-info m-span-label"   th:each="tag : ${blog.tags}">[[${tag.tagName}]]</span>
                         </div>
                     </div>
-                    <div class="m-padded-tb-mini m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3>这是博客的简介</h3></div>
-                    <div class="m-padded-tb col-md-2 "><button type="button" class="btn btn-primary-outline  m-opacity-mini m-padded-lr-mini" style="border-radius: 25px;outline: none;">查看详情</button></div>
-
-
-
-                </div>
-
-                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px">
-                    <!--            标题-->
-                    <div class="m-padded-tb-mini m-font-spaced-mini m-font-padded-left m-opacity"><h2 class="m-margin-none">你真的理解什么是财富自由吗？</h2></div>
-                    <div class="row container-fluid m-opacity" style="margin-top: 8px">
-                        <div class="text-left m-padded-none" style="margin-top:6px;margin-right: 3px" >
-                            <span class="glyphicon glyphicon-calendar m-padded-none text-right"  style="padding-right:0.3em" aria-hidden="true">2020-05-20</span>
-                            <span class="text-right glyphicon glyphicon-eye-open m-padded-none" style="padding-top: 0.1em;padding-right:0.3em" aria-hidden="true">520</span>
-                            <span class="label label-info">spring boot</span>
-                            <span class="label label-info">spring</span>
-                            <span class="label label-info">spring cloud</span>
-                        </div>
+                    <div class="m-padded-tb-min m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3 class="m-font-lined-mini" th:text="${blog.introduction}">这是博客的简介</h3></div>
+                    <div class="m-padded-tb m-margin-lr" ><button type="button" class="btn btn-primary-outline  m-opacity-mini m-padded-lr-mini" style="font-size:16px;border-radius: 25px;outline: none;padding-bottom: 3px;padding-top: 3px">查看详情</button></div>
+                    <div class="m-aline-mini m-margin-tb-min " style="margin-left: 6px;margin-right: 6px"></div>
+                    <div class="m-padded-lr-mini m-opacity-big">
+                        <span style="font-size: 16px">欢迎分享到：微信、朋友圈、微博 ......</span>
                     </div>
-                    <div class="m-padded-tb-mini m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3>这是博客的简介</h3></div>
-                    <div class="m-padded-tb col-md-2 "><button type="button" class="btn btn-primary-outline  m-opacity-mini m-padded-lr-mini" style="border-radius: 25px;outline: none;">查看详情</button></div>
-
-
-
                 </div>
-                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px">
-                    <!--            标题-->
-                    <div class="m-padded-tb-mini m-font-spaced-mini m-font-padded-left m-opacity"><h2 class="m-margin-none">你真的理解什么是财富自由吗？</h2></div>
-                    <div class="row container-fluid m-opacity" style="margin-top: 8px">
-                        <div class="text-left m-padded-none" style="margin-top:6px;margin-right: 3px" >
-                            <span class="glyphicon glyphicon-calendar m-padded-none text-right"  style="padding-right:0.3em" aria-hidden="true">2020-05-20</span>
-                            <span class="text-right glyphicon glyphicon-eye-open m-padded-none" style="padding-top: 0.1em;padding-right:0.3em" aria-hidden="true">520</span>
-                            <span class="label label-info">spring boot</span>
-                            <span class="label label-info">spring</span>
-                            <span class="label label-info">spring cloud</span>
-                        </div>
-                    </div>
-                    <div class="m-padded-tb-mini m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3>这是博客的简介</h3></div>
-                    <div class="m-padded-tb col-md-2 "><button type="button" class="btn btn-primary-outline  m-opacity-mini m-padded-lr-mini" style="border-radius: 25px;outline: none;">查看详情</button></div>
-
-
-
-                </div>
-                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px">
-                    <!--            标题-->
-                    <div class="m-padded-tb-mini m-font-spaced-mini m-font-padded-left m-opacity"><h2 class="m-margin-none">你真的理解什么是财富自由吗？</h2></div>
-                    <div class="row container-fluid m-opacity" style="margin-top: 8px">
-                        <div class="text-left m-padded-none" style="margin-top:6px;margin-right: 3px" >
-                            <span class="glyphicon glyphicon-calendar m-padded-none text-right"  style="padding-right:0.3em" aria-hidden="true">2020-05-20</span>
-                            <span class="text-right glyphicon glyphicon-eye-open m-padded-none" style="padding-top: 0.1em;padding-right:0.3em" aria-hidden="true">520</span>
-                            <span class="label label-info">spring boot</span>
-                            <span class="label label-info">spring</span>
-                            <span class="label label-info">spring cloud</span>
-                        </div>
-                    </div>
-                    <div class="m-padded-tb-mini m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3>这是博客的简介</h3></div>
-                    <div class="m-padded-tb col-md-2 "><button type="button" class="btn btn-primary-outline  m-opacity-mini m-padded-lr-mini" style="border-radius: 25px;outline: none;">查看详情</button></div>
-
-
-
-                </div>
-                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px">
-                    <!--            标题-->
-                    <div class="m-padded-tb-mini m-font-spaced-mini m-font-padded-left m-opacity"><h2 class="m-margin-none">你真的理解什么是财富自由吗？</h2></div>
-                    <div class="row container-fluid m-opacity" style="margin-top: 8px">
-                        <div class="text-left m-padded-none" style="margin-top:6px;margin-right: 3px" >
-                            <span class="glyphicon glyphicon-calendar m-padded-none text-right"  style="padding-right:0.3em" aria-hidden="true">2020-05-20</span>
-                            <span class="text-right glyphicon glyphicon-eye-open m-padded-none" style="padding-top: 0.1em;padding-right:0.3em" aria-hidden="true">520</span>
-                            <span class="label label-info">spring boot</span>
-                            <span class="label label-info">spring</span>
-                            <span class="label label-info">spring cloud</span>
-                        </div>
-                    </div>
-                    <div class="m-padded-tb-mini m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3>这是博客的简介</h3></div>
-                    <div class="m-padded-tb col-md-2 "><button type="button" class="btn btn-primary-outline  m-opacity-mini m-padded-lr-mini" style="border-radius: 25px;outline: none;">查看详情</button></div>
-
-
-
-                </div>
-
-
-
-                <!--            简介-->
-
             </div>
-
-
-
-
-
-
             <!--        footer分页跳转-->
             <nav aria-label="Page navigation">
                 <ul class="pager text-center m-margin-tb-tiny" style="margin-bottom: 99px">
-                    <li class="previous " ><a href="#" class="m-box-shadow"><span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a></li>
-                    <li><span class="btn btn-lg disabled " style="border-radius: 35%;margin-top: 3px;box-shadow: 2px 2px 8px #9C9C9C"><h3 class="m-margin-none m-font-color-blue">15</h3></span></li>
-                    <li class="next"><a class="m-box-shadow" href="#"> <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span></a></li>
+                    <li class="previous "  th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{?pn=}+${page.pageNum-1}" class="btn m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''">
+                        <span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a>
+                    </li>
+                    <li>
+                        <a class="btn btn-lg disabled " style="border-radius: 35%;margin-top: 3px;box-shadow: 2px 2px 8px #9C9C9C">
+                            <h3 class="m-margin-none m-font-color-blue" th:text="${page.pageNum}">15</h3>
+                        </a>
+                    </li>
+                    <li class="next" th:classappend="${page.pageNum==page.pages}?'disabled':''">
+                        <a class="btn m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{?pn=}+${page.pageNum+1}">
+                            <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
 

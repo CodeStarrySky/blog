@@ -36,4 +36,8 @@ public interface BlogDao {
     public List<Blog> selectByUserId(@Param("userId") Long userId);
 
     public List<Blog> selectByShowAll();
+
+    public List<Blog> selectTimeSequence();
+
+    public Blog selectTimeMaxAndMin();
 }

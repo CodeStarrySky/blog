@@ -6,6 +6,7 @@ import com.wch.blog.bean.BlogTag;
 import com.wch.blog.bean.Type;
 import com.wch.blog.bean.User;
 import com.wch.blog.dao.BlogDao;
+import com.wch.blog.service.BlogService;
 import com.wch.blog.service.UserService;
 import com.wch.blog.utils.MD5AndSHAUtils;
 import org.junit.jupiter.api.Test;
@@ -111,6 +112,14 @@ class BlogApplicationTests {
     @Test
     public void deleteBlogTagByBlogId(){
         System.out.println(blogDao.deleteBlogTagByBlogId(95L));
+    }
+
+    @Resource
+    BlogService blogService;
+    @Test
+    public void getTimeSequence(){
+        System.out.println(blogService.getTimeSequence());;
+
     }
 
 }

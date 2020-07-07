@@ -8,6 +8,7 @@ import com.wch.blog.dao.BlogTagDao;
 import com.wch.blog.dao.TagDao;
 import com.wch.blog.exception.ValidationException;
 import com.wch.blog.service.BlogService;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.logging.SimpleFormatter;
 
 @Service
@@ -125,11 +124,50 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public List<Blog> getShowAll(){
-        return blogDao.selectByShowAll();
+
+        List<Blog> blogs = blogDao.selectByShowAll();
+        for(Blog blog : blogs){
+            blog.setUser(null);
+            blog.setCreateTime(null);
+        }
+        return blogs;
     }
 
-
-
-
-
+    @Override
+    public  Map<Integer,List> getTimeSequence() {
+        //1、根据时间倒序查询所有的博客
+        List<Blog> blogs = blogDao.selectTimeSequence();
+        //2、获得所有博客的最早最晚时间
+        Blog blogTime = blogDao.selectTimeMaxAndMin();
+        Date maxTime = blogTime.getMaxTime();
+        Date minTime = blogTime.getMinTime();
+        //3、对时间格式化
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        //最新时间
+        Integer max = Integer.valueOf(simpleDateFormat.format(maxTime).split("-")[0]);
+        //最早时间
+        Integer min = Integer.valueOf(simpleDateFormat.format(minTime).split("-")[0]);
+        System.out.println(max+"*********************************"+min);
+        Integer format = 0;
+        Map<Integer,List> map = new HashMap<>();
+        List<Blog> nullTime = new ArrayList<>();
+       for(;min<=max;min++){
+           List<Blog> temp = null;
+           for(Blog blog : blogs){
+               temp = new ArrayList<>();
+               Date updateTime = blog.getUpdateTime();
+               if(updateTime==null){
+                   nullTime.add(blog);
+                   continue;
+               }
+               format = Integer.valueOf(simpleDateFormat.format(updateTime).split("-")[0]);
+               if(format==min){
+                   temp.add(blog);
+               }
+           }
+           map.put(min,temp);
+       }
+       map.put(0,nullTime);
+       return map;
+    }
 }

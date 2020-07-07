@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 public interface BlogService {
     public List<Blog> getAll();
@@ -20,4 +21,7 @@ public interface BlogService {
     public int updateBlog(Blog blog) throws ParseException;
 
     public List<Blog> getShowAll();
+
+    public Map<Integer,List> getTimeSequence();
+
 }

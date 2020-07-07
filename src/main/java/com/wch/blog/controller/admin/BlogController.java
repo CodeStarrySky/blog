@@ -58,11 +58,9 @@ public class BlogController {
 
 
         List<Blog> blogs = blogService.getAll();
-        for (Blog blog : blogs) {
-            System.out.println(blog.getUpdateTime());
-        }
         PageInfo page = new PageInfo(blogs,NAVIGATE_PAGES);
         model.addAttribute("page",page);
+        System.out.println(page);
         List<Type> types = typeService.getAll();
         model.addAttribute("types",types);
 

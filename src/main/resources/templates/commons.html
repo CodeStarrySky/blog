@@ -85,22 +85,22 @@
             <div class="row m-middle">
                 <!--                    头像-->
                 <div class="col-md-6 center-block">
-                    <img src="../static/images/headProtrait.jpg" th:src="@{${user.headPortrait}}" class="img-responsive  m-margin-large-mini">
+                    <img src="../static/images/headProtrait.jpg" th:src="@{${#session.getAttribute('data').user.headPortrait}}" class="img-responsive  m-margin-large-mini">
                 </div>
                 <!-- 介绍-->
                 <div class="col-md-6   m-opacity-big text-center">
                     <div class="m-margin-tb-big" >
-                        <h5 th:text="${user.intro1}">喜欢编程的菜鸟</h5>
-                        <h5 th:text="${user.intro2}">喜欢编程的菜鸟</h5>
-                        <h5 th:text="${user.intro3}">喜欢编程的菜鸟</h5>
+                        <h5 th:text="${#session.getAttribute('data').user.intro1}">喜欢编程的菜鸟</h5>
+                        <h5 th:text="${#session.getAttribute('data').user.intro2}">喜欢编程的菜鸟</h5>
+                        <h5 th:text="${#session.getAttribute('data').user.intro3}">喜欢编程的菜鸟</h5>
                     </div>
                 </div>
             </div>
             <!-- 个人信息 -->
             <div class="row text-center m-font-lined ">
-                <h3 class="m-opacity" style="margin-top: 0px;"><b>[[${user.nickname}]]</b></h3>
-                <h5 th:text="${user.profession}">Rookie & Developer</h5>
-                <h5 class="m-opacity-big"  style="margin-bottom: 0px" ><span class="glyphicon glyphicon-map-marker"aria-hidden="true"></span> [[${user.address}]]</h5>
+                <h3 class="m-opacity" style="margin-top: 0px;"><b>[[${#session.getAttribute('data').user.nickname}]]</b></h3>
+                <h5 th:text="${#session.getAttribute('data').user.profession}">Rookie & Developer</h5>
+                <h5 class="m-opacity-big"  style="margin-bottom: 0px" ><span class="glyphicon glyphicon-map-marker"aria-hidden="true"></span> [[${#session.getAttribute('data').user.address}]]</h5>
                 <button type="button" class="btn btn-info m-border-radius m-padded-lr-mini m-margin-tb-mini" style="background-color: dodgerblue;outline: none">点击关注我吧</button>
             </div>
             <!--                 博客 、 标签 -->
@@ -145,7 +145,7 @@
             </div>
             <!-- 分类具体内容 -->
             <div class="col-md-10 col-md-offset-1 text-center m-opacity-mini m-div-min-height">
-                <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini " th:each="type:${types}">
+                <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini " th:each="type:${#session.getAttribute('data').types}">
                     <h4 class="m-center-block m-font-lined-tiny">
                         <div class="col-md-10 m-font-spaced m-opacity" style="padding-bottom: 8px;font-size: 18px;font-weight: bold" th:text="${type.typeName}">技术框架</div>
                         <span class="col-md-2  label label-info " style="margin-bottom: 10px" th:text="${type.count}">13</span>
@@ -164,7 +164,7 @@
             <!-- 标签具体内容 -->
             <div class="m-opacity-mini m-div-min-height  m-margin-none text-center" >
                 <!--                    <div class="col-md-5 m-margin-tiny "><h3 ><span class="label label-info">spring boot</span></h3></div>-->
-                <span class="btn btn-info m-margin-large-mini" th:each="tag : ${tags}">[[${tag.tagName}]]&nbsp;&nbsp;<span class="badge">[[${tag.count}]]</span> </span>
+                <span class="btn btn-info m-margin-large-mini" th:each="tag : ${#session.getAttribute('data').tags}">[[${tag.tagName}]]&nbsp;&nbsp;<span class="badge">[[${tag.count}]]</span> </span>
 
 
 
@@ -184,28 +184,28 @@
             <div class="row  m-padded-none m-margin-tb-mini" style="padding-top: 52px;">
 
                 <div class="col-md-3 m-div-min-height-large " style="border-right: 2px solid #E6E3E3">
-                    <img src="../static/images/headProtrait.jpg" th:src="@{${user.publicQrCode}}" class="m-box-shadow m-border-radius" style="width: 166px; height: 166px">
+                    <img src="../static/images/headProtrait.jpg" th:src="@{${#session.getAttribute('data').user.publicQrCode}}" class="m-box-shadow m-border-radius" style="width: 166px; height: 166px">
                 </div>
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #E6E3E3">
                     <h3>最新博客</h3>
                     <div class="m-margin-tb-mini " >
-                        <h5 th:each="blog,blogStat : ${user.blogs}" th:if="${blogStat.count}<=3"><a href="#" style="color: deepskyblue" th:text="${blog.title}">最新博客1</a></h5>
+                        <h5 th:each="blog,blogStat : ${#session.getAttribute('data').user.blogs}" th:if="${blogStat.count}<=3"><a href="#" style="color: deepskyblue" th:text="${blog.title}">最新博客1</a></h5>
                     </div>
 
                 </div>
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #e6e3e3">
                     <h3>联系我</h3>
                     <div class="m-margin-tb-mini m-font-color-blue">
-                        <h5 th:if="${user.qq!=''&& user.qq!=null}">QQ： [[${user.qq}]]</h5>
-                        <h5 th:if="${user.email!=''&& user.email!=null}">邮箱： [[${user.email}]]</h5>
-                        <h5 th:if="${user.weChat!=''&& user.weChat!=null}">微信： [[${user.weChat}]]</h5>
+                        <h5 th:if="${#session.getAttribute('data').user.qq!=''&& #session.getAttribute('data').user.qq!=null}">QQ： [[${#session.getAttribute('data').user.qq}]]</h5>
+                        <h5 th:if="${#session.getAttribute('data').user.email!=''&& #session.getAttribute('data').user.email!=null}">邮箱： [[${#session.getAttribute('data').user.email}]]</h5>
+                        <h5 th:if="${#session.getAttribute('data').user.weChat!=''&& #session.getAttribute('data').user.weChat!=null}">微信： [[${#session.getAttribute('data').user.weChat}]]</h5>
                     </div>
 
                 </div>
 
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny m-font-spaced">
                     <h3>Blog</h3>
-                    <h5  ><pre class="m-font-lined m-font-color-blue " style="border: 0;background-color: rgba(0,0,0,0)" th:text="${user.blogIntro}"> 这是我的个人博客，会分享关于编程、思考相关的任何内容，主要用来帮助提升自己。</pre></h5>
+                    <h5  ><pre class="m-font-lined m-font-color-blue " style="border: 0;background-color: rgba(0,0,0,0)" th:text="${#session.getAttribute('data').user.blogIntro}"> 这是我的个人博客，会分享关于编程、思考相关的任何内容，主要用来帮助提升自己。</pre></h5>
                 </div>
             </div>
         </div>

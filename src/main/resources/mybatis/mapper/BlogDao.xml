@@ -41,8 +41,11 @@
         <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
     </resultMap>
 
-    <select id="selectByShowAll" parameterType="java.lang.Long" resultMap="BlogMap">
+    <select id="selectByShowAll" resultMap="BlogMap">
         select * from blog where flag=1 and published=1 order by recommend,update_time desc
+    </select>
+    <select id="selectTimeSequence" resultMap="BlogMap">
+        select * from blog where flag=1 and published=1 order by update_time desc
     </select>
     <select id="selectByUserId" parameterType="java.lang.Long" resultMap="ByUserBlog">
         select id,title from blog where flag=1 and user_id=#{userId} order by update_time desc
@@ -69,6 +72,15 @@
 
     <select id="selectByTitle" resultMap="BlogMap" parameterType="java.lang.String">
         select * from blog where flag=1 and title=#{title}
+    </select>
+
+
+    <resultMap id="TimeMaxAndMin" type="com.wch.blog.bean.Blog">
+        <result column="maxTime" property="maxTime"></result>
+        <result column="minTime" property="minTime"></result>
+    </resultMap>
+    <select id="selectTimeMaxAndMin" resultMap="TimeMaxAndMin">
+        select max(update_time) as maxTime,min(update_time) as minTime from blog where flag=1 and published=1;
     </select>
 
     <update id="updateBlog" parameterType="com.wch.blog.bean.Blog" >

@@ -93,9 +93,9 @@
         <!-- 页面跳转 -->
         <nav aria-label="Page navigation">
             <ul class="pager text-center m-margin-tb-tiny" style="margin-bottom: 99px">
-                <li class="previous " th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{/admin/blogs?pn=}+${page.pageNum-1}" class="m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''"><span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a></li>
-                <li><span class="btn btn-lg disabled " style="border-radius: 35%;margin-top: 3px;box-shadow: 2px 2px 8px #9C9C9C"><h3 class="m-margin-none m-font-color-blue">[[${page.pageNum}]]</h3></span></li>
-                <li class="next" th:classappend="${page.pageNum==page.pages}?'disabled':''"><a class="m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{/admin/blogs?pn=}+${page.pageNum+1}"> <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span></a></li>
+                <li class="previous " th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{/admin/blogs?pn=}+${page.pageNum-1}" class="btn m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''"><span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a></li>
+                <li><a class="btn btn-lg disabled " style="border-radius: 35%;margin-top: 3px;box-shadow: 2px 2px 8px #9C9C9C"><h3 class="m-margin-none m-font-color-blue">[[${page.pageNum}]]</h3></a></li>
+                <li class="next" th:classappend="${page.pageNum==page.pages}?'disabled':''"><a class="btn m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{/admin/blogs?pn=}+${page.pageNum+1}"> <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span></a></li>
             </ul>
         </nav>
     </div>

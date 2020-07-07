@@ -81,6 +81,10 @@ public class Blog {
         return firstFigure.replace("G:/blog/images/blog/", "/blog/images/blog/");
     }
 
+    //所有博客最新的时间
+    private Date maxTime;
+    //最早发布博客的时间
+    private Date minTime;
 
 
 

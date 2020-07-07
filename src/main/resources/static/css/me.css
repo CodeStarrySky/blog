@@ -69,6 +69,10 @@ a:active {
 .m-margin-top {
     margin-top: 25px;
 }
+.m-margin-tb-min {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
 .m-margin-tb-mini {
     margin-top: 19px;
     margin-bottom: 19px;
@@ -113,7 +117,12 @@ a:active {
 .m-margin-lr {
     margin:0px 9px 0px 9px !important;
 }
+.m-span-label {
+    margin-left: 6px;
+    border-radius: 10px;
+    font-size: 12px;
 
+}
 .m-padded-lr-mini {
     padding-left: 1em;
     padding-right: 1em;
@@ -125,7 +134,10 @@ a:active {
 .m-padded-right {
     padding-right: 1em;
 }
-
+.m-padded-tb-min {
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
 .m-padded-tb-mini {
     padding-top: 0.2em;
     padding-bottom: 0.2em;
@@ -251,6 +263,11 @@ a:active {
 .m-aline {
     background-color:#E6E3E3;
     height:2px;
+
+}
+.m-aline-mini {
+    background-color:#E6E3E3;
+    height:1px;
 
 }
 body {
