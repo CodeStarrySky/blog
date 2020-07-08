@@ -3,7 +3,9 @@ $(function(){
 });
 
 function systole(){
+
 	console.log("systole");
+
 	if(!$(".history").length){
 		return;
 	}
@@ -11,7 +13,9 @@ function systole(){
 		$targetA = $warpEle.find("h2 a,ul li dl dt a"),
 		parentH,
 		eleTop = [];
-	$warpEle.parent().css({"height":99});
+
+	$warpEle.parent().css({"height":66});
+
 	// parentH = $warpEle.parent().height();
 	/**
 	 * 计算高度值
@@ -19,10 +23,10 @@ function systole(){
 
 	parentH = $warpEle.find("li").length*$warpEle.find("li").outerHeight(true) + $warpEle.find("h2").length*$warpEle.find("h2").outerHeight(true);
 	// console.log($warpEle.find("li").length,$warpEle.find("li").outerHeight(true),$warpEle.find("h2").length,$warpEle.find("h2").outerHeight(true));
-	// console.log(parentH);
+	console.log(parentH);
 	
 	setTimeout(function(){
-		
+		$(".history").css("opacity",1)
 		$warpEle.find("ul").children(":not('h2:first')").each(function(idx){
 			eleTop.push($(this).position().top);
 			$(this).css({"margin-top":-eleTop[idx]}).children().hide();

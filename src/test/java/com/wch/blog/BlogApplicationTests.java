@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @SpringBootTest
 class BlogApplicationTests {
@@ -118,7 +120,22 @@ class BlogApplicationTests {
     BlogService blogService;
     @Test
     public void getTimeSequence(){
-        System.out.println(blogService.getTimeSequence());;
+        Map<Integer, List<Blog>> map = blogService.getTimeSequence();
+        Set<Integer> integers = map.keySet();
+        System.out.println("Set:::::::::::::"+integers);
+        int s = 0;
+        System.out.println("map::::::::::::::::"+map);
+        for(Integer i : integers){
+            List<Blog> list = map.get(i);
+
+            System.out.println(i+"::::::::::::::::::"+list.size());
+            int n=0;
+            for (Blog blog : list){
+                System.out.println(i+"******************"+blog.getUpdateTime());
+                n++;
+                s++;
+            }
+        }
 
     }
 

@@ -73,11 +73,8 @@ public class Blog {
 
     public String getFirstFigure(){
         if(firstFigure==null||"".equals(firstFigure)){
-            System.out.println("3fffffffffffff"+firstFigure);
             return firstFigure;
         }
-        System.out.println("1xxxxxxxxxxxxxxxxxxxxx"+firstFigure);
-        System.out.println("2*********************"+firstFigure.replace("G:\\blog\\images\\blog\\", "/blog/images/blog/"));
         return firstFigure.replace("G:/blog/images/blog/", "/blog/images/blog/");
     }
 

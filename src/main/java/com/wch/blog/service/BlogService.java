@@ -22,6 +22,6 @@ public interface BlogService {
 
     public List<Blog> getShowAll();
 
-    public Map<Integer,List> getTimeSequence();
+    public Map<Integer,List<Blog>> getTimeSequence();
 
 }

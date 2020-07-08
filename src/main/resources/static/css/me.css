@@ -121,6 +121,9 @@ a:active {
     margin-left: 6px;
     border-radius: 10px;
     font-size: 12px;
+}
+.m-span-label-mini {
+    margin-left: 6px;
 
 }
 .m-padded-lr-mini {
@@ -357,8 +360,8 @@ body {
 
     position:relative;
 
-    left: -20px;
-    top: -5px;
+    left: -15px;
+    top: 10px;
 
     transform:rotate(-45deg);
 
@@ -439,7 +442,12 @@ button {
 .mask-mini button{
     font-size: 9px;
 }
-
+.m-div-padded {
+    padding-left:9px;
+    padding-right:9px;
+    padding-top: 2px;
+    padding-bottom: 5px;
+}
 
 
 

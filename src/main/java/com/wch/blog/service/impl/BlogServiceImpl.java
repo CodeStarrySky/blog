@@ -134,7 +134,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public  Map<Integer,List> getTimeSequence() {
+    public  Map<Integer,List<Blog>> getTimeSequence() {
         //1、根据时间倒序查询所有的博客
         List<Blog> blogs = blogDao.selectTimeSequence();
         //2、获得所有博客的最早最晚时间
@@ -142,32 +142,29 @@ public class BlogServiceImpl implements BlogService {
         Date maxTime = blogTime.getMaxTime();
         Date minTime = blogTime.getMinTime();
         //3、对时间格式化
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //最新时间
-        Integer max = Integer.valueOf(simpleDateFormat.format(maxTime).split("-")[0]);
+        int max = Integer.valueOf(simpleDateFormat.format(maxTime).split("-")[0]);
         //最早时间
-        Integer min = Integer.valueOf(simpleDateFormat.format(minTime).split("-")[0]);
-        System.out.println(max+"*********************************"+min);
-        Integer format = 0;
-        Map<Integer,List> map = new HashMap<>();
-        List<Blog> nullTime = new ArrayList<>();
-       for(;min<=max;min++){
-           List<Blog> temp = null;
+        int min = Integer.valueOf(simpleDateFormat.format(minTime).split("-")[0]);
+        int format = 0;
+        Map<Integer,List<Blog>> map = new LinkedHashMap<>();
+        int i=0;
+        int j=0;
+       for(;max>=min;max--){
+           List<Blog> temp = new ArrayList<>();;
            for(Blog blog : blogs){
-               temp = new ArrayList<>();
                Date updateTime = blog.getUpdateTime();
                if(updateTime==null){
-                   nullTime.add(blog);
                    continue;
                }
                format = Integer.valueOf(simpleDateFormat.format(updateTime).split("-")[0]);
-               if(format==min){
+               if(format==max){
                    temp.add(blog);
                }
            }
-           map.put(min,temp);
+           map.put(max,temp);
        }
-       map.put(0,nullTime);
        return map;
     }
 }

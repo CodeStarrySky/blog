@@ -62,11 +62,13 @@ public class BlogShowController {
     @ModelAttribute
     public void getPublicData(HttpSession session){
         if(session.getAttribute("data")==null){
+            System.out.println("************************************************");
             User user = userService.finUser(BLOG_USERNAME);
             user.setUsername("");
             List<Type> types = typeService.getLimitType(TYPE_NUMBER);
             List<Tag> tags = tagService.getLimitTag(TAG_NUMBER);
             Map<String,Object> data = new HashMap<>();
+            System.out.println(user);
             data.put("user",user);
             data.put("types",types);
             data.put("tags",tags);
@@ -86,19 +88,33 @@ public class BlogShowController {
     public String index(@RequestParam(value="pn",required = false,defaultValue = "1") Integer pn, Model model){
         PageHelper.startPage(pn, PAGE_SIZE);
         List<Blog> blogs = blogService.getShowAll();
-        System.out.println(blogs.size());
+        System.out.println(blogs.size()+"*****"+blogs);
         PageInfo page = new PageInfo(blogs,NAVIGATE_PAGES);
         model.addAttribute("page",page);
         return "index";
     }
 
     @GetMapping("/archive")
-    public String archive(){
-
-
-
-
+    public String archive(Model model){
+        Map<Integer, List<Blog>> blogMap = blogService.getTimeSequence();
+        model.addAttribute("blogMap",blogMap);
         return "archive";
+    }
+
+    @GetMapping("/tags")
+    public String tags(Model model){
+
+        return "tags";
+    }
+    @GetMapping("/types")
+    public String types(Model model){
+
+        return "types";
+    }
+    @GetMapping("/about")
+    public String about(Model model){
+
+        return "about";
     }
 
 

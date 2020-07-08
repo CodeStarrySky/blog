@@ -25,6 +25,23 @@
             <result column="intro3"             jdbcType="VARCHAR"      property="intro3"></result>
             <collection property="blogs" column="id" ofType="com.wch.blog.bean.Blog" select="com.wch.blog.dao.BlogDao.selectByUserId" fetchType="lazy"></collection>
         </resultMap>
+        <resultMap id="UserNotBlogMap" type="com.wch.blog.bean.User">
+            <result column="nickname"           jdbcType="VARCHAR"      property="nickname"></result>
+            <result column="address"            jdbcType="VARCHAR"      property="address"></result>
+            <result column="email"              jdbcType="VARCHAR"      property="email"></result>
+            <result column="qq"                 jdbcType="VARCHAR"      property="qq"></result>
+            <result column="wechat"             jdbcType="VARCHAR"      property="weChat"></result>
+            <result column="head_portrait"      jdbcType="VARCHAR"      property="headPortrait"></result>
+            <result column="public_qrcode"      jdbcType="VARCHAR"      property="publicQrCode"></result>
+            <result column="collection_qrcode"  jdbcType="VARCHAR"      property="collectionQrCode"></result>
+            <result column="introduce_myself"   jdbcType="LONGVARCHAR"  property="introduceMyself"></result>
+            <result column="contact_me"           jdbcType="LONGVARCHAR"  property="contactMe"></result>
+            <result column="blog_intro"         jdbcType="LONGVARCHAR"  property="blogIntro"></result>
+            <result column="profession"         jdbcType="VARCHAR"      property="profession"></result>
+            <result column="intro1"             jdbcType="VARCHAR"      property="intro1"></result>
+            <result column="intro2"             jdbcType="VARCHAR"      property="intro2"></result>
+            <result column="intro3"             jdbcType="VARCHAR"      property="intro3"></result>
+        </resultMap>
     <select id="selectList" resultMap="UserMap">
         select * from user;
     </select>
@@ -51,7 +68,9 @@
         select * from user where id=#{id} and password=#{pwd};
     </select>
 
-
+    <select id="selectShowByName" resultMap="UserNotBlogMap">
+        select * from user where username=#{username}
+    </select>
 
     <update id="updatePwd">
         update user set password=#{newPwd} where id=#{id}

@@ -22,6 +22,14 @@
 <!--       <collection      property="comments"          column="id"     ofType="com.wch.blog.bean.Comment"      select="com.wch.blog.dao.CommentDao.selectByBlogId"  fetchType="lazy"></collection>-->
        <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
    </resultMap>
+    <resultMap id="BlogNotUserMap" type="com.wch.blog.bean.Blog">
+        <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
+        <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
+        <result          property="introduction"      column="introduction"     jdbcType="LONGVARCHAR"></result>
+        <result          property="views"              column="views"             jdbcType="INTEGER"></result>
+        <result          property="updateTime"        column="update_time"      ></result>
+        <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
+    </resultMap>
     <sql id="ifNullSql">
         <if  test="title!=null"> title=#{title},</if>
         <if  test="content!=null"> content=#{content},</if>
@@ -41,10 +49,10 @@
         <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
     </resultMap>
 
-    <select id="selectByShowAll" resultMap="BlogMap">
+    <select id="selectByShowAll" resultMap="BlogNotUserMap">
         select * from blog where flag=1 and published=1 order by recommend,update_time desc
     </select>
-    <select id="selectTimeSequence" resultMap="BlogMap">
+    <select id="selectTimeSequence" resultMap="BlogNotUserMap">
         select * from blog where flag=1 and published=1 order by update_time desc
     </select>
     <select id="selectByUserId" parameterType="java.lang.Long" resultMap="ByUserBlog">

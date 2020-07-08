@@ -30,4 +30,6 @@ public interface UserDao{
     public User selectByPassword(@Param("pwd") String pwd, @Param("id") Long id);
 
     public int updatePwd(@Param("newPwd") String pwd,@Param("id") Long id);
+
+    public User selectShowByName(@Param("username") String username);
 }
