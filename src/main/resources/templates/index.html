@@ -55,7 +55,7 @@
             <!--        footer分页跳转-->
             <nav aria-label="Page navigation">
                 <ul class="pager text-center m-margin-tb-tiny" style="margin-bottom: 99px">
-                    <li class="previous "  th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{?pn=}+${page.pageNum-1}" class="btn m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''">
+                    <li class="previous "  th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{/pn/}+${page.pageNum-1}" class="btn m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''">
                         <span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a>
                     </li>
                     <li>
@@ -64,7 +64,7 @@
                         </a>
                     </li>
                     <li class="next" th:classappend="${page.pageNum==page.pages}?'disabled':''">
-                        <a class="btn m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{?pn=}+${page.pageNum+1}">
+                        <a class="btn m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{/pn/}+${page.pageNum+1}">
                             <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span>
                         </a>
                     </li>

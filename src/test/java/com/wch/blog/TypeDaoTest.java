@@ -48,6 +48,11 @@ public class TypeDaoTest {
     }
 
     @Test
+    public void selectShowTypeAndBlogTest(){
+        System.out.println(typeDao.selectShowTypeAndBlog());
+    }
+
+    @Test
     public void seleteOneTest() {
         Type type = typeDao.selectById(1l);
         System.out.println(type);;

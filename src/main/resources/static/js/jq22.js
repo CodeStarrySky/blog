@@ -11,7 +11,7 @@ function systole(){
 	}
 	var $warpEle = $(".history-date"),
 		$targetA = $warpEle.find("h2 a,ul li dl dt a"),
-		parentH,
+		parentH = 0,
 		eleTop = [];
 
 	$warpEle.parent().css({"height":66});
@@ -20,8 +20,11 @@ function systole(){
 	/**
 	 * 计算高度值
 	 */
-
-	parentH = $warpEle.find("li").length*$warpEle.find("li").outerHeight(true) + $warpEle.find("h2").length*$warpEle.find("h2").outerHeight(true);
+	$.each($warpEle.find("li"),function (i,n) {
+		parentH = parentH + $(this).outerHeight(true);
+	})
+	parentH = parentH + $warpEle.find("h2").length*$warpEle.find("h2").outerHeight(true);
+	// parentH = $warpEle.find("li").length*$warpEle.find("li").outerHeight(true) + $warpEle.find("h2").length*$warpEle.find("h2").outerHeight(true);
 	// console.log($warpEle.find("li").length,$warpEle.find("li").outerHeight(true),$warpEle.find("h2").length,$warpEle.find("h2").outerHeight(true));
 	console.log(parentH);
 	

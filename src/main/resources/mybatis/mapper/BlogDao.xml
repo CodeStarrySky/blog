@@ -26,8 +26,8 @@
         <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
         <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
         <result          property="introduction"      column="introduction"     jdbcType="LONGVARCHAR"></result>
-        <result          property="views"              column="views"             jdbcType="INTEGER"></result>
         <result          property="updateTime"        column="update_time"      ></result>
+        <association     property="type"              column="type_id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
         <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
     </resultMap>
     <sql id="ifNullSql">
@@ -51,6 +51,9 @@
 
     <select id="selectByShowAll" resultMap="BlogNotUserMap">
         select * from blog where flag=1 and published=1 order by recommend,update_time desc
+    </select>
+    <select id="selectShowByTypeId" parameterType="java.lang.Long" resultMap="BlogNotUserMap">
+        select * from blog where flag=1 and published=1 and type_id=#{typeId} order by update_time desc
     </select>
     <select id="selectTimeSequence" resultMap="BlogNotUserMap">
         select * from blog where flag=1 and published=1 order by update_time desc

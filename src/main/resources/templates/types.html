@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="commons::head('归档')"></head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head('分类')"></head>
 <body>
 <!--导航条-->
 <nav th:replace="commons::top"></nav>
@@ -23,21 +23,21 @@
             <!--        </div>-->
             <!--        中间内容-->
             <div class=" history " style="opacity: 0;margin-top: 52px;padding-top: 0px">
-                    <div class="history-date"  >
-                        <ul th:each="blogMap : ${blogMap}">
-                            <h2 class="first img-responsive " id="archive-h2" style="margin-bottom: 29px"> <a href="#nogo" th:text="${blogMap.key}">2012年</a> </h2>
-                            <li class="green " style="padding-bottom: 19px" th:each="blog : ${blogMap.value}">
-                                <h3 class="col-md-3" >[[${#dates.format(blog.updateTime,'MM.dd')}]]
-                                    <span class="m-opacity-big" style="color: #0663dd">[[${#dates.format(blog.updateTime,'HH:mm:ss')}]]</span>
-                                </h3>
-                                <div class="col-md-8 col-md-offset-1 panel panel-default panel-body m-div-padded" style="margin-left: 52px;margin-top: -10px">
-                                    <!-- 边框小三角 -->
-                                    <div class=" m-inner"></div>
-                                    <div class="m-padded-none">
-                                        <div class="m-font-spaced-large m-font-padded-left " style="margin-bottom: 5px;font-size: 16px" th:text="${blog.title}">你真的理解什么是财富自由吗?</div>
-                                        <hr class="m-padded-none m-margin-none" style="margin-left: 8px;margin-right: 8px">
-                                        <div class="row container-fluid m-opacity-tiny" style="padding-left: 25px">
-                                            <div class="text-left " style="margin-top:6px;margin-right: 3px" >
+                <div class="history-date"  >
+                    <ul th:each="type : ${types}">
+                        <h2 class="first img-responsive types-h2"  style="margin-bottom: 29px"> <a href="#nogo" th:text="${type.typeName}" style="padding-left: 188px">2012年</a> </h2>
+                        <li class="green " style="padding-bottom: 19px" th:each="blog : ${type.blogs}">
+                            <h3 class="col-md-3" >[[${#dates.format(blog.updateTime,'yyyy.MM.dd')}]]
+                                <span class="m-opacity-big" style="color: #0663dd">[[${#dates.format(blog.updateTime,'HH:mm:ss')}]]</span>
+                            </h3>
+                            <div class="col-md-8 col-md-offset-1 panel panel-default panel-body m-div-padded" style="margin-left: 52px;margin-top: -10px">
+                                <!-- 边框小三角 -->
+                                <div class=" m-inner"></div>
+                                <div class="m-padded-none">
+                                    <div class="m-font-spaced-large m-font-padded-left " style="margin-bottom: 5px;font-size: 16px" th:text="${blog.title}">你真的理解什么是财富自由吗?</div>
+                                    <hr class="m-padded-none m-margin-none" style="margin-left: 8px;margin-right: 8px">
+                                    <div class="row container-fluid m-opacity-tiny" style="padding-left: 25px">
+                                        <div class="text-left " style="margin-top:6px;margin-right: 3px" >
                                                 <span style="margin-right:12px" >
                                                     <span class="glyphicon glyphicon-calendar " aria-hidden="true" ></span>
                                                     <span>
@@ -45,24 +45,26 @@
                                                     </span>
                                                 </span>
 
-                                                <span style="margin-right:12px">
+                                            <span style="margin-right:12px">
                                                     <span class=" glyphicon glyphicon-folder-open"
-                                                            aria-hidden="true">
+                                                          aria-hidden="true">
                                                     </span>
                                                     <span style="padding-left: 2px">[[${blog.type.typeName}]]</span>
                                                 </span>
-                                                <span class="label label-info m-span-label-mini"   th:each="tag : ${blog.tags}">[[${tag.tagName}]]</span>
-                                            </div>
+                                            <span class="label label-info m-span-label-mini"   th:each="tag : ${blog.tags}">[[${tag.tagName}]]</span>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </li>
+                    </ul>
 
-                    </div>
+                </div>
 
 
             </div>
+
+
 
 
 

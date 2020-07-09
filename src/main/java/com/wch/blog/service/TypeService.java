@@ -19,4 +19,8 @@ public interface TypeService {
     public Type checkTypeName(String typeName);
 
     public  List<Type> getLimitType(Integer number);
+
+    public List<Type> getShowType();
+
+
 }

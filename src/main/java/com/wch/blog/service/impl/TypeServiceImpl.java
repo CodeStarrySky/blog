@@ -57,4 +57,10 @@ public class TypeServiceImpl implements TypeService {
     public List<Type> getLimitType(Integer number){
         return typeDao.selectByLimit(number);
     }
+
+
+    @Override
+    public List<Type> getShowType() {
+        return typeDao.selectShowTypeAndBlog();
+    }
 }

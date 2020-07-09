@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
@@ -93,7 +94,18 @@ public class BlogShowController {
         model.addAttribute("page",page);
         return "index";
     }
-
+    @GetMapping("/pn/{pn}")
+    public String indexPn(@PathVariable(value="pn",required = false) Integer pn, Model model){
+        if(pn==1){
+            return "redirect:/";
+        }
+        PageHelper.startPage(pn, PAGE_SIZE);
+        List<Blog> blogs = blogService.getShowAll();
+        System.out.println(blogs.size()+"*****"+blogs);
+        PageInfo page = new PageInfo(blogs,NAVIGATE_PAGES);
+        model.addAttribute("page",page);
+        return "index";
+    }
     @GetMapping("/archive")
     public String archive(Model model){
         Map<Integer, List<Blog>> blogMap = blogService.getTimeSequence();
@@ -108,7 +120,8 @@ public class BlogShowController {
     }
     @GetMapping("/types")
     public String types(Model model){
-
+        List<Type> types = typeService.getShowType();
+        model.addAttribute("types",types);
         return "types";
     }
     @GetMapping("/about")

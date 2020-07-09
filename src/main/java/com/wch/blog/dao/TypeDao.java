@@ -22,4 +22,6 @@ public interface TypeDao {
     public Type selectByName(String typeName);
 
     public List<Type> selectByLimit(@Param("number") Integer number);
+
+    public List<Type> selectShowTypeAndBlog();
 }
