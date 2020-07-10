@@ -31,5 +31,5 @@ public interface UserDao{
 
     public int updatePwd(@Param("newPwd") String pwd,@Param("id") Long id);
 
-    public User selectShowByName(@Param("username") String username);
+
 }

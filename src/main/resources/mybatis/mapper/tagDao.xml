@@ -36,4 +36,13 @@
     <select id="selectByLimit" resultMap="TagAddCountMap" parameterType="java.lang.Integer">
         SELECT tag.id,tag.tag_name,count(DISTINCT blog_tag.id) count FROM tag LEFT JOIN blog_tag on tag.id=blog_tag.tag_id GROUP BY tag.id order by count(DISTINCT blog_tag.id) DESC LIMIT #{number}
    </select>
+    <resultMap id="TagAddBlogMap" type="com.wch.blog.bean.Tag">
+        <id property="id" column="id" jdbcType="BIGINT"></id>
+        <result property="tagName" column="tag_name" jdbcType="VARCHAR"></result>
+        <result property="count" column="count" jdbcType="INTEGER"></result>
+        <collection property="blogs" column="id" ofType="com.wch.blog.bean.BlogTag" select="com.wch.blog.dao.BlogTagDao.selectShowByTagId"></collection>
+    </resultMap>
+    <select id="selectShowTagAndBlog" resultMap="TagAddBlogMap" >
+       SELECT tag.id,tag.tag_name,count(DISTINCT blog_tag.id) count FROM tag LEFT JOIN blog_tag on tag.id=blog_tag.tag_id GROUP BY tag.id order by count(DISTINCT blog_tag.id) DESC
+    </select>
 </mapper>

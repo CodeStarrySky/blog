@@ -13,6 +13,17 @@
     <select id="selectByTagId" resultMap="BlogMap" parameterType="java.lang.Long">
         select blog.id,blog.title  from blog,blog_tag where  blog_tag.tag_id=#{tag_id} and blog.id=blog_tag.blog_id ;
     </select>
+    <resultMap id="BlogNotUserMap" type="com.wch.blog.bean.Blog">
+        <result              property="id"                 column="id"                jdbcType="BIGINT"></result>
+        <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
+        <result          property="introduction"      column="introduction"     jdbcType="LONGVARCHAR"></result>
+        <result          property="updateTime"        column="update_time"      ></result>
+        <association     property="type"              column="type_id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
+        <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
+    </resultMap>
+    <select id="selectShowByTagId" resultMap="BlogNotUserMap" parameterType="java.lang.Long">
+        select *  from blog,blog_tag where  blog_tag.tag_id=#{tag_id} and blog.id=blog_tag.blog_id ;
+    </select>
 
     <resultMap id="TagMap" type="com.wch.blog.bean.Tag">
         <result column="id" property="id" jdbcType="BIGINT"></result>

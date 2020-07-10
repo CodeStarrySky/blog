@@ -24,4 +24,7 @@ public interface BlogService {
 
     public Map<Integer,List<Blog>> getTimeSequence();
 
+    //前端显示博客详情
+    public Blog getShowBlog(Long id);
+
 }

@@ -16,4 +16,6 @@ public interface BlogTagDao {
     public List<Tag> selectByBlogId(@Param("blog_id") Long blogId);
 
     public int deleteById(@Param("id") Long id);
+
+    public List<Blog> selectShowByTagId(@Param("tag_id") Long tagId);
 }

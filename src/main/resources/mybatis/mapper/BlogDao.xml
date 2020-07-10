@@ -17,7 +17,7 @@
        <result          property="createTime"        column="create_time"        ></result>
        <result          property="updateTime"        column="update_time"      ></result>
        <result          property="flag"               column="flag"               jdbcType="VARCHAR"></result>
-       <association     property="user"              column="user_id"     select="com.wch.blog.dao.UserDao.selectById"    fetchType="lazy"></association>
+<!--       <association     property="user"              column="user_id"     select="com.wch.blog.dao.UserDao.selectById"    fetchType="lazy"></association>-->
        <association     property="type"              column="type_id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
 <!--       <collection      property="comments"          column="id"     ofType="com.wch.blog.bean.Comment"      select="com.wch.blog.dao.CommentDao.selectByBlogId"  fetchType="lazy"></collection>-->
        <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
@@ -26,6 +26,19 @@
         <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
         <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
         <result          property="introduction"      column="introduction"     jdbcType="LONGVARCHAR"></result>
+        <result          property="updateTime"        column="update_time"      ></result>
+        <association     property="type"              column="type_id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
+        <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
+    </resultMap>
+    <resultMap id="BlogShowMap" type="com.wch.blog.bean.Blog">
+        <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
+        <result          property="content"           column="content"           jdbcType="LONGVARCHAR"></result>
+        <result          property="introduction"      column="introduction"     jdbcType="LONGVARCHAR"></result>
+        <result          property="firstFigure"       column="first_figure"     jdbcType="VARCHAR"></result>
+        <result          property="ifOriginal"        column="if_original"      jdbcType="BIT"></result>
+        <result          property="appreciates"       column="appreciates"       jdbcType="BIT"></result>
+        <result          property="shareStatement"    column="share_statement"   jdbcType="BIT"></result>
+        <result          property="commentabled"      column="commentabled"      jdbcType="BIT"></result>
         <result          property="updateTime"        column="update_time"      ></result>
         <association     property="type"              column="type_id"     select="com.wch.blog.dao.TypeDao.selectById"    fetchType="lazy"></association>
         <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
@@ -50,13 +63,13 @@
     </resultMap>
 
     <select id="selectByShowAll" resultMap="BlogNotUserMap">
-        select * from blog where flag=1 and published=1 order by recommend,update_time desc
+        select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 order by recommend,update_time desc
     </select>
     <select id="selectShowByTypeId" parameterType="java.lang.Long" resultMap="BlogNotUserMap">
-        select * from blog where flag=1 and published=1 and type_id=#{typeId} order by update_time desc
+        select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 and type_id=#{typeId} order by update_time desc
     </select>
     <select id="selectTimeSequence" resultMap="BlogNotUserMap">
-        select * from blog where flag=1 and published=1 order by update_time desc
+        select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 order by update_time desc
     </select>
     <select id="selectByUserId" parameterType="java.lang.Long" resultMap="ByUserBlog">
         select id,title from blog where flag=1 and user_id=#{userId} order by update_time desc
@@ -80,8 +93,11 @@
     <select id="selectById" resultMap="BlogMap" parameterType="java.lang.Long">
         select * from blog where flag=1 and id=#{id}
     </select>
+    <select id="selectShowById" resultMap="BlogShowMap" parameterType="java.lang.Long">
+        select id,title,update_time,introduction,content,first_figure,if_original,appreciates,share_statement,commentabled,type_id from blog where flag=1 and published=1 and id=#{id} order by recommend,update_time desc
+    </select>
 
-    <select id="selectByTitle" resultMap="BlogMap" parameterType="java.lang.String">
+    <select id="selectByTitle" resultMap="BlogNotUserMap" parameterType="java.lang.String">
         select * from blog where flag=1 and title=#{title}
     </select>
 

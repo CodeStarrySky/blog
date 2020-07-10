@@ -7,6 +7,17 @@
   text-align: justify;
 }
 
+.typo li{
+  font-weight: 300;
+  padding: 4px 0;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.typo pre code {
+  font-size: 16px;
+}
+
 
 /* 要注意表单元素并不继承父级 font 的问题 */
  .typo button, .typo  input,.typo select, .typo  textarea {

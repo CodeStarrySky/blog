@@ -36,8 +36,18 @@ body {
 	padding-left:45px;
 	margin-bottom:74px;
 }
-#archive-h2 {
+.archive-h2 {
 	background: url(../images/icon06.gif) no-repeat 158px 0;
+
+	height:59px;
+	font-size:25px;
+	font-family:微软雅黑;
+	font-weight:normal;
+	padding-left:45px;
+	margin-bottom:74px;
+}
+.tags-h2 {
+	background: url(../images/tags-icon.png) no-repeat 158px 0;
 
 	height:59px;
 	font-size:25px;

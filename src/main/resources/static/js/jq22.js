@@ -27,12 +27,12 @@ function systole(){
 	// parentH = $warpEle.find("li").length*$warpEle.find("li").outerHeight(true) + $warpEle.find("h2").length*$warpEle.find("h2").outerHeight(true);
 	// console.log($warpEle.find("li").length,$warpEle.find("li").outerHeight(true),$warpEle.find("h2").length,$warpEle.find("h2").outerHeight(true));
 	console.log(parentH);
-	
+
+	eleTop.push($(this).position().top);
+	$(this).css({"margin-top":-eleTop[idx]}).children().hide();
 	setTimeout(function(){
 		$(".history").css("opacity",1)
 		$warpEle.find("ul").children(":not('h2:first')").each(function(idx){
-			eleTop.push($(this).position().top);
-			$(this).css({"margin-top":-eleTop[idx]}).children().hide();
 		}).animate({"margin-top":0}, 1600).children().fadeIn();
 
 		$warpEle.parent().animate({"height":parentH}, 2600);

@@ -6,13 +6,18 @@ import com.wch.blog.bean.Tag;
 import com.wch.blog.dao.BlogDao;
 import com.wch.blog.dao.BlogTagDao;
 import com.wch.blog.dao.TagDao;
+import com.wch.blog.exception.NotFoundException;
 import com.wch.blog.exception.ValidationException;
 import com.wch.blog.service.BlogService;
+import com.wch.blog.utils.MarkdownUtils;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -166,5 +171,21 @@ public class BlogServiceImpl implements BlogService {
            map.put(max,temp);
        }
        return map;
+    }
+
+    @Override
+    public Blog getShowBlog(Long id) {
+        Blog blog = blogDao.selectShowById(id);
+        if(blog==null){
+            throw new NotFoundException("找不到该博客！");
+        }
+        System.out.println(blog);
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog,b);
+        String content = b.getContent();
+        System.out.println(b);
+        String s = MarkdownUtils.markdownToHtmlExtensions(content);
+        b.setContent(s);
+        return b;
     }
 }

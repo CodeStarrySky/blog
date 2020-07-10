@@ -70,8 +70,8 @@ public class UserController {
         if(pwd.equals("")||pwd==null){
             return Msg.fail().add("vi","密码不能为空");
         }
-        User user = userService.finUser((String)session.getAttribute("loginUser"));
-        if(!user.getPassword().equals(MD5AndSHAUtils.md5AndSHA(pwd))){
+        User confirmUser = userService.checkUser((String) session.getAttribute("loginUser"),pwd);
+        if(confirmUser==null){
             return Msg.fail().add("vi","密码输入有误");
         }
         return Msg.success();
@@ -83,14 +83,14 @@ public class UserController {
         if(newPwd==null||newPwd.trim()==""||confirmPwd==null||confirmPwd.trim()==""||oldPwd==null||oldPwd.trim()==""){
             throw new ValidationException("密码不能为空或空字符串！");
         }
-        User user = userService.finUser((String)session.getAttribute("loginUser"));
-        if(!user.getPassword().equals(MD5AndSHAUtils.md5AndSHA(oldPwd))){
+        User confirmUser = userService.checkUser((String) session.getAttribute("loginUser"),oldPwd);
+        if(confirmUser==null){
             throw new ValidationException("密码有误！");
         }
         if(!newPwd.equals(confirmPwd)){
             throw new ValidationException("新密码与旧密码不相等！");
         }
-        int i = userService.changePwd(MD5AndSHAUtils.md5AndSHA(newPwd), user.getId());
+        int i = userService.changePwd(MD5AndSHAUtils.md5AndSHA(newPwd), confirmUser.getId());
         if(i!=1){
             throw new ValidationException("系统故障，密码修改失败！");
         }

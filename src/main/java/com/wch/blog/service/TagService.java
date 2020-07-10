@@ -16,5 +16,9 @@ public interface TagService {
     public int deleteTag(Long id);
 
     public Tag checkTagName(String tagName);
+
     public List<Tag> getLimitTag(Integer number);
+
+    public List<Tag> getShowTagAndBlog();
+
 }

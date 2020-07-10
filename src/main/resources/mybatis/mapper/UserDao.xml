@@ -5,7 +5,6 @@
             <id     column="id"                 jdbcType="BIGINT"       property="id"></id>
             <result column="nickname"           jdbcType="VARCHAR"      property="nickname"></result>
             <result column="username"           jdbcType="VARCHAR"      property="username"></result>
-            <result column="password"           jdbcType="VARCHAR"      property="password"></result>
             <result column="address"            jdbcType="VARCHAR"      property="address"></result>
             <result column="email"              jdbcType="VARCHAR"      property="email"></result>
             <result column="qq"                 jdbcType="VARCHAR"      property="qq"></result>
@@ -25,35 +24,18 @@
             <result column="intro3"             jdbcType="VARCHAR"      property="intro3"></result>
             <collection property="blogs" column="id" ofType="com.wch.blog.bean.Blog" select="com.wch.blog.dao.BlogDao.selectByUserId" fetchType="lazy"></collection>
         </resultMap>
-        <resultMap id="UserNotBlogMap" type="com.wch.blog.bean.User">
-            <result column="nickname"           jdbcType="VARCHAR"      property="nickname"></result>
-            <result column="address"            jdbcType="VARCHAR"      property="address"></result>
-            <result column="email"              jdbcType="VARCHAR"      property="email"></result>
-            <result column="qq"                 jdbcType="VARCHAR"      property="qq"></result>
-            <result column="wechat"             jdbcType="VARCHAR"      property="weChat"></result>
-            <result column="head_portrait"      jdbcType="VARCHAR"      property="headPortrait"></result>
-            <result column="public_qrcode"      jdbcType="VARCHAR"      property="publicQrCode"></result>
-            <result column="collection_qrcode"  jdbcType="VARCHAR"      property="collectionQrCode"></result>
-            <result column="introduce_myself"   jdbcType="LONGVARCHAR"  property="introduceMyself"></result>
-            <result column="contact_me"           jdbcType="LONGVARCHAR"  property="contactMe"></result>
-            <result column="blog_intro"         jdbcType="LONGVARCHAR"  property="blogIntro"></result>
-            <result column="profession"         jdbcType="VARCHAR"      property="profession"></result>
-            <result column="intro1"             jdbcType="VARCHAR"      property="intro1"></result>
-            <result column="intro2"             jdbcType="VARCHAR"      property="intro2"></result>
-            <result column="intro3"             jdbcType="VARCHAR"      property="intro3"></result>
-        </resultMap>
     <select id="selectList" resultMap="UserMap">
-        select * from user;
+        select id,nickname,username,address,email,qq,wechat,head_portrait,public_qrcode,collection_qrcode,introduce_myself,contact_me,blog_intro,profession,intro1,intro2,intro3 from user;
     </select>
     <select id="selectById" resultMap="UserMap" parameterType="java.lang.Long">
-        select * from user where id=#{id}
+        select id,nickname,username,address,email,qq,wechat,head_portrait,public_qrcode,collection_qrcode,introduce_myself,contact_me,blog_intro,profession,intro1,intro2,intro3 from user where id=#{id}
     </select>
     <select id="selectByCondition"  resultMap="UserMap">
-        select * from user where username=#{username} and password=#{password}
+        select id,username from user where username=#{username} and password=#{password}
     </select>
 
     <select id="selectByName" resultMap="UserMap">
-        select * from user where username=#{username}
+        select id,nickname,username,address,email,qq,wechat,head_portrait,public_qrcode,collection_qrcode,introduce_myself,contact_me,blog_intro,profession,intro1,intro2,intro3 from user where username=#{username}
     </select>
 
     <update id="updateUserField">
@@ -65,12 +47,10 @@
     </select>
 
     <select id="selectByPassword" resultMap="UserMap">
-        select * from user where id=#{id} and password=#{pwd};
+        select id,nickname,username,address,email,qq,wechat,head_portrait,public_qrcode,collection_qrcode,introduce_myself,contact_me,blog_intro,profession,intro1,intro2,intro3 from user where id=#{id} and password=#{pwd};
     </select>
 
-    <select id="selectShowByName" resultMap="UserNotBlogMap">
-        select * from user where username=#{username}
-    </select>
+
 
     <update id="updatePwd">
         update user set password=#{newPwd} where id=#{id}

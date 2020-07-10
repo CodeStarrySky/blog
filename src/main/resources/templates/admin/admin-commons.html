@@ -108,7 +108,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="submit" class="btn btn-danger disabled" id="change_pwd_btn">保存</button>
+                    <button type="submit" class="btn btn-danger " disabled id="change_pwd_btn">保存</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -119,8 +119,8 @@
             $('#change_pwd_modal').on('hidden.bs.modal', function (e) {
                 //1、清空模态框表单
                 $('#change_pwd_modal form')[0].reset();
-                $('#change_pwd_btn').removeClass("disabled")
-                $('#change_pwd_btn').addClass("disabled")
+                $('#change_pwd_btn').removeAttr("disabled")
+                $('#change_pwd_btn').attr("disabled","disabled")
                 $('#change_pwd_modal input').parent().removeClass("has-success has-error")
                 $('#change_pwd_modal input').next('span').remove();
                 console.log($('#change_pwd_modal input').next())
@@ -196,7 +196,7 @@
                 //判断所有div的has-success属性是否与相关input属性一样多（不含隐藏域）
                 console.log($('#change_pwd_modal div.has-success').length,$('#change_pwd_modal input').length,$('#change_pwd_modal input'))
                     if($('#change_pwd_modal div.has-success').length==$('#change_pwd_modal input').length-1){
-                        $("#change_pwd_btn").removeClass('disabled');
+                        $("#change_pwd_btn").removeAttr('disabled');
                     }
             }
             //修改密码

@@ -115,7 +115,9 @@ public class BlogShowController {
 
     @GetMapping("/tags")
     public String tags(Model model){
-
+        List<Tag> tags = tagService.getShowTagAndBlog();
+        model.addAttribute("tags",tags);
+        System.out.println(tags);
         return "tags";
     }
     @GetMapping("/types")
@@ -128,6 +130,13 @@ public class BlogShowController {
     public String about(Model model){
 
         return "about";
+    }
+    @GetMapping("/blog/{id}")
+    public String blog(Model model,@PathVariable("id") Long id){
+        Blog blog = blogService.getShowBlog(id);
+        model.addAttribute("blog",blog);
+        System.out.println(id);
+        return "blog";
     }
 
 

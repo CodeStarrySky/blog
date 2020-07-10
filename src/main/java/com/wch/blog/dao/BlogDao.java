@@ -42,4 +42,6 @@ public interface BlogDao {
     public Blog selectTimeMaxAndMin();
 
     public List<Blog> selectShowByTypeId(@Param("typeId") Long typeId);
+
+    public Blog selectShowById(@Param("id") Long id);
 }

@@ -39,17 +39,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User finUser(String username) {
         User user = userDao.selectByName(username);
-        user.setPassword("");
-        user.setCreateTime(null);
-        user.setUpdateTime(null);
+
         return user;
     }
 
-    @Override
-    public User finShowUser(String username){
-        User user = userDao.selectShowByName(username);
-        return user;
-    }
 
     @Transactional
     @Override

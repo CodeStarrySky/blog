@@ -77,6 +77,10 @@ a:active {
     margin-top: 19px;
     margin-bottom: 19px;
 }
+
+.m-margin-bottom{
+    margin-bottom: 19px;
+}
 .m-margin-tb-tiny {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -208,8 +212,11 @@ a:active {
 转载
  */
 .m-reprint {
-    color: brown;
-    border-color: brown;
+    color: #ff0025;
+    border-color:  #ff0025;
+    outline: none;
+    background-color: white;
+    color:  #ff0025;
 }
 /**
 转载
@@ -217,6 +224,9 @@ a:active {
 .m-original {
     color: deepskyblue;
     border-color: deepskyblue;
+    outline: none;
+    background-color: white;
+    color: deepskyblue;
 
 }
 
@@ -447,6 +457,17 @@ button {
     padding-right:9px;
     padding-top: 2px;
     padding-bottom: 5px;
+}
+
+pre {
+    border: 0;background-color: rgba(0,0,0,0)
+}
+
+#contact_me,#introduce_myself {
+    font-size: 19px;
+    letter-spacing: 1px;
+    line-height: 1.5 ;
+
 }
 
 

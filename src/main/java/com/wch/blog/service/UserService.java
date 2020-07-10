@@ -24,7 +24,7 @@ public interface UserService {
 
     public int changePwd(String newPwd,Long id);
 
-    public User finShowUser(String username);
+
 
 
 }

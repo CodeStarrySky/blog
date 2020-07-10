@@ -36,10 +36,10 @@
                             </span>
 
                             <span style="margin-right:12px;font-size: 15px">
-                                <span class=" glyphicon glyphicon-eye-open"
+                                <span class=" glyphicon glyphicon-folder-open"
                                         aria-hidden="true">
                                 </span>
-                                <span>[[${blog.views}]]</span>
+                                <span style="padding-left: 2px">[[${blog.type.typeName}]]</span>
                             </span>
                             <span class="label label-info m-span-label"   th:each="tag : ${blog.tags}">[[${tag.tagName}]]</span>
                         </div>
