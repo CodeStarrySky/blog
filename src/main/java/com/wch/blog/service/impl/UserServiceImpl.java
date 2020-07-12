@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Transactional
+
     @Override
     public User finUser(String username) {
         User user = userDao.selectByName(username);

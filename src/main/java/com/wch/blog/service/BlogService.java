@@ -27,4 +27,8 @@ public interface BlogService {
     //前端显示博客详情
     public Blog getShowBlog(Long id);
 
+    public int getShowBlogCount();
+
+    public List<Blog> showSearch(String query);
+
 }

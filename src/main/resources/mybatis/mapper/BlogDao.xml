@@ -63,13 +63,16 @@
     </resultMap>
 
     <select id="selectByShowAll" resultMap="BlogNotUserMap">
-        select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 order by recommend,update_time desc
+        select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 order by recommend desc ,update_time desc
     </select>
     <select id="selectShowByTypeId" parameterType="java.lang.Long" resultMap="BlogNotUserMap">
         select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 and type_id=#{typeId} order by update_time desc
     </select>
     <select id="selectTimeSequence" resultMap="BlogNotUserMap">
         select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 order by update_time desc
+    </select>
+    <select id="selectShowByQuery" resultMap="BlogNotUserMap" parameterType="java.lang.String">
+        select id,title,introduction,update_time,type_id from blog where flag=1 and published=1 and (title like '%${query}%' or content like '%${query}%' or introduction like '%${query}%' ) order by recommend desc ,update_time desc
     </select>
     <select id="selectByUserId" parameterType="java.lang.Long" resultMap="ByUserBlog">
         select id,title from blog where flag=1 and user_id=#{userId} order by update_time desc
@@ -94,7 +97,7 @@
         select * from blog where flag=1 and id=#{id}
     </select>
     <select id="selectShowById" resultMap="BlogShowMap" parameterType="java.lang.Long">
-        select id,title,update_time,introduction,content,first_figure,if_original,appreciates,share_statement,commentabled,type_id from blog where flag=1 and published=1 and id=#{id} order by recommend,update_time desc
+        select id,title,update_time,introduction,content,first_figure,if_original,appreciates,share_statement,commentabled,type_id from blog where flag=1 and published=1 and id=#{id} order by recommend desc,update_time desc
     </select>
 
     <select id="selectByTitle" resultMap="BlogNotUserMap" parameterType="java.lang.String">
@@ -157,6 +160,12 @@
     <delete id="deleteBlogTagByBlogId" parameterType="java.lang.Long">
         delete from blog_tag where blog_id=#{blogId}
     </delete>
+
+    <select id="selectShowCount" resultType="java.lang.Integer">
+        select count(id) from blog where flag=1 and published=1 ;
+    </select>
+
+
 
 
 </mapper>

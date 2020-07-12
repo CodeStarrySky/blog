@@ -52,7 +52,7 @@ public class TypeServiceImpl implements TypeService {
         return typeDao.selectByName(typeName);
     }
 
-    @Transactional
+
     @Override
     public List<Type> getLimitType(Integer number){
         return typeDao.selectByLimit(number);
@@ -60,7 +60,7 @@ public class TypeServiceImpl implements TypeService {
 
 
     @Override
-    public List<Type> getShowType() {
-        return typeDao.selectShowTypeAndBlog();
+    public List<Type> getShowType(Long typeId) {
+        return typeDao.selectShowTypeAndBlog(typeId);
     }
 }

@@ -3,6 +3,7 @@ package com.wch.blog.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mysql.cj.exceptions.NumberOutOfRange;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import com.wch.blog.bean.Blog;
 import com.wch.blog.bean.Tag;
@@ -15,10 +16,8 @@ import com.wch.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -69,10 +68,13 @@ public class BlogShowController {
             List<Type> types = typeService.getLimitType(TYPE_NUMBER);
             List<Tag> tags = tagService.getLimitTag(TAG_NUMBER);
             Map<String,Object> data = new HashMap<>();
-            System.out.println(user);
+            int blogCount = blogService.getShowBlogCount();
+            int tagCount = tagService.getShowTagCount();
             data.put("user",user);
             data.put("types",types);
             data.put("tags",tags);
+            data.put("blogCount",blogCount);
+            data.put("tagCount",tagCount);
             session.setAttribute("data",data);
         }
 
@@ -115,15 +117,30 @@ public class BlogShowController {
 
     @GetMapping("/tags")
     public String tags(Model model){
-        List<Tag> tags = tagService.getShowTagAndBlog();
+        List<Tag> tags = tagService.getShowTagAndBlog(null);
+        model.addAttribute("tags",tags);
+        System.out.println(tags);
+        return "tags";
+    }
+    @GetMapping("/tag/{tagId}")
+    public String tag(@PathVariable("tagId") Long tagId, Model model){
+        List<Tag> tags = tagService.getShowTagAndBlog(tagId);
         model.addAttribute("tags",tags);
         System.out.println(tags);
         return "tags";
     }
     @GetMapping("/types")
     public String types(Model model){
-        List<Type> types = typeService.getShowType();
+        List<Type> types = typeService.getShowType(null);
         model.addAttribute("types",types);
+        System.out.println(types);
+        return "types";
+    }
+    @GetMapping("/type/{typeId}")
+    public String type(@PathVariable("typeId") Long typeId, Model model){
+        List<Type> types = typeService.getShowType(typeId);
+        model.addAttribute("types",types);
+        System.out.println(types);
         return "types";
     }
     @GetMapping("/about")
@@ -137,6 +154,18 @@ public class BlogShowController {
         model.addAttribute("blog",blog);
         System.out.println(id);
         return "blog";
+    }
+
+    String query = null;
+
+    @PostMapping("/search")
+    public String search(@RequestParam(value="pn",required = false,defaultValue = "1") Integer pn, @RequestParam("query") String query, Model model){
+        if(query==null||"".equals(query)){
+            return "redirect:/";
+        }
+        List<Blog> blogs = blogService.showSearch(query);
+        model.addAttribute("blogs",blogs);
+        return "search";
     }
 
 

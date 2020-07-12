@@ -23,5 +23,5 @@ public interface TypeDao {
 
     public List<Type> selectByLimit(@Param("number") Integer number);
 
-    public List<Type> selectShowTypeAndBlog();
+    public List<Type> selectShowTypeAndBlog(@Param("typeId") Long typeId);
 }

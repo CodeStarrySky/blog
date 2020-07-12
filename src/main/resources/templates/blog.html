@@ -26,29 +26,31 @@
                 <div class=" panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px;padding:25px">
                     <div>
                         <!--            标题-->
-                        <div class="m-padded-tb-mini m-font-spaced-mini m-font-padded-left m-opacity"><h2 class="m-margin-none" th:text="${blog.title}">你真的理解什么是财富自由吗？</h2></div>
+                        <div class="m-padded-tb-mini m-font-spaced-mini m-font-padded-left m-opacity">
+                            <h2 class="m-margin-none" th:text="${blog.title}">你真的理解什么是财富自由吗？</h2>
+                        </div>
                         <div class="row container-fluid m-opacity" style="margin-top: 8px;">
                             <div class="text-left " style="margin-top:6px;margin-right: 3px" >
                             <span style="margin-right:12px;font-size: 15px" >
                                 <span class="glyphicon glyphicon-calendar " aria-hidden="true" ></span>
-                                <span>
+                                <span style="color: black" >
                                     [[${#dates.format(blog.updateTime,'yyyy-MM-dd')}]]
                                 </span>
                             </span>
 
-                                <span style="margin-right:12px;font-size: 15px">
+                            <span style="margin-right:12px;font-size: 15px" class="content-a">
                                 <span class=" glyphicon glyphicon-folder-open"
                                       aria-hidden="true">
                                 </span>
-                                <span style="padding-left: 2px">[[${blog.type.typeName}]]</span>
+                                <a style="padding-left: 2px;color: black" th:href="@{/type/}+${blog.type.id}">[[${blog.type.typeName}]]</a>
                             </span>
-                                <span class="label label-info m-span-label"   th:each="tag : ${blog.tags}">[[${tag.tagName}]]</span>
+                                <a class="label label-info m-span-label "   th:each="tag : ${blog.tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]</a>
                             </div>
                         </div>
                         <div class="m-padded-tb-mini m-font-spaced m-font-padded-left m-opacity-mini m-margin-none" style="margin-bottom: 15px"><h3 th:text="${blog.introduction}">这是博客的简介</h3></div>
 
                         <!-- 图片 -->
-                        <div class="m-imag-size-max">
+                        <div class="m-imag-size-max" th:if="${blog.firstFigure!=null||blog.firstFigure!=''}">
                             <img src="../static/images/imgTest.jpg" th:src="@{${blog.firstFigure}}" class="img-responsive m-border-radius-tiny">
                         </div>
 
@@ -461,25 +463,38 @@ h5,h6{font-size:1em;}
 
             <!-- 评论区 -->
             <div class="panel panel-default panel-body" >
-                <form class="form-inline">
+                <form class="form-inline" th:action="@{/comment}" method="post">
                     <div class="m-margin-tb-mini">
                         <textarea style="width: 100%;min-height:66px;border-color: deepskyblue;outline: none" placeholder="请输入评论信息..."></textarea>
                     </div>
                    <div >
-                        <div class="form-group m-padded-lr-mini has-feedback ">
-<!--                            <span class="glyphicon glyphicon-search form-control-feedback " aria-hidden="true" style="padding-right: 25px"></span>-->
+                        <div class="form-group m-padded-none has-feedback ">
                             <input type="text" class="form-control " id="exampleInputName2" placeholder="Name" >
                         </div>
                         <div class="form-group m-padded-lr-mini has-feeback">
-<!--                            <span class="glyphicon glyphicon-search form-control-feedback " aria-hidden="true" style="padding-right: 25px"></span>-->
                             <input type="email" class="form-control " id="exampleInputEmail2" placeholder="Email">
                         </div>
-                        <button type="submit" class="btn btn-info">评论</button>
+                       <div class="form-group" style="margin-top: 16px;padding-right: 16px;position: relative">
+                           <input type="hidden" name="headPortrait" id="head_portrait_id" th:value="${comment!=null}?${comment.headPortrait}:''">
+                           <input style="top:22px;left:22px;opacity: 0;width:0px;height:0px;position: absolute" id="head_portrait_upload" name="head_portrait"  type="file" accept="image/gif, image/jpeg, image/png" />
+                           <button type="button" th:style="'opacity:'+(${comment==null||comment.headPortrait==''||comment.headPortrait==null}?'1':'0')+';width: 62px;height:62px;left:5px;top:-17px;font-size: 22px'"  class="glyphicon glyphicon-cloud-upload" style="" id="head_upload_btn" ></button>
+                           <div id="head_portrait_div"  th:style="'display:'+(${comment==null||comment.headPortrait==''||comment.headPortrait==null}?'none':'inline')">
+                               <img  id="head_portrait_img" src="../static/images/headProtrait.jpg"  th:src="@{${comment==null||comment.headPortrait==''||comment.headPortrait==null?'':comment.headPortrait}}"
+                                     class="m-border-radius-mini img-responsive m-box-shadow" style="width: 66px;height:66px;top:-19px;left:3px;position: absolute">
+
+                               <div class="mask-comment text-center" >
+                                   <button type="button" class="btn btn-info m-border-radius m-padded-none" id="head_edit_btn" style="position:absolute;top:6px;left:16px;width: 39px;height:22px;font-size: 6px">修改</button>
+                                   <button type="button" class="btn btn-danger m-border-radius m-padded-none" id="head_delete_btn" style="position:absolute;top:36px;left:16px;width: 39px;height:22px;font-size: 6px">删除</button>
+                               </div>
+                           </div>
+                           <!--            <input type="file" name="firstFigure" class="form-control" placeholder="地址"  aria-describedby="sizing-addon1" th:value="${blog}!=null?${blog.firstFigure}:''">-->
+                       </div>
+                        <button type="submit" class="btn btn-info">发布</button>
                    </div>
                 </form>
 <!--                评论区-->
                 <div>
-                    <h5 style="margin-top: 19px">评论</h5>
+                    <h5  style="font-size: 19px;margin-top: 19px;color: deepskyblue">评论</h5>
                     <hr style="margin:5px 0 5px 0">
                     <div class="media" style="border-bottom: 1px solid #E6E3E3">
 
@@ -595,6 +610,72 @@ h5,h6{font-size:1em;}
                             "<img class='img-responsive\' src='../static/images/headProtrait.jpg'>" +
                         "</div>"
             });
+            //上传图片
+
+            $("#head_portrait_div").mouseover(function () {
+                $(".mask-comment").show();
+            });
+            $("#head_portrait_div").mouseout(function () {
+                $(".mask-comment").hide();
+            })
+
+            $("#head_upload_btn,#head_edit_btn").click(function () {
+                $('#head_portrait_upload').trigger("click");
+            })
+
+            $('#head_portrait_upload').change(function () {
+                var file = $(this).val();
+                if(file==''||file==null){
+                    $("#head_upload_btn").css('opacity','1');
+                    $("#head_portrait_upload").parent('div').next('span').remove();
+                    $("#head_upload_btn").removeClass("disabled");
+                    $("#head_portrait_div").css('display','none');
+                }else{
+                    if(!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file)) {
+                        $('#head_portrait_upload').val('');
+                        $("#head_portrait_id").val('');
+                        $("#head_portrait_upload").parent('div').next('span').remove();
+                        $("#head_upload_btn").css('opacity','1');
+                        $("#head_upload_btn").removeClass("disabled");
+                        $("#head_portrait_div").css('display','none');
+                        $("#head_portrait_upload").parent('div').after("<span style='color: #dd5555'>请选择图片类文件</span>");
+                        return false;
+                    }
+                    $("#head_portrait_upload").parent('div').next('span').remove();
+                    preImg(this.id,'head_portrait_img');
+                    $("#head_upload_btn").css('opacity','0');
+                    $("#head_upload_btn").removeClass("disabled");
+                    $("#head_portrait_div").css('display','inline');
+                    $("#head_upload_btn").addClass("disabled");
+                }
+            })
+
+            $('#head_delete_btn').click(function () {
+                $('#head_portrait_upload').val('');
+                $("#head_portrait_id").val('');
+                $("#head_portrait_upload").parent('div').next('span').remove();
+                $("#head_upload_btn").css('opacity','1');
+                $("#head_upload_btn").removeClass("disabled");
+                $("#head_portrait_div").css('display','none');
+            })
+
+            //图片即时预览
+            function getFileUrl(sourceId) {
+                var url;
+                if (navigator.userAgent.indexOf("MSIE")>=1) { // IE
+                    url = document.getElementById(sourceId).value;
+                } else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox
+                    url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+                } else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome
+                    url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+                }
+                return url;
+            }
+            function preImg(sourceId, targetId) {
+                var url = getFileUrl(sourceId);
+                var imgPre = document.getElementById(targetId);
+                imgPre.src = url;
+            }
         })
 </script>
 </body>

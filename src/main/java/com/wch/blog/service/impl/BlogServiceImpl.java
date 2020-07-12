@@ -53,7 +53,6 @@ public class BlogServiceImpl implements BlogService {
         return blogDao.deleteById(id);
     }
 
-    @Transactional
     @Override
     public Blog findById(Long id){
         Blog blog = blogDao.selectById(id);
@@ -126,7 +125,6 @@ public class BlogServiceImpl implements BlogService {
         return 1;
     }
 
-    @Transactional
     @Override
     public List<Blog> getShowAll(){
 
@@ -187,5 +185,15 @@ public class BlogServiceImpl implements BlogService {
         String s = MarkdownUtils.markdownToHtmlExtensions(content);
         b.setContent(s);
         return b;
+    }
+
+    @Override
+    public int getShowBlogCount() {
+        return blogDao.selectShowCount();
+    }
+
+    @Override
+    public List<Blog> showSearch(String query) {
+        return blogDao.selectShowByQuery(query);
     }
 }

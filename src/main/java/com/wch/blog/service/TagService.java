@@ -19,6 +19,8 @@ public interface TagService {
 
     public List<Tag> getLimitTag(Integer number);
 
-    public List<Tag> getShowTagAndBlog();
+    public List<Tag> getShowTagAndBlog(Long tagId);
+
+    public int getShowTagCount();
 
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons::head('搜索结果')"></head>
+<body>
+<!--导航条-->
+<nav th:replace="commons::top"></nav>
+
+<div class="content">
+    <!--内容主体-->
+    <div class="row m-margin-none " style="padding-top: 12px">
+        <!-- 左侧 -->
+        <div th:replace="commons::left"></div>
+
+
+        <!--    中间-->
+        <div class="col-md-6" >
+            <!--        header-->
+            <!--        <div class="panel panel-default panel-body m-padded-tb-mini" style="margin-bottom: 0px">-->
+            <!--            <div class="row text-center">-->
+            <!--                <div class="col-md-2" style="color: aqua"><h3>博客</h3></div>-->
+            <!--                <h3 class="col-md-2 col-md-offset-8" >共 <strong style="color: darkorange">14</strong> 篇</h3>-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <!--        中间内容-->
+            <div >
+                <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px" th:each="blog : ${blogs}">
+                    <!--            标题-->
+                    <div class="m-padded-tb-min m-font-spaced-mini m-font-padded-left m-opacity-mini content-a">
+                        <h2 class="m-margin-none m-font-lined-mini" > <a th:href="@{/blog/}+${blog.id}" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h2>
+                    </div>
+                    <div class="row container-fluid m-opacity-tiny" style="padding-left: 25px">
+                        <div class="text-left " style="margin-top:6px;margin-right: 3px" >
+                            <span style="margin-right:12px;font-size: 15px" th:if="${blog.updateTime!=null}">
+                                <span class="glyphicon glyphicon-calendar " aria-hidden="true" ></span>
+                                <span style="color: black" >
+                                    [[${#dates.format(blog.updateTime,'yyyy-MM-dd')}]]
+                                </span>
+                            </span>
+
+                            <span style="margin-right:12px;font-size: 15px" class="content-a" th:if="${blog.type!=null}">
+                                <span class=" glyphicon glyphicon-folder-open"
+                                      aria-hidden="true">
+                                </span>
+                                <a style="padding-left: 2px;color: black" th:href="@{/type/}+${blog.type.id}">[[${blog.type.typeName}]]</a>
+                            </span>
+                            <a class="label label-info m-span-label" th:if="${blog.tags!=null}"   th:each="tag : ${blog.tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]</a>
+                        </div>
+                    </div>
+                    <div class="m-padded-tb-min m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3 class="m-font-lined-mini" th:text="${blog.introduction}">这是博客的简介</h3></div>
+                    <div class="m-padded-tb m-margin-lr" ><button type="button"  th:attr="blogId=${blog.id}"   class="btn btn-primary-outline  m-opacity-mini m-padded-lr-mini goBlog-btn" style="font-size:16px;border-radius: 25px;outline: none;padding-bottom: 3px;padding-top: 3px">查看详情</button></div>
+                    <div class="m-aline-mini m-margin-tb-min " style="margin-left: 6px;margin-right: 6px"></div>
+                    <div class="m-padded-lr-mini m-opacity-big">
+                        <span style="font-size: 16px">欢迎分享到：微信、朋友圈、微博 ......</span>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br><br>
+
+
+        </div>
+
+        <!-- 右侧 -->
+        <div th:replace="commons::right"></div>
+    </div>
+</div>
+
+
+<!--底部footer-->
+<footer th:replace="commons::footer"></footer>
+
+<!--/*/<th:block th:replace="commons::script"></th:block>/*/-->
+<script th:inline="javascript">
+
+    $(".goBlog-btn").click(function () {
+        var blog_url = /*[[@{/blog/}]]*/"";
+        var blogId = $(this).attr("blogId");
+        window.location.href=blog_url+blogId;
+    })
+
+
+
+</script>
+</body>
+</html>

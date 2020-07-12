@@ -22,7 +22,7 @@
         <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
     </resultMap>
     <select id="selectShowByTagId" resultMap="BlogNotUserMap" parameterType="java.lang.Long">
-        select *  from blog,blog_tag where  blog_tag.tag_id=#{tag_id} and blog.id=blog_tag.blog_id ;
+        select blog.id,blog.title,blog.introduction,blog.update_time,blog.type_id  from blog,blog_tag where blog_tag.tag_id=#{tag_id} and blog.id=blog_tag.blog_id and blog.flag=1 and blog.published=1  order by blog.update_time desc;
     </select>
 
     <resultMap id="TagMap" type="com.wch.blog.bean.Tag">

@@ -1,22 +1,23 @@
 
 
-a:link {
-    color: black;
+.content-a a:link {
+    color: black!important;
     text-decoration:none;
 }
 /* 未访问链接*/
-a:visited {
-    color: black;
+.content-a a:visited {
+    color: black!important;
     text-decoration:none;
 }
 
-/* 已访问链接 */
-a:hover {
-    color: orange;
+/* 鼠标移动到链接上 */
+.content-a a:hover {
+    color: deepskyblue!important;
     text-decoration:none;
-}  /* 鼠标移动到链接上 */
-a:active {
-    color:orange;
+    cursor: pointer;
+}  /* 鼠标点击链接上 */
+.content-a a:active {
+    color: deepskyblue!important;
     text-decoration:none;
 }
 
@@ -436,6 +437,19 @@ button {
     border-radius: 10px;
     display: none;
 }
+.mask-comment {
+    position: absolute;
+    top:-20px;
+    left:1px;
+    width:69px;
+    height: 69px;
+    background: rgba(0,0,0,0.5);
+    color: #f5f1e5;
+    text-align: center;
+    border-radius: 10px;
+    display: none;
+}
+
 .footer-mask {
     position: absolute;
     top:10px;

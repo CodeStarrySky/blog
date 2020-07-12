@@ -44,14 +44,18 @@ public class TagServiceImpl implements TagService {
         return tagDao.selectByName(tagName);
     }
 
-    @Transactional
     @Override
     public List<Tag> getLimitTag(Integer number){
         return tagDao.selectByLimit(number);
     }
 
     @Override
-    public List<Tag> getShowTagAndBlog() {
-        return tagDao.selectShowTagAndBlog();
+    public List<Tag> getShowTagAndBlog(Long tagId) {
+        return tagDao.selectShowTagAndBlog(tagId);
+    }
+
+    @Override
+    public int getShowTagCount() {
+        return tagDao.selectShowCount();
     }
 }

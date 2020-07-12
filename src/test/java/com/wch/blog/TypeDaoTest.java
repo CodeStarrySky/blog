@@ -49,7 +49,7 @@ public class TypeDaoTest {
 
     @Test
     public void selectShowTypeAndBlogTest(){
-        System.out.println(typeDao.selectShowTypeAndBlog());
+        System.out.println(typeDao.selectShowTypeAndBlog(null));
     }
 
     @Test

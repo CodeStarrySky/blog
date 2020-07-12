@@ -37,7 +37,7 @@
         <result property="count" column="count" jdbcType="INTEGER"></result>
     </resultMap>
     <select id="selectByLimit" resultMap="TypeAddCountMap" parameterType="java.lang.Integer">
-        select type.id,type.type_name,count(distinct blog.id) count  from type left join blog on type.id=blog.type_id group by type.id order by COUNT(DISTINCT blog.id) desc LIMIT #{number}
+        select type.id,type.type_name,count(blog.id) count  from type left join blog on type.id=blog.type_id and blog.flag=1 and blog.published=1 group by type.id order by COUNT(blog.id) desc LIMIT #{number}
     </select>
     <resultMap id="TypeAddBlogMap" type="com.wch.blog.bean.Type">
         <id property="id" column="id" jdbcType="BIGINT"></id>
@@ -45,8 +45,12 @@
         <result property="count" column="count" jdbcType="INTEGER"></result>
         <collection property="blogs" column="id" ofType="com.wch.blog.bean.Blog" select="com.wch.blog.dao.BlogDao.selectShowByTypeId"></collection>
     </resultMap>
-    <select id="selectShowTypeAndBlog" resultMap="TypeAddBlogMap" >
-        select type.id,type.type_name,count(distinct blog.id) count  from type left join blog on type.id=blog.type_id group by type.id order by COUNT(DISTINCT blog.id) desc
+    <select id="selectShowTypeAndBlog" resultMap="TypeAddBlogMap" parameterType="java.lang.Long">
+        select type.id,type.type_name,count(blog.id) count  from type left join blog on type.id=blog.type_id
+        <if test="typeId!=null">
+            where type.id=#{typeId}
+        </if>
+        group by type.id order by COUNT(blog.id) desc
     </select>
 
 

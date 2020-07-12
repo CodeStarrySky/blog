@@ -34,7 +34,8 @@
         <result property="count" column="count" jdbcType="INTEGER"></result>
     </resultMap>
     <select id="selectByLimit" resultMap="TagAddCountMap" parameterType="java.lang.Integer">
-        SELECT tag.id,tag.tag_name,count(DISTINCT blog_tag.id) count FROM tag LEFT JOIN blog_tag on tag.id=blog_tag.tag_id GROUP BY tag.id order by count(DISTINCT blog_tag.id) DESC LIMIT #{number}
+    SELECT tag.id,tag.tag_name,count(blog.id) count FROM tag LEFT JOIN
+            blog_tag on tag.id=blog_tag.tag_id left join blog on blog_tag.blog_id=blog.id and blog.flag=1 and blog.published=1 GROUP BY tag.id order by count(blog_tag.id) DESC LIMIT #{number}
    </select>
     <resultMap id="TagAddBlogMap" type="com.wch.blog.bean.Tag">
         <id property="id" column="id" jdbcType="BIGINT"></id>
@@ -42,7 +43,17 @@
         <result property="count" column="count" jdbcType="INTEGER"></result>
         <collection property="blogs" column="id" ofType="com.wch.blog.bean.BlogTag" select="com.wch.blog.dao.BlogTagDao.selectShowByTagId"></collection>
     </resultMap>
-    <select id="selectShowTagAndBlog" resultMap="TagAddBlogMap" >
-       SELECT tag.id,tag.tag_name,count(DISTINCT blog_tag.id) count FROM tag LEFT JOIN blog_tag on tag.id=blog_tag.tag_id GROUP BY tag.id order by count(DISTINCT blog_tag.id) DESC
+    <select id="selectShowTagAndBlog" resultMap="TagAddBlogMap" parameterType="java.lang.Long">
+       SELECT tag.id,tag.tag_name,count(blog_tag.id) count FROM tag LEFT JOIN blog_tag on tag.id=blog_tag.tag_id
+        left join blog on blog_tag.blog_id=blog.id and blog.flag=1 and blog.published=1
+        <if test="tagId!=null">
+            where tag.id=#{tagId}
+        </if>
+        GROUP BY tag.id order by count(blog_tag.id) DESC
+
+    </select>
+
+    <select id="selectShowCount" resultType="java.lang.Integer">
+        select count(id) from tag;
     </select>
 </mapper>

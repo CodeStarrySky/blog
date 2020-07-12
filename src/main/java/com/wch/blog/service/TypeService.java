@@ -20,7 +20,7 @@ public interface TypeService {
 
     public  List<Type> getLimitType(Integer number);
 
-    public List<Type> getShowType();
+    public List<Type> getShowType(Long typeId);
 
 
 }

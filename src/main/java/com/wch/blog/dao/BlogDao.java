@@ -39,9 +39,13 @@ public interface BlogDao {
 
     public List<Blog> selectTimeSequence();
 
+    public List<Blog> selectShowByQuery(@Param("query") String query);
+
     public Blog selectTimeMaxAndMin();
 
     public List<Blog> selectShowByTypeId(@Param("typeId") Long typeId);
 
     public Blog selectShowById(@Param("id") Long id);
+
+    public int selectShowCount();
 }

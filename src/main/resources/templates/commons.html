@@ -62,12 +62,13 @@
 
                 </ul>
                 <div class="navbar-form navbar-right" >
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="搜索">
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                   </span>
-                    </div><!-- /input-group -->
+                    <form name="search" action="#" id="search-form" th:action="@{/search}" method="post">
+                        <div class="form-group m-padded-lr-mini has-feedback ">
+                            <input type="text" class="form-control m-border-radius" id="search-input"  placeholder="Search..." name="query">
+                            <span class="glyphicon glyphicon-search form-control-feedback " aria-hidden="true" style="padding-right: 25px"></span>
+                        </div>
+                    </form>
+
                 </div><!-- /.col-lg-6 -->
 
 
@@ -110,14 +111,14 @@
 
                 <!-- 博客 -->
                 <div class="col-md-6 m-padded-none m-opacity-mini m-padded-tb" style="border-right: 1px solid #E6E3E3">
-                    <h3 class="m-font-mimi m-margin-none m-font-lined-mini">52</h3>
+                    <h3 class="m-font-mimi m-margin-none m-font-lined-mini" th:text="${#session.getAttribute('data').blogCount}">52</h3>
                     <h3 class="m-font-mini m-margin-none m-font-lined-mini">文章</h3>
                 </div>
 
 
                 <!-- 标签 -->
                 <div class="col-md-6 m-padded-none m-opacity-mini m-padded-tb" >
-                    <h3 class="m-font-mimi m-margin-none m-font-lined-mini">52</h3>
+                    <h3 class="m-font-mimi m-margin-none m-font-lined-mini" th:text="${#session.getAttribute('data').tagCount}">52</h3>
                     <h3 class="m-font-mini m-margin-none m-font-lined-mini">标签</h3>
                 </div>
 
@@ -137,18 +138,19 @@
 <div th:fragment="right" class="col-md-3 " >
     <div class="m-padded-none " style="margin-top: 52px;padding-top: 0px;" >
         <!--            分类-->
-        <div class="panel panel-default panel-body m-border-radius m-box-shadow-mini " >
+        <div class="panel panel-default panel-body m-border-radius m-box-shadow-mini content-a" >
             <div class=" page-header m-padded-none m-margin-none" style="padding-left: 25px">
                 <h3 class="row m-opacity-mini m-font-spaced ">
                     <b class="col-md-5">分类</b>
-                    <a class="col-md-2 col-md-offset-5" href="#"><span class="glyphicon glyphicon-forward text-right " style="color: darkgray;margin-bottom: 5px" aria-hidden="true"></span></a>
+                    <a class="col-md-2 col-md-offset-5" href="#" th:href="@{/types}"><span class="glyphicon glyphicon-forward text-right " style="color: darkgray;margin-bottom: 5px" aria-hidden="true"></span></a>
                 </h3>
             </div>
             <!-- 分类具体内容 -->
             <div class="col-md-10 col-md-offset-1 text-center m-opacity-mini m-div-min-height">
                 <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini " th:each="type:${#session.getAttribute('data').types}">
                     <h4 class="m-center-block m-font-lined-tiny">
-                        <div class="col-md-10 m-font-spaced m-opacity" style="padding-bottom: 8px;font-size: 18px;font-weight: bold" th:text="${type.typeName}">技术框架</div>
+                        <a class="col-md-10 m-font-spaced m-opacity"
+                           style="padding-bottom: 8px;font-size: 18px;font-weight: bold;color: black" th:text="${type.typeName}" th:href="@{/type/}+${type.id}">技术框架</a>
                         <span class="col-md-2  label label-info " style="margin-bottom: 10px" th:text="${type.count}">13</span>
                     </h4>
                 </div>
@@ -159,13 +161,13 @@
             <div class=" page-header m-padded-none m-margin-none" style="padding-left: 25px">
                 <h3 class="row m-opacity-mini m-font-spaced ">
                     <b class="col-md-5">标签</b>
-                    <a class="col-md-2 col-md-offset-5" href="#"><span class="glyphicon glyphicon-forward text-right " style="color: darkgray;margin-bottom: 5px" aria-hidden="true"></span></a>
+                    <a class="col-md-2 col-md-offset-5" href="#" th:href="@{/tags}"><span class="glyphicon glyphicon-forward text-right " style="color: darkgray;margin-bottom: 5px" aria-hidden="true"></span></a>
                 </h3>
             </div>
             <!-- 标签具体内容 -->
             <div class="m-opacity-mini m-div-min-height  m-margin-none text-center" >
                 <!--                    <div class="col-md-5 m-margin-tiny "><h3 ><span class="label label-info">spring boot</span></h3></div>-->
-                <span class="btn btn-info m-margin-large-mini" th:each="tag : ${#session.getAttribute('data').tags}">[[${tag.tagName}]]&nbsp;&nbsp;<span class="badge">[[${tag.count}]]</span> </span>
+                <a class="btn btn-info m-margin-large-mini" th:each="tag : ${#session.getAttribute('data').tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]&nbsp;&nbsp;<span class="badge">[[${tag.count}]]</span> </a>
 
 
 
@@ -189,8 +191,8 @@
                 </div>
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #E6E3E3">
                     <h3>最新博客</h3>
-                    <div class="m-margin-tb-mini " >
-                        <h5 th:each="blog,blogStat : ${#session.getAttribute('data').user.blogs}" th:if="${blogStat.count}<=3"><a href="#" style="color: deepskyblue" th:text="${blog.title}">最新博客1</a></h5>
+                    <div class="m-margin-tb-mini content-a" >
+                        <h5 th:each="blog,blogStat : ${#session.getAttribute('data').user.blogs}" th:if="${blogStat.count}<=3"><a href="#" th:href="@{/blog/}+${blog.id}" style="color: deepskyblue!important;" th:text="${blog.title}">最新博客1</a></h5>
                     </div>
 
                 </div>
@@ -241,7 +243,7 @@
 
 <!-- script部分 -->
 <th:block th:fragment="script">
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
@@ -249,6 +251,24 @@
             crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="../static/js/jq22.js" th:src="@{/js/jq22.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#search-input').keypress(function(event){
+                if(event.key =='Enter'){
+                    var query = $('#search-input').val().trim();
+                    if(query==null||""==query){
+                        $('#search-input').parent('div').removeClass("has-error");
+                        $('#search-input').attr("placeholder","搜索条件不能为空").parent('div').addClass("has-error");
+                        return false;
+                    }else{
+                        $('#search-input').parent('div').removeClass("has-error");
+                        $('form:first').submit();
+                    }
+                }
+            })
+
+        })
+    </script>
 </th:block>
 </body>
 </html>

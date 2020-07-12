@@ -24,6 +24,8 @@ public interface TagDao {
 
     public List<Tag> selectByLimit(@Param("number") Integer number);
 
-    public List<Tag> selectShowTagAndBlog();
+    public List<Tag> selectShowTagAndBlog(@Param("tagId") Long tagId);
+
+    public int selectShowCount();
 
 }
