@@ -324,6 +324,13 @@ body {
     padding-bottom: 10px;
 }
 
+.m-padded {
+    padding-left:16px;
+    padding-right:16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 /*
 上下居中
  */

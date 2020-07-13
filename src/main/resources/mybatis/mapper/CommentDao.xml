@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wch.blog.dao.CommentDao">
+
+    <resultMap id="CommentMap" type="com.wch.blog.bean.Comment">
+        <id column="id" jdbcType="BIGINT" property="id"></id>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+        <result column="email"  jdbcType="VARCHAR" property="email"></result>
+        <result column="content"  jdbcType="VARCHAR" property="content"></result>
+        <result column="head_portrait"  jdbcType="VARCHAR" property="headPortrait"></result>
+        <result column="create_time"  jdbcType="VARCHAR" property="createTime"></result>
+        <association property="replyComments" column="id" select="com.wch.blog.dao.CommentDao.selectShowByCommentId" fetchType="lazy"></association>
+    </resultMap>
+
+
+    <select id="selectShowByBlogId" parameterType="java.lang.Long" resultMap="CommentMap">
+        select id,nickname,email,content,head_portrait,create_time,parent_id from comment where blog_id=#{blogId} and isnull(parent_id)=1 order by create_time;
+    </select>
+
+    <select id="selectShowByCommentId" parameterType="java.lang.Long" resultMap="CommentMap">
+        select id,nickname,email,content,head_portrait,create_time,parent_id from comment where parent_id=#{parentId} order by create_time;
+    </select>
+
+    <insert id="saveComment" parameterType="com.wch.blog.bean.Comment">
+        insert into comment(nickname,email,content,head_portrait,create_time,blog_id,user_id,parent_id)
+        values (#{comment.nickname},#{comment.email},#{comment.content},#{comment.headPortrait},#{comment.createTime},#{comment.blog.id},#{comment.user.id},#{comment.parentComment.id});
+
+    </insert>
+
+
+
+
+</mapper>

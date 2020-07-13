@@ -31,6 +31,7 @@
         <collection      property="tags"              column="id"     ofType="com.wch.blog.bean.Tag"           select="com.wch.blog.dao.BlogTagDao.selectByBlogId" fetchType="lazy"></collection>
     </resultMap>
     <resultMap id="BlogShowMap" type="com.wch.blog.bean.Blog">
+        <id              property="id"                 column="id"                jdbcType="BIGINT"></id>
         <result          property="title"             column="title"             jdbcType="VARCHAR"></result>
         <result          property="content"           column="content"           jdbcType="LONGVARCHAR"></result>
         <result          property="introduction"      column="introduction"     jdbcType="LONGVARCHAR"></result>

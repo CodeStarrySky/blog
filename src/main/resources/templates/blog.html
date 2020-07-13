@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="commons::head('博客详情')"></head>
 <body>
 <!--导航条-->
@@ -462,17 +462,19 @@ h5,h6{font-size:1em;}
 
 
             <!-- 评论区 -->
-            <div class="panel panel-default panel-body" >
-                <form class="form-inline" th:action="@{/comment}" method="post">
+            <div class="panel panel-default panel-body comment-div">
+                <form class="form-inline" th:action="@{/comment}" method="post" id="comment-form">
+                    <input type="hidden" name="blog.id" th:value="${blog.id}">
+                    <input type="hidden" name="parentComment.id" id="parentId">
                     <div class="m-margin-tb-mini">
-                        <textarea style="width: 100%;min-height:66px;border-color: deepskyblue;outline: none" placeholder="请输入评论信息..."></textarea>
+                        <textarea class="m-padded m-border-radius-mini" name="content" style="width: 100%;min-height:99px;border-width:2px;border-color: deepskyblue;outline: none;font-size: 16px" id="content" placeholder="请输入评论信息..."></textarea>
                     </div>
                    <div >
                         <div class="form-group m-padded-none has-feedback ">
-                            <input type="text" class="form-control " id="exampleInputName2" placeholder="Name" >
+                            <input type="text" class="form-control " id="nickname" name="nickname" placeholder="Name" >
                         </div>
                         <div class="form-group m-padded-lr-mini has-feeback">
-                            <input type="email" class="form-control " id="exampleInputEmail2" placeholder="Email">
+                            <input type="email" class="form-control " id="email" name="email" placeholder="Email">
                         </div>
                        <div class="form-group" style="margin-top: 16px;padding-right: 16px;position: relative">
                            <input type="hidden" name="headPortrait" id="head_portrait_id" th:value="${comment!=null}?${comment.headPortrait}:''">
@@ -489,106 +491,48 @@ h5,h6{font-size:1em;}
                            </div>
                            <!--            <input type="file" name="firstFigure" class="form-control" placeholder="地址"  aria-describedby="sizing-addon1" th:value="${blog}!=null?${blog.firstFigure}:''">-->
                        </div>
-                        <button type="submit" class="btn btn-info">发布</button>
+                        <button type="button" id="published-btn" class="btn btn-info" disabled>发布</button>
                    </div>
                 </form>
 <!--                评论区-->
-                <div>
+                <div id="comments-section">
                     <h5  style="font-size: 19px;margin-top: 19px;color: deepskyblue">评论</h5>
                     <hr style="margin:5px 0 5px 0">
-                    <div class="media" style="border-bottom: 1px solid #E6E3E3">
+                    <div th:fragment="comments_div" id="comments_div">
+                        <div class="media" style="border-bottom: 1px solid #E6E3E3" th:each="comment:${comments}">
 
-                        <div class="media-left">
-                            <img src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" class="img-circle" style="width: 39px;height:39px" >
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">Media heading</h4>
-                            <span>哈哈哈哈哈哈哈哈哈</span>
-                            <div>
-                                <a class="btn btn-default btn-xs" href="#" role="button">回复</a>
+                            <div class="media-left" >
+                                <img src="../static/images/headProtrait.jpg" th:src="@{${comment.headPortrait}}" class="img-circle" style="width: 39px;height:39px;" >
                             </div>
-                            <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px">
-                                <div class="media-left"  >
-                                    <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" style="width: 35px;height: 35px;margin-top:5px">
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <span>哈哈哈哈哈哈哈哈哈</span>
-                                    <div>
-                                        <a class="btn btn-default btn-xs" href="#" role="button">回复</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px">
-                                <div class="media-left"  >
-                                    <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" style="width: 35px;height: 35px;margin-top:5px">
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <span>哈哈哈哈哈哈哈哈哈</span>
-                                    <div>
-                                        <a class="btn btn-default btn-xs" href="#" role="button">回复</a>
-                                    </div>
+                            <div class="media-body">
+                                <h4 class="media-heading" th:text="${comment.nickname}">Media heading</h4>
+                                <span th:text="${comment.content}">哈哈哈哈哈哈哈哈哈</span>
+                                <div>
+                                    <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${comment.id}"   role="button">回复</a>
                                 </div>
 
-
+                                <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px" th:if="${comment.replyComments}!=null" th:each="replyComment:${comment.replyComments}">
+                                        <div class="media-left"  >
+                                            <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{${replyComment.headPortrait}}" style="width: 35px;height: 35px;margin-top:5px">
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading" >[[${replyComment.nickname}]]<span class="m-font-color-blue"> @hahaha</span></h4>
+                                            <span th:text="${replyComment.content}">哈哈哈哈哈哈哈哈哈</span>
+                                            <div>
+                                                <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${replyComment.id}"  role="button">回复</a>
+                                            </div>
+                                        </div>
+                                </div>
 
                             </div>
                         </div>
+
+
                     </div>
 
-                    <div class="media" style="border-bottom: 1px solid #E6E3E3">
-
-                        <div class="media-left">
-                            <img src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" class="img-circle" style="width: 39px;height:39px" >
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">Media heading</h4>
-                            <span>哈哈哈哈哈哈哈哈哈</span>
-                            <div>
-                                <a class="btn btn-default btn-xs" href="#" role="button">回复</a>
-                            </div>
-                            <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px">
-                                <div class="media-left"  >
-                                    <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" style="width: 35px;height: 35px;margin-top:5px">
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <span>哈哈哈哈哈哈哈哈哈</span>
-                                    <div>
-                                        <a class="btn btn-default btn-xs" href="#" role="button">回复</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px">
-                                <div class="media-left"  >
-                                    <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}" style="width: 35px;height: 35px;margin-top:5px">
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Media heading</h4>
-                                    <span>哈哈哈哈哈哈哈哈哈</span>
-                                    <div>
-                                        <a class="btn btn-default btn-xs" href="#" role="button">回复</a>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-
-
-
-
-
             </div>
-
-
-
-
         <!-- 右侧 -->
         <div th:replace="commons::right"></div>
     </div>
@@ -598,7 +542,13 @@ h5,h6{font-size:1em;}
 <footer th:replace="commons::footer"></footer>
 
 <!--/*/<th:block th:replace="commons::script"></th:block>/*/-->
-<script>
+<script th:inline="javascript">
+        $(function () {
+            var path = /*[[@{/comments/{id}(id=${blog.id})}]]*/"";
+            console.log(path)
+            $("#comments_div").load(path);
+
+        });
         $(function () {
             $('pre code').addClass("language-css");
             $('[data-toggle="popover"]').popover({
@@ -610,6 +560,16 @@ h5,h6{font-size:1em;}
                             "<img class='img-responsive\' src='../static/images/headProtrait.jpg'>" +
                         "</div>"
             });
+
+            //点击回复效果
+            $('#comments-section').delegate('.reply-btn','click',function () {
+                var nickname = $(this).parent('div').parent('div').children('h4').text();
+                var parentId = $(this).attr("commentId");
+                $("#content").val('@'+nickname+' ');
+                $("#parentId").val(parentId);
+                $('html,body').animate({scrollTop:$('.comment-div').offset().top-199},520);
+                return false;
+            })
             //上传图片
 
             $("#head_portrait_div").mouseover(function () {
@@ -622,6 +582,103 @@ h5,h6{font-size:1em;}
             $("#head_upload_btn,#head_edit_btn").click(function () {
                 $('#head_portrait_upload').trigger("click");
             })
+
+            $("#published-btn").click(function(){
+                if(!form_checkout()){
+                    return;
+                }
+                var form = new FormData();
+                if($("#head_portrait_upload")[0].files[0]==null||$("#head_portrait_upload")[0].files[0]==''){
+                    $.ajax({
+                        type: "POST",
+                        dataType:"JSON",
+                        url: /*[[@{/comment}]]*/'',
+                        data: $('#comment-form').serialize(),
+                        success: function (result) {
+                            $('#content').val('');
+                            $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");
+                        }
+                    })
+                    return;
+                }
+                form.append("file",$("#head_portrait_upload")[0].files[0]);
+                var $this = $("#head_portrait_div");
+                $.ajax({
+                    url:/*[[@{/addAndEditHeadPortrait}]]*/'',
+                    data:form,
+                    cache: false,
+                    async: false,
+                    type:"POST",
+                    dataType:'json',
+                    processData:false,
+                    contentType:false,
+                    success: function (result) {
+                        if(result.code==200){
+                            $this.parent('div').next('span').remove();
+                            $this.parent('div').after("<span style='color: #dd5555'>"+result.extend.vi+"</span>");
+                        }else {
+                            $this.parent('div').next('span').remove();
+                            $("#head_portrait_id").val(result.extend.path);
+                            $.ajax({
+                                type: "POST",
+                                dataType:"JSON",
+                                url: /*[[@{/comment}]]*/'',
+                                data: $('#comment-form').serialize(),
+                                success: function (result) {
+                                    $('#content').val('');
+                                    $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");
+                                }
+                            })
+                        }
+                    }
+                })
+            });
+
+            $('#email').change(function () {
+                var email = $(this).val();
+                var myreg = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+                $('#email').parent('div').removeClass("has-error");
+                $('#email').attr('placeholder','');
+                if(!myreg.test(email)){
+                    $('#email').parent('div').addClass("has-error");
+                    $('#email').attr('placeholder','请输入正确的邮箱地址！');
+                }else{
+                    $('#published-btn').removeAttr('disabled');
+                }
+            })
+
+
+            //提交前先校验表单数据
+            function form_checkout(){
+                var content = $('#content').val().trim();
+                var nickname = $('#nickname').val().trim();
+                var email = $('#email').val();
+                var flag = true;
+                $('#content').parent('div').removeClass("has-error");
+                $('#content').attr('placeholder','');
+                $('#nickname').parent('div').removeClass("has-error");
+                $('#nickname').attr('placeholder','');
+                $('#email').parent('div').removeClass("has-error");
+                $('#email').attr('placeholder','');
+                if(content==null||content==''){
+                    $('#content').parent('div').addClass("has-error");
+                    $('#content').attr('placeholder','      不能发布空内容哦！');
+                    flag=false;
+                }
+                if(nickname==null||nickname==''){
+                    $('#nickname').parent('div').addClass("has-error");
+                    $('#nickname').attr('placeholder','   需要一个昵称哦！');
+                    $('#nickname').val('');
+                    flag=false;
+                }
+                if(email==null||email==''){
+                    $('#email').parent('div').addClass("has-error");
+                    $('#email').attr('placeholder','   需要一个邮箱哦！')
+                    $('#email').val('');
+                    flag=false;
+                }
+                return flag;
+            }
 
             $('#head_portrait_upload').change(function () {
                 var file = $(this).val();

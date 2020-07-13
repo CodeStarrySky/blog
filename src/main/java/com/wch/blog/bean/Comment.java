@@ -38,4 +38,12 @@ public class Comment {
     private List<Comment> replyComments;
     //父评论
     private Comment parentComment;
+
+
+    public String getHeadPortrait(){
+        if(headPortrait==null||"".equals(headPortrait)){
+            return headPortrait;
+        }
+        return headPortrait.replace("G:/blog/images/comments/", "/blog/images/comments/");
+    }
 }

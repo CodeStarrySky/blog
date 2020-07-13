@@ -19,6 +19,7 @@ logging:
 
 user-resources-path: G:/blog/images/user/     #用户头像、二维码等上传到服务器的路径
 blog-resources-path: G:/blog/images/blog/     #博客首图等上传到服务器的路径
+comment-resources-path: G:/blog/images/comments/
 page-size: 10                                  #博客管理页面分页时每页显示数量
 
 blog-username: wchaohui                            #博客访客浏览页面查询博客的用户名

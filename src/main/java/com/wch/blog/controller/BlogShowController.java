@@ -152,6 +152,7 @@ public class BlogShowController {
     public String blog(Model model,@PathVariable("id") Long id){
         Blog blog = blogService.getShowBlog(id);
         model.addAttribute("blog",blog);
+        System.out.println(blog);
         System.out.println(id);
         return "blog";
     }
@@ -167,6 +168,8 @@ public class BlogShowController {
         model.addAttribute("blogs",blogs);
         return "search";
     }
+
+
 
 
 
