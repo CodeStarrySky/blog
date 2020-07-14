@@ -462,7 +462,7 @@ h5,h6{font-size:1em;}
 
 
             <!-- 评论区 -->
-            <div class="panel panel-default panel-body comment-div">
+            <div class="panel panel-default panel-body comment-div" >
                 <form class="form-inline" th:action="@{/comment}" method="post" id="comment-form">
                     <input type="hidden" name="blog.id" th:value="${blog.id}">
                     <input type="hidden" name="parentComment.id" id="parentId">
@@ -495,17 +495,17 @@ h5,h6{font-size:1em;}
                    </div>
                 </form>
 <!--                评论区-->
-                <div id="comments-section">
-                    <h5  style="font-size: 19px;margin-top: 19px;color: deepskyblue">评论</h5>
+                <div id="comments-section" >
+                    <h5  style="font-size: 22px;margin-top: 19px;color: deepskyblue;font-family: 华文行楷">评论</h5>
                     <hr style="margin:5px 0 5px 0">
-                    <div th:fragment="comments_div" id="comments_div">
-                        <div class="media" style="border-bottom: 1px solid #E6E3E3" th:each="comment:${comments}">
+                    <div th:fragment="comments_div" id="comments_div" >
+                        <div class="media" style="border-bottom: 1px solid #E6E3E3" th:if="${not #lists.isEmpty(comments)}" th:each="comment:${comments}">
 
                             <div class="media-left" >
                                 <img src="../static/images/headProtrait.jpg" th:src="@{${comment.headPortrait}}" class="img-circle" style="width: 39px;height:39px;" >
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading" th:text="${comment.nickname}">Media heading</h4>
+                                <h4 class="media-heading"><span >[[${comment.nickname}]]</span></h4>
                                 <span th:text="${comment.content}">哈哈哈哈哈哈哈哈哈</span>
                                 <div>
                                     <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${comment.id}"   role="button">回复</a>
@@ -516,8 +516,8 @@ h5,h6{font-size:1em;}
                                             <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{${replyComment.headPortrait}}" style="width: 35px;height: 35px;margin-top:5px">
                                         </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading" >[[${replyComment.nickname}]]<span class="m-font-color-blue"> @hahaha</span></h4>
-                                            <span th:text="${replyComment.content}">哈哈哈哈哈哈哈哈哈</span>
+                                            <h4 class="media-heading" ><span>[[${replyComment.nickname}]]</span><span style="font-size: 16px;color: #FF9900;font-family: 华文行楷;"> @小红</span></h4>
+                                            <span th:text="${replyComment.content}" >哈哈哈哈哈哈哈哈哈</span>
                                             <div>
                                                 <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${replyComment.id}"  role="button">回复</a>
                                             </div>
@@ -527,8 +527,13 @@ h5,h6{font-size:1em;}
                             </div>
                         </div>
 
-
+                        <div th:if="${#lists.isEmpty(comments)}" class="text-center">
+                            <br><br>
+                            <span style="color: #00bbff;font-size: 12px">暂无评论哦......</span>
+                            <br><br>
+                        </div>
                     </div>
+
 
                 </div>
             </div>
@@ -545,11 +550,13 @@ h5,h6{font-size:1em;}
 <script th:inline="javascript">
         $(function () {
             var path = /*[[@{/comments/{id}(id=${blog.id})}]]*/"";
+            var reply_position;
             console.log(path)
-            $("#comments_div").load(path);
+            $("#comments_div").load(path,function () {
+                reply_position = $('#comments_div div:last').offset().top;
+                console.log(reply_position)
+            });
 
-        });
-        $(function () {
             $('pre code').addClass("language-css");
             $('[data-toggle="popover"]').popover({
                 title: "如果觉得本文对您有帮助，您可以鼓励一下博主！",
@@ -565,7 +572,9 @@ h5,h6{font-size:1em;}
             $('#comments-section').delegate('.reply-btn','click',function () {
                 var nickname = $(this).parent('div').parent('div').children('h4').text();
                 var parentId = $(this).attr("commentId");
-                $("#content").val('@'+nickname+' ');
+                reply_position=$(this).offset().top-299;
+                console.log("222222222222222222",reply_position)
+                $("#content").attr("placeholder",'@'+nickname+' ');
                 $("#parentId").val(parentId);
                 $('html,body').animate({scrollTop:$('.comment-div').offset().top-199},520);
                 return false;
@@ -596,7 +605,10 @@ h5,h6{font-size:1em;}
                         data: $('#comment-form').serialize(),
                         success: function (result) {
                             $('#content').val('');
-                            $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");
+                            $('html,body').animate({scrollTop:reply_position},520);
+                            $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"",function () {
+                                reply_position = $('#comments_div div:last').offset().top;
+                            });
                         }
                     })
                     return;
@@ -626,7 +638,10 @@ h5,h6{font-size:1em;}
                                 data: $('#comment-form').serialize(),
                                 success: function (result) {
                                     $('#content').val('');
-                                    $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"");
+                                    $('html,body').animate({scrollTop:reply_position},520);
+                                    $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"",function () {
+                                        reply_position = $('#comments_div div:last').offset().top;
+                                    });
                                 }
                             })
                         }

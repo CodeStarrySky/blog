@@ -9,12 +9,21 @@
         <result column="content"  jdbcType="VARCHAR" property="content"></result>
         <result column="head_portrait"  jdbcType="VARCHAR" property="headPortrait"></result>
         <result column="create_time"  jdbcType="VARCHAR" property="createTime"></result>
-        <association property="replyComments" column="id" select="com.wch.blog.dao.CommentDao.selectShowByCommentId" fetchType="lazy"></association>
+<!--        <association property="parentComment" column="parent_id" select="com.wch.blog.dao.CommentDao.selectShowByCommentParentId" fetchType="lazy"></association>-->
+        <collection property="replyComments" column="id" ofType="com.wch.blog.bean.Comment" select="com.wch.blog.dao.CommentDao.selectShowByCommentId" fetchType="lazy"></collection>
+    </resultMap>
+    <resultMap id="CommentNotParentMap" type="com.wch.blog.bean.Comment">
+        <id column="id" jdbcType="BIGINT" property="id"></id>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
+        <result column="email"  jdbcType="VARCHAR" property="email"></result>
+        <result column="content"  jdbcType="VARCHAR" property="content"></result>
+        <result column="head_portrait"  jdbcType="VARCHAR" property="headPortrait"></result>
+        <result column="create_time"  jdbcType="VARCHAR" property="createTime"></result>
     </resultMap>
 
 
     <select id="selectShowByBlogId" parameterType="java.lang.Long" resultMap="CommentMap">
-        select id,nickname,email,content,head_portrait,create_time,parent_id from comment where blog_id=#{blogId} and isnull(parent_id)=1 order by create_time;
+        select id,nickname,email,content,head_portrait,create_time,parent_id from comment where blog_id=#{blogId} and ISNULL(parent_id)=1  order by create_time;
     </select>
 
     <select id="selectShowByCommentId" parameterType="java.lang.Long" resultMap="CommentMap">

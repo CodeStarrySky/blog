@@ -30,13 +30,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="" href="#">
+                <span >
                     <div class="form-inline navbar-btn ">
                         <img class="m-div-imag-size m-padded-none" src="../static/images/headProtrait.jpg" th:src="@{/images/headProtrait.jpg}"  style="border-radius: 55%;">
-                        <b class="m-opacity-big m-font-color-blue">Wchaohui</b>
+                        <b class="m-opacity-big m-font-color-blue" style="font-family: 华文行楷;font-size: 19px;">Wchaohui</b>
                     </div>
 
-                </a>
+                </span>
             </div>
 
             <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1" style="padding-top: 6px">
@@ -100,7 +100,7 @@
             </div>
             <!-- 个人信息 -->
             <div class="row text-center m-font-lined ">
-                <h3 class="m-opacity" style="margin-top: 0px;"><b>[[${#session.getAttribute('data').user.nickname}]]</b></h3>
+                <h3 class="m-opacity" style="margin-top: 0px;font-family: 华文楷体;"><b>[[${#session.getAttribute('data').user.nickname}]]</b></h3>
                 <h5 th:text="${#session.getAttribute('data').user.profession}">Rookie & Developer</h5>
                 <h5 class="m-opacity-big"  style="margin-bottom: 0px" ><span class="glyphicon glyphicon-map-marker"aria-hidden="true"></span> [[${#session.getAttribute('data').user.address}]]</h5>
                 <button type="button" class="btn btn-info m-border-radius m-padded-lr-mini m-margin-tb-mini" style="background-color: dodgerblue;outline: none">点击关注我吧</button>

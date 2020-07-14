@@ -37,13 +37,6 @@ public class CommentShowController {
         }else{
             comment.setHeadPortrait(path.replace("/blog/images/comment/",commentPaht));
         }
-        System.out.println(comment);
-        String content = comment.getContent();
-        if(!content.startsWith("@")){
-            comment.setParentComment(null);
-        }
-        System.out.println(comment);
-        System.out.println(comment);
         int i = commentService.saveComment(comment);
         if(i>0){
             return Msg.success();
