@@ -469,7 +469,7 @@ h5,h6{font-size:1em;}
                     <div class="m-margin-tb-mini">
                         <textarea class="m-padded m-border-radius-mini" name="content" style="width: 100%;min-height:99px;border-width:2px;border-color: deepskyblue;outline: none;font-size: 16px" id="content" placeholder="请输入评论信息..."></textarea>
                     </div>
-                   <div >
+                   <div id="visitor_info_div">
                         <div class="form-group m-padded-none has-feedback ">
                             <input type="text" class="form-control " id="nickname" name="nickname" placeholder="Name" >
                         </div>
@@ -505,18 +505,18 @@ h5,h6{font-size:1em;}
                                 <img src="../static/images/headProtrait.jpg" th:src="@{${comment.headPortrait}}" class="img-circle" style="width: 39px;height:39px;" >
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading"><span >[[${comment.nickname}]]</span></h4>
+                                <h4 class="media-heading"><span name="nickname">[[${comment.nickname}]]</span></h4>
                                 <span th:text="${comment.content}">哈哈哈哈哈哈哈哈哈</span>
                                 <div>
                                     <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${comment.id}"   role="button">回复</a>
                                 </div>
 
-                                <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px" th:if="${comment.replyComments}!=null" th:each="replyComment:${comment.replyComments}">
+                                <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px"  th:each="replyComment:${comment.replyComments}">
                                         <div class="media-left"  >
                                             <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{${replyComment.headPortrait}}" style="width: 35px;height: 35px;margin-top:5px">
                                         </div>
                                         <div class="media-body">
-                                            <h4 class="media-heading" ><span>[[${replyComment.nickname}]]</span><span style="font-size: 16px;color: #FF9900;font-family: 华文行楷;"> @小红</span></h4>
+                                            <h4 class="media-heading" ><span name="nickname">[[${replyComment.nickname}]]</span><span style="font-size: 16px;color: #FF9900;font-family: 华文行楷;"> @[[${replyComment.parentComment.nickname}]]</span></h4>
                                             <span th:text="${replyComment.content}" >哈哈哈哈哈哈哈哈哈</span>
                                             <div>
                                                 <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${replyComment.id}"  role="button">回复</a>
@@ -570,15 +570,27 @@ h5,h6{font-size:1em;}
 
             //点击回复效果
             $('#comments-section').delegate('.reply-btn','click',function () {
-                var nickname = $(this).parent('div').parent('div').children('h4').text();
+                var nickname = $(this).parent('div').parent('div').children('h4').find('span[name=nickname]').text();
                 var parentId = $(this).attr("commentId");
                 reply_position=$(this).offset().top-299;
                 console.log("222222222222222222",reply_position)
                 $("#content").attr("placeholder",'@'+nickname+' ');
                 $("#parentId").val(parentId);
                 $('html,body').animate({scrollTop:$('.comment-div').offset().top-199},520);
+                $('#published-btn').next('.btn-danger').remove();
+                $('#published-btn').after(' <button type="button" id="cancel-reply-btn" class="btn btn-danger">取消回复</button>')
                 return false;
             })
+
+            $('#visitor_info_div').delegate('.btn-danger','click',function () {
+                console.log("1111111111111111111111111111");
+                $("#parentId").val('');
+                $('#content').attr('placeholder',' 请输入评论信息......');
+                $(this).remove();
+                return false;
+            })
+
+
             //上传图片
 
             $("#head_portrait_div").mouseover(function () {
@@ -605,6 +617,8 @@ h5,h6{font-size:1em;}
                         data: $('#comment-form').serialize(),
                         success: function (result) {
                             $('#content').val('');
+                            $('#parentId').val('');
+                            $('#published-btn').next('.btn-danger').remove();
                             $('html,body').animate({scrollTop:reply_position},520);
                             $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"",function () {
                                 reply_position = $('#comments_div div:last').offset().top;
@@ -638,6 +652,8 @@ h5,h6{font-size:1em;}
                                 data: $('#comment-form').serialize(),
                                 success: function (result) {
                                     $('#content').val('');
+                                    $('#parentId').val('');
+                                    $('#published-btn').next('.btn-danger').remove();
                                     $('html,body').animate({scrollTop:reply_position},520);
                                     $("#comments_div").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"",function () {
                                         reply_position = $('#comments_div div:last').offset().top;
@@ -653,7 +669,7 @@ h5,h6{font-size:1em;}
                 var email = $(this).val();
                 var myreg = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
                 $('#email').parent('div').removeClass("has-error");
-                $('#email').attr('placeholder','');
+                $('#email').attr('placeholder',' Email');
                 if(!myreg.test(email)){
                     $('#email').parent('div').addClass("has-error");
                     $('#email').attr('placeholder','请输入正确的邮箱地址！');
@@ -670,11 +686,11 @@ h5,h6{font-size:1em;}
                 var email = $('#email').val();
                 var flag = true;
                 $('#content').parent('div').removeClass("has-error");
-                $('#content').attr('placeholder','');
+                $('#content').attr('placeholder',' 请输入评论信息......');
                 $('#nickname').parent('div').removeClass("has-error");
-                $('#nickname').attr('placeholder','');
+                $('#nickname').attr('placeholder',' Name');
                 $('#email').parent('div').removeClass("has-error");
-                $('#email').attr('placeholder','');
+                $('#email').attr('placeholder',' Email');
                 if(content==null||content==''){
                     $('#content').parent('div').addClass("has-error");
                     $('#content').attr('placeholder','      不能发布空内容哦！');

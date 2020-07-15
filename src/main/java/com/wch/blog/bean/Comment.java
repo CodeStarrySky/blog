@@ -44,6 +44,7 @@ public class Comment {
         if(headPortrait==null||"".equals(headPortrait)){
             return headPortrait;
         }
-        return headPortrait.replace("G:/blog/images/comments/", "/blog/images/comments/");
+        String replace = headPortrait.replace("G:/blog/images/comments/", "/blog/images/comments/");
+        return replace;
     }
 }

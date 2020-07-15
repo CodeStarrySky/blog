@@ -2,7 +2,7 @@ spring:
   thymeleaf:
     cache: false
   profiles:
-    active: dev
+    active: pro
   mvc:
     hiddenmethod:
       filter:

@@ -1,13 +1,15 @@
 spring:
   datasource:
-    url: jdbc:mysql://8.129.222.219:3306/blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://8.129.222.219:3306/blog?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
   thymeleaf:
     cache: false
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
 logging:
   level:
     root: warn
@@ -16,4 +18,17 @@ logging:
     name: log/blog-pro.log
 
 server:
-  port: 8081
+  port: 9999
+
+
+user-resources-path: "/opt/blog/images/user/"     #用户头像、二维码等上传到服务器的路径
+blog-resources-path: "/opt/blog/images/blog/"     #博客首图等上传到服务器的路径
+comment-resources-path: "/opt/blog/images/comments/" #博客评论头像地址
+comment-default-avatar-path: "/opt/blog/images/comments/defaultAvatar.jpg" #默认头像地址
+page-size: 10                                  #博客管理页面分页时每页显示数量
+
+blog-username: wchaohui                            #博客访客浏览页面查询博客的用户名
+navigate-pages: 1                                   #导航条页码数量
+right-type-number: 6                                #右边分类栏显示分类的个数
+right-tag-number: 10                                 #右边标签栏显示标签的个数
+#最新博客查询数量已写死在BlogDao.xml中

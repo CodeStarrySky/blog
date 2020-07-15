@@ -11,9 +11,13 @@ import java.util.List;
 public interface CommentDao {
 
 
-    public List<Comment> selectShowByCommentId(@Param("parentId") Long parentId);
+    public List<Comment> selectShowByCommentId(@Param("id") Long parentId);
 
     public List<Comment> selectShowByBlogId(@Param("blogId") Long blogId);
 
     public int saveComment(@Param("comment") Comment comment);
+
+    public Comment selectShowByCommentParentId(@Param("parentId") Long parentId);
+
+    public Comment selectShowByEmail(@Param("email") String email);
 }

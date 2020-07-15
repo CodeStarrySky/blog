@@ -10,4 +10,6 @@ public interface CommentService {
 
     public int saveComment(Comment comment);
 
+    public Comment getShowByEmail(String email);
+
 }

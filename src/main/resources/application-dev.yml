@@ -17,9 +17,10 @@ logging:
   file:
     name: log/blog-dev.log
 
-user-resources-path: G:/blog/images/user/     #用户头像、二维码等上传到服务器的路径
-blog-resources-path: G:/blog/images/blog/     #博客首图等上传到服务器的路径
-comment-resources-path: G:/blog/images/comments/
+user-resources-path: "G:/blog/images/user/"     #用户头像、二维码等上传到服务器的路径
+blog-resources-path: "G:/blog/images/blog/"     #博客首图等上传到服务器的路径
+comment-resources-path: "G:/blog/images/comments/" #博客评论头像地址
+comment-default-avatar-path: "G:/blog/images/comments/defaultAvatar.jpg" #默认头像地址
 page-size: 10                                  #博客管理页面分页时每页显示数量
 
 blog-username: wchaohui                            #博客访客浏览页面查询博客的用户名

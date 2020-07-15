@@ -5,29 +5,36 @@
     <resultMap id="CommentMap" type="com.wch.blog.bean.Comment">
         <id column="id" jdbcType="BIGINT" property="id"></id>
         <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
-        <result column="email"  jdbcType="VARCHAR" property="email"></result>
         <result column="content"  jdbcType="VARCHAR" property="content"></result>
         <result column="head_portrait"  jdbcType="VARCHAR" property="headPortrait"></result>
         <result column="create_time"  jdbcType="VARCHAR" property="createTime"></result>
-<!--        <association property="parentComment" column="parent_id" select="com.wch.blog.dao.CommentDao.selectShowByCommentParentId" fetchType="lazy"></association>-->
+        <association property="parentComment" column="parent_id" select="com.wch.blog.dao.CommentDao.selectShowByCommentParentId" fetchType="lazy"></association>
         <collection property="replyComments" column="id" ofType="com.wch.blog.bean.Comment" select="com.wch.blog.dao.CommentDao.selectShowByCommentId" fetchType="lazy"></collection>
     </resultMap>
-    <resultMap id="CommentNotParentMap" type="com.wch.blog.bean.Comment">
+    <resultMap id="CommentParentMap" type="com.wch.blog.bean.Comment">
         <id column="id" jdbcType="BIGINT" property="id"></id>
         <result column="nickname" jdbcType="VARCHAR" property="nickname"></result>
-        <result column="email"  jdbcType="VARCHAR" property="email"></result>
-        <result column="content"  jdbcType="VARCHAR" property="content"></result>
+    </resultMap>
+
+    <resultMap id="CommentByEmailMap" type="com.wch.blog.bean.Comment">
+        <id column="id" jdbcType="BIGINT" property="id"></id>
         <result column="head_portrait"  jdbcType="VARCHAR" property="headPortrait"></result>
-        <result column="create_time"  jdbcType="VARCHAR" property="createTime"></result>
     </resultMap>
 
 
     <select id="selectShowByBlogId" parameterType="java.lang.Long" resultMap="CommentMap">
-        select id,nickname,email,content,head_portrait,create_time,parent_id from comment where blog_id=#{blogId} and ISNULL(parent_id)=1  order by create_time;
+        select id,nickname,content,head_portrait,create_time,parent_id from comment where blog_id=#{blogId} and ISNULL(parent_id)=1  order by create_time;
     </select>
 
     <select id="selectShowByCommentId" parameterType="java.lang.Long" resultMap="CommentMap">
-        select id,nickname,email,content,head_portrait,create_time,parent_id from comment where parent_id=#{parentId} order by create_time;
+        select id,nickname,content,head_portrait,create_time,parent_id from comment where parent_id=#{id} order by create_time;
+    </select>
+    <select id="selectShowByCommentParentId" parameterType="java.lang.Long" resultMap="CommentParentMap">
+        select id,nickname from comment where id=#{parentId} order by create_time;
+    </select>
+
+    <select id="selectShowByEmail" parameterType="java.lang.String" resultMap="CommentByEmailMap">
+        select id,head_portrait from comment where email = #{email} order by create_time desc limit 1;
     </select>
 
     <insert id="saveComment" parameterType="com.wch.blog.bean.Comment">

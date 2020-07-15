@@ -26,16 +26,24 @@ public class CommentShowController {
     @Value("${comment-resources-path}")
     String commentPaht;
 
-
+    @Value("${comment-default-avatar-path}")
+    private String defaultAvatar;
 
     @ResponseBody
     @PostMapping("/comment")
     public Msg saveComments(@Valid Comment comment){
-        String path = comment.getHeadPortrait();
-        if("".equals(path)||path==null){
-
+        System.out.println(commentPaht);
+        String headPortrait = comment.getHeadPortrait();
+        if(headPortrait==null||"".equals(headPortrait)){
+            String email = comment.getEmail();
+            Comment confirmComment = commentService.getShowByEmail(email);
+            if(confirmComment!=null){
+                comment.setHeadPortrait(confirmComment.getHeadPortrait().replace("/blog/images/comments/",commentPaht));
+            }else{
+                comment.setHeadPortrait(defaultAvatar);
+            }
         }else{
-            comment.setHeadPortrait(path.replace("/blog/images/comment/",commentPaht));
+            comment.setHeadPortrait(headPortrait.replace("/blog/images/comments/",commentPaht));
         }
         int i = commentService.saveComment(comment);
         if(i>0){
@@ -50,7 +58,6 @@ public class CommentShowController {
 
         List<Comment> comments = commentService.getShowByBlogId(blogId);
         model.addAttribute("comments",comments);
-        System.out.println(comments);
         return "blog :: comments_div";
     }
 
