@@ -166,6 +166,10 @@
         select count(id) from blog where flag=1 and published=1 ;
     </select>
 
+    <update id="updateShowView" parameterType="java.lang.Long">
+        update blog set views = views + 1 where id=#{id};
+    </update>
+
 
 
 

@@ -226,7 +226,7 @@
         });
 
 
-        $('input:not("nav input,#head_upload,#footer_img_upload"),textarea').change(function () {
+        $('input:not("#head_upload,#footer_img_upload"),textarea').change(function () {
             var $this = $(this);
             var fieldName = $(this).attr("name");
             var fieldValue = $(this).val();

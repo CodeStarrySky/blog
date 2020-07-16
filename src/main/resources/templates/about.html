@@ -62,6 +62,97 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 评论区 -->
+            <div class="panel panel-default panel-body comment-div" >
+                <form class="form-inline" th:action="@{/comment}" method="post" id="comment-form">
+                    <input type="hidden" name="user.id" th:value="${#session.getAttribute('data').user.id}">
+                    <input type="hidden" name="parentComment.id" id="parentId">
+                    <div class="m-margin-tb-mini">
+                        <textarea class="m-padded m-border-radius-mini" name="content" style="width: 100%;min-height:99px;border-width:2px;border-color: deepskyblue;outline: none;font-size: 16px" id="content" placeholder="请输入评论信息..."></textarea>
+                    </div>
+                    <div id="visitor_info_div">
+                        <div class="form-group m-padded-none has-feedback ">
+                            <input type="text" class="form-control " id="nickname" name="nickname" placeholder="Name" >
+                        </div>
+                        <div class="form-group m-padded-lr-mini has-feeback">
+                            <input type="email" class="form-control " id="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group" style="margin-top: 16px;padding-right: 16px;position: relative">
+                            <input type="hidden" name="headPortrait" id="head_portrait_id" th:value="${comment!=null}?${comment.headPortrait}:''">
+                            <input style="top:22px;left:22px;opacity: 0;width:0px;height:0px;position: absolute" id="head_portrait_upload" name="head_portrait"  type="file" accept="image/gif, image/jpeg, image/png" />
+                            <button type="button" th:style="'opacity:'+(${comment==null||comment.headPortrait==''||comment.headPortrait==null}?'1':'0')+';width: 62px;height:62px;left:5px;top:-17px;font-size: 22px'"  class="glyphicon glyphicon-cloud-upload" style="" id="head_upload_btn" ></button>
+                            <div id="head_portrait_div"  th:style="'display:'+(${comment==null||comment.headPortrait==''||comment.headPortrait==null}?'none':'inline')">
+                                <img  id="head_portrait_img" src="../static/images/headProtrait.jpg"  th:src="@{${comment==null||comment.headPortrait==''||comment.headPortrait==null?'':comment.headPortrait}}"
+                                      class="m-border-radius-mini img-responsive m-box-shadow" style="width: 66px;height:66px;top:-19px;left:3px;position: absolute">
+
+                                <div class="mask-comment text-center" >
+                                    <button type="button" class="btn btn-info m-border-radius m-padded-none" id="head_edit_btn" style="position:absolute;top:6px;left:16px;width: 39px;height:22px;font-size: 6px">修改</button>
+                                    <button type="button" class="btn btn-danger m-border-radius m-padded-none" id="head_delete_btn" style="position:absolute;top:36px;left:16px;width: 39px;height:22px;font-size: 6px">删除</button>
+                                </div>
+                            </div>
+                            <!--            <input type="file" name="firstFigure" class="form-control" placeholder="地址"  aria-describedby="sizing-addon1" th:value="${blog}!=null?${blog.firstFigure}:''">-->
+                        </div>
+                        <button type="button" id="published-btn" class="btn btn-info" disabled>发布</button>
+                    </div>
+                </form>
+                <!--                评论区-->
+                <div id="comments-section" >
+                    <h5  style="font-size: 22px;margin-top: 19px;color: deepskyblue;font-family: 华文行楷">评论</h5>
+                    <hr style="margin:5px 0 5px 0">
+                    <div th:fragment="comments_div" id="comments_div" >
+                        <div class="media" style="border-bottom: 1px solid #E6E3E3" th:if="${not #lists.isEmpty(comments)}" th:each="comment:${comments}">
+
+                            <div class="media-left" >
+                                <img src="../static/images/headProtrait.jpg" th:src="@{${comment.headPortrait}}" class="img-circle" style="width: 39px;height:39px;" >
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <span name="nickname">[[${comment.nickname}]]</span>
+                                    <a th:if="${comment.flag}" th:href="@{/about}"   class="btn btn-danger btn-mini m-reprint m-padded-none " style="font-size: 8px">博主</a>
+                                    <span class="m-opacity-tiny" style="font-size: 13px">[[${#dates.format(comment.createTime,"yyyy-MM-dd")}]]
+                                            <span style="font-size: 8px">[[${#dates.format(comment.createTime,"HH:mm:ss")}]]</span>
+                                        </span>
+                                </h4>
+                                <span th:text="${comment.content}">哈哈哈哈哈哈哈哈哈</span>
+                                <div>
+                                    <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${comment.id}"   role="button">回复</a>
+                                </div>
+
+                                <div class="media" style="border: 1px solid #E6E3E3;margin-top: 5px;margin-bottom: 5px"  th:each="replyComment:${comment.replyComments}">
+                                    <div class="media-left"  >
+                                        <img class="img-circle " src="../static/images/headProtrait.jpg" th:src="@{${replyComment.headPortrait}}" style="width: 35px;height: 35px;margin-top:5px">
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading" >
+                                            <span name="nickname">[[${replyComment.nickname}]]</span>
+                                            <a th:if="${replyComment.flag}" th:href="@{/about}"   class="btn btn-danger btn-mini m-reprint m-padded-none " style="font-size: 8px">博主</a>
+                                            <span style="font-size: 16px;color: #00c6ff"> @[[${replyComment.parentComment.nickname}]]</span>
+                                            <a th:if="${replyComment.parentComment.flag}" th:href="@{/about}"   class="btn btn-danger btn-mini m-reprint m-padded-none " style="font-size: 8px">博主</a>
+                                            <span class="m-opacity-tiny" style="font-size: 13px">[[${#dates.format(replyComment.createTime,"yyyy-MM-dd")}]]
+                                                        <span style="font-size: 8px">[[${#dates.format(replyComment.createTime,"HH:mm:ss")}]]</span>
+                                                    </span>
+                                        </h4>
+                                        <span th:text="${replyComment.content}" >哈哈哈哈哈哈哈哈哈</span>
+                                        <div>
+                                            <a class="btn btn-default btn-xs reply-btn" th:attr="commentId=${replyComment.id}"  role="button">回复</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div th:if="${#lists.isEmpty(comments)}" class="text-center">
+                            <br><br>
+                            <span style="color: #00bbff;font-size: 12px">暂无评论哦......</span>
+                            <br><br>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
         </div>
 
         <!-- 右侧 -->
@@ -95,6 +186,226 @@
 
 
 
+</script>
+
+<script th:inline="javascript">
+    $(function () {
+        var path = /*[[@{/comments/user/{id}(id=${#session.getAttribute('data').user.id})}]]*/"";
+        var reply_position;
+        console.log(path)
+        $("#comments_div").load(path,function () {
+            reply_position = $('#comments_div div:last').offset().top;
+            console.log(reply_position)
+        });
+
+        $('pre code').addClass("language-css");
+        $('[data-toggle="popover"]').popover({
+            title: "如果觉得本文对您有帮助，您可以鼓励一下博主！",
+            animation: true,
+            html: true,
+            container: "body",
+            content:"<div>"+
+                "<img class='img-responsive\' src='../static/images/headProtrait.jpg'>" +
+                "</div>"
+        });
+
+        //点击回复效果
+        $('#comments-section').delegate('.reply-btn','click',function () {
+            var nickname = $(this).parent('div').parent('div').children('h4').find('span[name=nickname]').text();
+            var parentId = $(this).attr("commentId");
+            reply_position=$(this).offset().top-299;
+            console.log("222222222222222222",reply_position)
+            $("#content").attr("placeholder",'@'+nickname+' ');
+            $("#parentId").val(parentId);
+            $('html,body').animate({scrollTop:$('.comment-div').offset().top-199},520);
+            $('#published-btn').next('.btn-danger').remove();
+            $('#published-btn').after(' <button type="button" id="cancel-reply-btn" class="btn btn-danger">取消回复</button>')
+            return false;
+        })
+
+        $('#visitor_info_div').delegate('.btn-danger','click',function () {
+            console.log("1111111111111111111111111111");
+            $("#parentId").val('');
+            $('#content').attr('placeholder',' 请输入评论信息......');
+            $(this).remove();
+            return false;
+        })
+
+
+        //上传图片
+
+        $("#head_portrait_div").mouseover(function () {
+            $(".mask-comment").show();
+        });
+        $("#head_portrait_div").mouseout(function () {
+            $(".mask-comment").hide();
+        })
+
+        $("#head_upload_btn,#head_edit_btn").click(function () {
+            $('#head_portrait_upload').trigger("click");
+        })
+
+        $("#published-btn").click(function(){
+            if(!form_checkout()){
+                return;
+            }
+            var form = new FormData();
+            if($("#head_portrait_upload")[0].files[0]==null||$("#head_portrait_upload")[0].files[0]==''){
+                $.ajax({
+                    type: "POST",
+                    dataType:"JSON",
+                    url: /*[[@{/comment}]]*/'',
+                    data: $('#comment-form').serialize(),
+                    success: function (result) {
+                        $('#content').val('');
+                        $('#parentId').val('');
+                        $('#published-btn').next('.btn-danger').remove();
+                        $('html,body').animate({scrollTop:reply_position},520);
+                        $("#comments_div").load(/*[[@{/comments/user/{id}(id=${#session.getAttribute('data').user.id})}]]*/"",function () {
+                            reply_position = $('#comments_div div:last').offset().top;
+                        });
+                    }
+                })
+                return;
+            }
+            form.append("file",$("#head_portrait_upload")[0].files[0]);
+            var $this = $("#head_portrait_div");
+            $.ajax({
+                url:/*[[@{/addAndEditHeadPortrait}]]*/'',
+                data:form,
+                cache: false,
+                async: false,
+                type:"POST",
+                dataType:'json',
+                processData:false,
+                contentType:false,
+                success: function (result) {
+                    if(result.code==200){
+                        $this.parent('div').next('span').remove();
+                        $this.parent('div').after("<span style='color: #dd5555'>"+result.extend.vi+"</span>");
+                    }else {
+                        $this.parent('div').next('span').remove();
+                        $("#head_portrait_id").val(result.extend.path);
+                        $.ajax({
+                            type: "POST",
+                            dataType:"JSON",
+                            url: /*[[@{/comment}]]*/'',
+                            data: $('#comment-form').serialize(),
+                            success: function (result) {
+                                $('#content').val('');
+                                $('#parentId').val('');
+                                $('#published-btn').next('.btn-danger').remove();
+                                $('html,body').animate({scrollTop:reply_position},520);
+                                $("#comments_div").load(/*[[@{/comments/user/{id}(id=${#session.getAttribute('data').user.id})}]]*/"",function () {
+                                    reply_position = $('#comments_div div:last').offset().top;
+                                });
+                            }
+                        })
+                    }
+                }
+            })
+        });
+
+        $('#email').change(function () {
+            var email = $(this).val();
+            var myreg = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
+            $('#email').parent('div').removeClass("has-error");
+            $('#email').attr('placeholder',' Email');
+            if(!myreg.test(email)){
+                $('#email').parent('div').addClass("has-error");
+                $('#email').attr('placeholder','请输入正确的邮箱地址！');
+            }else{
+                $('#published-btn').removeAttr('disabled');
+            }
+        })
+
+
+        //提交前先校验表单数据
+        function form_checkout(){
+            var content = $('#content').val().trim();
+            var nickname = $('#nickname').val().trim();
+            var email = $('#email').val();
+            var flag = true;
+            $('#content').parent('div').removeClass("has-error");
+            $('#content').attr('placeholder',' 请输入评论信息......');
+            $('#nickname').parent('div').removeClass("has-error");
+            $('#nickname').attr('placeholder',' Name');
+            $('#email').parent('div').removeClass("has-error");
+            $('#email').attr('placeholder',' Email');
+            if(content==null||content==''){
+                $('#content').parent('div').addClass("has-error");
+                $('#content').attr('placeholder','      不能发布空内容哦！');
+                flag=false;
+            }
+            if(nickname==null||nickname==''){
+                $('#nickname').parent('div').addClass("has-error");
+                $('#nickname').attr('placeholder','   需要一个昵称哦！');
+                $('#nickname').val('');
+                flag=false;
+            }
+            if(email==null||email==''){
+                $('#email').parent('div').addClass("has-error");
+                $('#email').attr('placeholder','   需要一个邮箱哦！')
+                $('#email').val('');
+                flag=false;
+            }
+            return flag;
+        }
+
+        $('#head_portrait_upload').change(function () {
+            var file = $(this).val();
+            if(file==''||file==null){
+                $("#head_upload_btn").css('opacity','1');
+                $("#head_portrait_upload").parent('div').next('span').remove();
+                $("#head_upload_btn").removeClass("disabled");
+                $("#head_portrait_div").css('display','none');
+            }else{
+                if(!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file)) {
+                    $('#head_portrait_upload').val('');
+                    $("#head_portrait_id").val('');
+                    $("#head_portrait_upload").parent('div').next('span').remove();
+                    $("#head_upload_btn").css('opacity','1');
+                    $("#head_upload_btn").removeClass("disabled");
+                    $("#head_portrait_div").css('display','none');
+                    $("#head_portrait_upload").parent('div').after("<span style='color: #dd5555'>请选择图片类文件</span>");
+                    return false;
+                }
+                $("#head_portrait_upload").parent('div').next('span').remove();
+                preImg(this.id,'head_portrait_img');
+                $("#head_upload_btn").css('opacity','0');
+                $("#head_upload_btn").removeClass("disabled");
+                $("#head_portrait_div").css('display','inline');
+                $("#head_upload_btn").addClass("disabled");
+            }
+        })
+
+        $('#head_delete_btn').click(function () {
+            $('#head_portrait_upload').val('');
+            $("#head_portrait_id").val('');
+            $("#head_portrait_upload").parent('div').next('span').remove();
+            $("#head_upload_btn").css('opacity','1');
+            $("#head_upload_btn").removeClass("disabled");
+            $("#head_portrait_div").css('display','none');
+        })
+
+        //图片即时预览
+        function getFileUrl(sourceId) {
+            var url;
+            if (navigator.userAgent.indexOf("MSIE")>=1) { // IE
+                url = document.getElementById(sourceId).value;
+            } else if(navigator.userAgent.indexOf("Firefox")>0) { // Firefox
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+            } else if(navigator.userAgent.indexOf("Chrome")>0) { // Chrome
+                url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+            }
+            return url;
+        }
+        function preImg(sourceId, targetId) {
+            var url = getFileUrl(sourceId);
+            var imgPre = document.getElementById(targetId);
+            imgPre.src = url;
+        }
+    })
 </script>
 </body>
 </html>

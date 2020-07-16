@@ -30,6 +30,10 @@ public class Comment {
     private String headPortrait;
     //发表时间
     private Date createTime;
+
+    //bing 标记是否为博主评论
+    private boolean flag=false;
+
     //所属博客
     private Blog blog;
     //评论的用户
@@ -44,7 +48,10 @@ public class Comment {
         if(headPortrait==null||"".equals(headPortrait)){
             return headPortrait;
         }
-        String replace = headPortrait.replace("G:/blog/images/comments/", "/blog/images/comments/");
-        return replace;
+        if(headPortrait.startsWith("G:")){
+            return headPortrait.replace("/opt/blog/images/comments/", "/blog/images/comments/");
+        }else{
+            return headPortrait;
+        }
     }
 }

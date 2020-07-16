@@ -29,3 +29,5 @@ right-type-number: 6                                #右边分类栏显示分类
 right-tag-number: 10                                 #右边标签栏显示标签的个数
 #最新博客查询数量已写死在BlogDao.xml中
 
+server:
+  port: 9999

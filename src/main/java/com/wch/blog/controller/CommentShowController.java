@@ -4,8 +4,11 @@ import com.wch.blog.bean.Comment;
 import com.wch.blog.bean.Msg;
 import com.wch.blog.bean.User;
 import com.wch.blog.service.CommentService;
+import com.wch.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +17,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.util.List;
 
@@ -22,6 +27,8 @@ public class CommentShowController {
 
     @Resource
     CommentService commentService;
+    @Resource
+    UserService userService;
 
     @Value("${comment-resources-path}")
     String commentPaht;
@@ -29,10 +36,22 @@ public class CommentShowController {
     @Value("${comment-default-avatar-path}")
     private String defaultAvatar;
 
+    @Transactional
     @ResponseBody
     @PostMapping("/comment")
-    public Msg saveComments(@Valid Comment comment){
-        System.out.println(commentPaht);
+    public Msg saveComments(@Valid Comment comment,HttpSession session){
+        Object loginUser = session.getAttribute("loginUser");
+        if(loginUser!=null){
+            String nickname = comment.getNickname();
+            String email = comment.getEmail();
+            String headPortrait = userService.getHeadPortrait(nickname, email);
+            if(headPortrait==null||"".equals(headPortrait)){
+                comment.setFlag(false);
+            }else {
+                comment.setHeadPortrait(headPortrait.replace("user","comments"));
+                comment.setFlag(true);
+            }
+        }
         String headPortrait = comment.getHeadPortrait();
         if(headPortrait==null||"".equals(headPortrait)){
             String email = comment.getEmail();
@@ -61,6 +80,12 @@ public class CommentShowController {
         return "blog :: comments_div";
     }
 
+    @GetMapping("/comments/user/{userId}")
+    public String commentUserIds(@PathVariable("userId") Long userId, Model model){
+        List<Comment> comments = commentService.getShowByUserId(userId);
+        model.addAttribute("comments",comments);
+        return "blog :: comments_div";
+    }
 
 
 

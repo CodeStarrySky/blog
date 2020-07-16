@@ -23,7 +23,7 @@
             <!--        </div>-->
             <!--        中间内容-->
             <div class=" history " style="opacity: 0;margin-top: 52px;padding-top: 0px">
-                    <div class="history-date"  >
+                    <div class="history-date" th:if="${not #maps.isEmpty(blogMap)}" >
                         <ul th:each="blogMap : ${blogMap}">
                             <h2 class="first img-responsive archive-h2"  style="margin-bottom: 29px"> <a href="#nogo" th:text="${blogMap.key}">2012年</a> </h2>
                             <li class="green " style="padding-bottom: 19px" th:each="blog : ${blogMap.value}">

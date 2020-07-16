@@ -12,4 +12,6 @@ public interface CommentService {
 
     public Comment getShowByEmail(String email);
 
+    public List<Comment> getShowByUserId(Long userId);
+
 }

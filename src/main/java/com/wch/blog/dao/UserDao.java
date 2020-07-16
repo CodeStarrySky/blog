@@ -31,5 +31,7 @@ public interface UserDao{
 
     public int updatePwd(@Param("newPwd") String pwd,@Param("id") Long id);
 
+    public String selectByNickNameAndEmail(@Param("nickname") String nickname,@Param("email") String email);
+
 
 }

@@ -75,7 +75,12 @@ public class Blog {
         if(firstFigure==null||"".equals(firstFigure)){
             return firstFigure;
         }
-        return firstFigure.replace("G:/blog/images/blog/", "/blog/images/blog/");
+        if(firstFigure.startsWith("G:")){
+            return firstFigure.replace("/opt/blog/images/blog/", "/blog/images/blog/");
+        }else{
+            return firstFigure;
+        }
+
     }
 
     //所有博客最新的时间

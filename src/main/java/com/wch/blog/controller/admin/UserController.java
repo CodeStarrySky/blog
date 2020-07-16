@@ -8,6 +8,7 @@ import com.wch.blog.exception.ValidationException;
 import com.wch.blog.service.UserService;
 import com.wch.blog.utils.MD5AndSHAUtils;
 import org.apache.ibatis.annotations.Param;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import java.io.File;
+import java.io.*;
 import java.util.List;
 
 @Controller
@@ -34,7 +36,10 @@ public class UserController {
     UserService userService;
 
     @Value("${user-resources-path}")
-    String resourcePath;
+    private String resourcePath;
+
+    @Value("${comment-resources-path}")
+    private String commentPath;
 
     @GetMapping("/pim")
     public String goPimPage(Model model, HttpSession session){
@@ -116,14 +121,20 @@ public class UserController {
         try{
             File fileDir = new File(resourcePath);
             String path = fileDir.getAbsolutePath();
-            System.out.println(path);
+            File commentDir = new File(commentPath);
+            String commentPath = commentDir.getAbsolutePath();
             if(!fileDir.exists()){
                 fileDir.mkdirs();
             }
+            if(!commentDir.exists()){
+                commentDir.mkdirs();
+            }
             try{
-                file.transferTo(new File(path,fileName));
-                System.out.println(path);
-                int i= userService.updateUserField(fieldName,path+File.separator+fileName,user.getId());
+                File userFile = new File(path, fileName);
+                file.transferTo(userFile);
+                copyFile(userFile,new File(commentPath,fileName));
+                System.out.println("path:::::::::::::::::::::::::"+path);
+                int i= userService.updateUserField(fieldName,path.replace('\\','/')+"/"+fileName,user.getId());
                 if(i!=1){
                     return Msg.fail().add("vi","数据库更新出错！");
                 }
@@ -136,6 +147,17 @@ public class UserController {
             e.printStackTrace();
             return Msg.fail().add("vi","文件路径未找到！");
         }
+    }
+    private  void copyFile(File file,File newFile) throws IOException {
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(newFile));
+        byte[] by = new byte[1024];
+        int len = 0;
+        while ((len = bufferedInputStream.read(by)) != -1) {
+            bufferedOutputStream.write(by, 0, len);
+        }
+        bufferedInputStream.close();
+        bufferedOutputStream.close();
     }
 
 }

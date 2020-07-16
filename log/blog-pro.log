@@ -1,23 +1,46 @@
-2020-07-15 21:50:35.925  INFO 23568 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 23568 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
-2020-07-15 21:50:35.931  INFO 23568 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
-2020-07-15 21:50:42.701  INFO 23568 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 8.613 seconds (JVM running for 11.394)
-2020-07-15 21:51:03.821  INFO 23568 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@753b289b]}
-2020-07-15 21:51:03.866 ERROR 23568 --- [http-nio-9999-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.wch.blog.dao.UserDao.selectByName] with root cause
+2020-07-16 08:55:53.777  INFO 2624 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 2624 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 08:55:53.792  INFO 2624 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 08:55:58.983  INFO 2624 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 6.566 seconds (JVM running for 9.34)
+2020-07-16 18:22:09.512  INFO 23752 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 23752 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 18:22:09.523  INFO 23752 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 18:22:14.813  INFO 23752 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 6.967 seconds (JVM running for 9.333)
+2020-07-16 18:22:56.406  INFO 23752 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/about', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@570f2139]}
+2020-07-16 18:22:57.455 ERROR 23752 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-07-16 18:22:57.458  INFO 23752 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/about', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.about', args=[{}]}
+2020-07-16 18:22:57.458 ERROR 23752 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------about
+2020-07-16 18:22:59.065  INFO 23752 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/user/4', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.commentUserIds', args=[4, {}]}
+2020-07-16 18:22:59.125 ERROR 23752 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-07-16 19:48:42.031  INFO 17724 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 17724 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 19:48:42.038  INFO 17724 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 19:48:48.022  INFO 17724 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 7.794 seconds (JVM running for 11.02)
+2020-07-16 20:04:06.624  INFO 4084 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 4084 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 20:04:06.630  INFO 4084 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 20:04:13.130  INFO 4084 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 8.215 seconds (JVM running for 11.668)
+2020-07-16 20:10:38.496  INFO 23300 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 23300 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 20:10:38.506  INFO 23300 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 20:10:43.600  INFO 23300 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 6.41 seconds (JVM running for 9.107)
+2020-07-16 20:32:35.060  INFO 26848 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 26848 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 20:32:35.068  INFO 26848 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 20:32:39.433  INFO 26848 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 5.832 seconds (JVM running for 9.244)
+2020-07-16 20:43:58.900  INFO 2964 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 2964 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 20:43:58.904  INFO 2964 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 20:44:06.273  INFO 2964 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 8.57 seconds (JVM running for 10.788)
+2020-07-16 20:44:19.069  INFO 2964 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@2e6cca69]}
+2020-07-16 20:44:20.091 ERROR 2964 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-07-16 20:44:20.104  INFO 2964 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.index', args=[1, {}]}
+2020-07-16 20:44:20.184 ERROR 2964 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------index
+2020-07-16 20:44:23.077  INFO 2964 --- [http-nio-9999-exec-5] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/archive;jsessionid=F2457372BB39E8DED2E8900AB30243EE', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@2e6cca69]}
+2020-07-16 20:44:23.078 ERROR 2964 --- [http-nio-9999-exec-5] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-07-16 20:44:23.079  INFO 2964 --- [http-nio-9999-exec-5] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/archive;jsessionid=F2457372BB39E8DED2E8900AB30243EE', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.archive', args=[{}]}
+2020-07-16 20:44:23.183 ERROR 2964 --- [http-nio-9999-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is java.lang.NullPointerException] with root cause
 
-org.apache.ibatis.binding.BindingException: Invalid bound statement (not found): com.wch.blog.dao.UserDao.selectByName
-	at org.apache.ibatis.binding.MapperMethod$SqlCommand.<init>(MapperMethod.java:235)
-	at org.apache.ibatis.binding.MapperMethod.<init>(MapperMethod.java:53)
-	at org.apache.ibatis.binding.MapperProxy.lambda$cachedInvoker$0(MapperProxy.java:107)
-	at java.util.concurrent.ConcurrentHashMap.computeIfAbsent(ConcurrentHashMap.java:1660)
-	at org.apache.ibatis.binding.MapperProxy.cachedInvoker(MapperProxy.java:94)
-	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:85)
-	at com.sun.proxy.$Proxy84.selectByName(Unknown Source)
-	at com.wch.blog.service.impl.UserServiceImpl.finUser(UserServiceImpl.java:41)
-	at com.wch.blog.service.impl.UserServiceImpl$$FastClassBySpringCGLIB$$4f739522.invoke(<generated>)
+java.lang.NullPointerException: null
+	at com.wch.blog.service.impl.BlogServiceImpl.getTimeSequence(BlogServiceImpl.java:145)
+	at com.wch.blog.service.impl.BlogServiceImpl$$FastClassBySpringCGLIB$$739654eb.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:687)
-	at com.wch.blog.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$2171a8c7.finUser(<generated>)
-	at com.wch.blog.controller.BlogShowController.getPublicData(BlogShowController.java:66)
+	at com.wch.blog.service.impl.BlogServiceImpl$$EnhancerBySpringCGLIB$$58d255.getTimeSequence(<generated>)
+	at com.wch.blog.controller.BlogShowController.archive(BlogShowController.java:113)
 	at com.wch.blog.controller.BlogShowController$$FastClassBySpringCGLIB$$bcb38640.invoke(<generated>)
 	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:771)
@@ -36,16 +59,15 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
 	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
 	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
-	at com.wch.blog.controller.BlogShowController$$EnhancerBySpringCGLIB$$ed9ff4c7.getPublicData(<generated>)
+	at com.wch.blog.controller.BlogShowController$$EnhancerBySpringCGLIB$$968db2d6.archive(<generated>)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
 	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-	at org.springframework.web.method.annotation.ModelFactory.invokeModelAttributeMethods(ModelFactory.java:137)
-	at org.springframework.web.method.annotation.ModelFactory.initModel(ModelFactory.java:106)
-	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:856)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:879)
 	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
 	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
 	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
@@ -96,7 +118,7 @@ org.apache.ibatis.binding.BindingException: Invalid bound statement (not found):
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
 
-2020-07-15 21:51:04.488 ERROR 23568 --- [http-nio-9999-exec-1] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-9999-exec-1] Exception processing template "error/500": An error happened during template parsing (template: "class path resource [templates/error/500.html]")
+2020-07-16 20:44:23.223 ERROR 2964 --- [http-nio-9999-exec-5] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-9999-exec-5] Exception processing template "error/500": An error happened during template parsing (template: "class path resource [templates/error/500.html]")
 
 org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/error/500.html]")
 	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:241)
@@ -191,7 +213,7 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1007E:
 	at org.thymeleaf.spring5.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:263)
 	... 74 common frames omitted
 
-2020-07-15 21:51:04.489 ERROR 23568 --- [http-nio-9999-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
+2020-07-16 20:44:23.225 ERROR 2964 --- [http-nio-9999-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
 
 org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property or field 'message' cannot be found on null
 	at org.springframework.expression.spel.ast.PropertyOrFieldReference.readProperty(PropertyOrFieldReference.java:213)
@@ -277,7 +299,7 @@ org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property o
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
 
-2020-07-15 21:51:04.491 ERROR 23568 --- [http-nio-9999-exec-1] o.a.c.c.C.[Tomcat].[localhost]           : Exception Processing ErrorPage[errorCode=0, location=/error]
+2020-07-16 20:44:23.226 ERROR 2964 --- [http-nio-9999-exec-5] o.a.c.c.C.[Tomcat].[localhost]           : Exception Processing ErrorPage[errorCode=0, location=/error]
 
 org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/error/500.html]")
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
@@ -375,16 +397,14 @@ Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1007E:
 	at org.thymeleaf.spring5.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:263)
 	... 74 common frames omitted
 
-2020-07-15 21:54:52.576  INFO 31648 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 31648 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
-2020-07-15 21:54:52.581  INFO 31648 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
-2020-07-15 21:54:57.708  INFO 31648 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 6.351 seconds (JVM running for 8.573)
-2020-07-15 21:55:15.780  INFO 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@20c53d70]}
-2020-07-15 21:55:16.863 ERROR 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
-2020-07-15 21:55:16.876  INFO 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.index', args=[1, {}]}
-2020-07-15 21:55:17.804 ERROR 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------index
-2020-07-15 21:55:24.933  INFO 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/109', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@20c53d70]}
-2020-07-15 21:55:24.934 ERROR 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
-2020-07-15 21:55:24.940  INFO 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/109', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 109]}
-2020-07-15 21:55:25.214 ERROR 31648 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
-2020-07-15 21:55:25.738  INFO 31648 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/109', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[109, {}]}
-2020-07-15 21:55:30.362 ERROR 31648 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-07-16 20:44:24.705  INFO 2964 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/types', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@2e6cca69]}
+2020-07-16 20:44:24.706 ERROR 2964 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-07-16 20:44:24.707  INFO 2964 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/types', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.types', args=[{}]}
+2020-07-16 20:44:24.918 ERROR 2964 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------types
+2020-07-16 20:44:27.746  INFO 2964 --- [http-nio-9999-exec-7] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/tags', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@2e6cca69]}
+2020-07-16 20:44:27.747 ERROR 2964 --- [http-nio-9999-exec-7] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-07-16 20:44:27.748  INFO 2964 --- [http-nio-9999-exec-7] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/tags', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.tags', args=[{}]}
+2020-07-16 20:44:28.072 ERROR 2964 --- [http-nio-9999-exec-7] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------tags
+2020-07-16 20:46:33.065  INFO 30632 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 30632 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-07-16 20:46:33.071  INFO 30632 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-07-16 20:46:40.178  INFO 30632 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 8.429 seconds (JVM running for 10.749)

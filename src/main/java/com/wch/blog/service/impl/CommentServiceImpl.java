@@ -28,6 +28,13 @@ public class CommentServiceImpl implements CommentService {
         return notPrentComment;
     }
 
+    @Override
+    public List<Comment> getShowByUserId(Long userId) {
+        List<Comment> comments = commentDao.selectShowByUserId(userId);
+        List<Comment> notPrentComment = getNotPrentComment(comments);
+        return notPrentComment;
+    }
+
     /**
      * 遍历出顶级节点
      * @param comments

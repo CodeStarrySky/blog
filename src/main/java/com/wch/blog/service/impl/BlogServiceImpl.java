@@ -171,17 +171,18 @@ public class BlogServiceImpl implements BlogService {
        return map;
     }
 
+    @Transactional
     @Override
     public Blog getShowBlog(Long id) {
+
         Blog blog = blogDao.selectShowById(id);
         if(blog==null){
             throw new NotFoundException("找不到该博客！");
         }
-        System.out.println(blog);
+        blogDao.updateShowView(id);
         Blog b = new Blog();
         BeanUtils.copyProperties(blog,b);
         String content = b.getContent();
-        System.out.println(b);
         String s = MarkdownUtils.markdownToHtmlExtensions(content);
         b.setContent(s);
         return b;

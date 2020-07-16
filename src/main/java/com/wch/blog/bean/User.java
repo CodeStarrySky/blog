@@ -94,7 +94,7 @@ public class User {
         if("".equals(path)||path==null){
             return path;
         }
-        String newPath = path.replace("G:\\blog\\images\\user\\", "/blog/images/user/");
+        String newPath = path.replace("/opt/blog/images/user/", "/blog/images/user/");
         return newPath;
     }
 

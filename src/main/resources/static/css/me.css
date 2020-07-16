@@ -70,6 +70,11 @@
 .m-margin-top {
     margin-top: 25px;
 }
+
+.m-margin-tb-very-min {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .m-margin-tb-min {
     margin-top: 12px;
     margin-bottom: 12px;

@@ -20,4 +20,6 @@ public interface CommentDao {
     public Comment selectShowByCommentParentId(@Param("parentId") Long parentId);
 
     public Comment selectShowByEmail(@Param("email") String email);
+
+    public List<Comment> selectShowByUserId(@Param("userId") Long userId);
 }

@@ -24,6 +24,7 @@ public interface UserService {
 
     public int changePwd(String newPwd,Long id);
 
+    public String getHeadPortrait(String nickname, String email);
 
 
 

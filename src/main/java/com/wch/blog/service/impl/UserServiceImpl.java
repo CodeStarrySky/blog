@@ -65,4 +65,9 @@ public class UserServiceImpl implements UserService {
     public int changePwd(String newPwd, Long id) {
         return userDao.updatePwd(newPwd,id);
     }
+
+    @Override
+    public String getHeadPortrait(String nickname, String email) {
+        return userDao.selectByNickNameAndEmail(nickname,email);
+    }
 }

@@ -34,6 +34,10 @@
         select id,username from user where username=#{username} and password=#{password}
     </select>
 
+    <select id="selectByNickNameAndEmail"  resultType="java.lang.String">
+        select head_portrait from user where nickname=#{nickname} and email=#{email};
+    </select>
+
     <select id="selectByName" resultMap="UserMap">
         select id,nickname,username,address,email,qq,wechat,head_portrait,public_qrcode,collection_qrcode,introduce_myself,contact_me,blog_intro,profession,intro1,intro2,intro3 from user where username=#{username}
     </select>

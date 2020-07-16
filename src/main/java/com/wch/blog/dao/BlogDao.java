@@ -48,4 +48,6 @@ public interface BlogDao {
     public Blog selectShowById(@Param("id") Long id);
 
     public int selectShowCount();
+
+    public int updateShowView(@Param("id") Long id);
 }
