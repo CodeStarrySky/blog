@@ -75,7 +75,7 @@ public class Blog {
         if(firstFigure==null||"".equals(firstFigure)){
             return firstFigure;
         }
-        if(firstFigure.startsWith("G:")){
+        if(firstFigure.startsWith("/opt")){
             return firstFigure.replace("/opt/blog/images/blog/", "/blog/images/blog/");
         }else{
             return firstFigure;

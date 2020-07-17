@@ -48,7 +48,7 @@ public class Comment {
         if(headPortrait==null||"".equals(headPortrait)){
             return headPortrait;
         }
-        if(headPortrait.startsWith("G:")){
+        if(headPortrait.startsWith("/opt")){
             return headPortrait.replace("/opt/blog/images/comments/", "/blog/images/comments/");
         }else{
             return headPortrait;
