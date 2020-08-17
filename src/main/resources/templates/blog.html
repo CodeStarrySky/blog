@@ -23,7 +23,7 @@
             <!--        </div>-->
             <!--        中间内容-->
             <div>
-                <div class=" panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px;padding:25px">
+                <div class=" panel panel-default panel-body m-border-radius m-box-shadow" id="panel-div" style="margin-top: 52px;padding:25px">
                     <div>
                         <!--            标题-->
                         <div class="m-padded-tb-mini m-font-spaced-mini  m-opacity">
@@ -58,7 +58,7 @@
                         <div class="m-cross-dotted"></div>
 
                         <!-- 文章内容 -->
-                        <div class="m-padded-lr">
+                        <div class="m-padded-lr" id="content-div">
                             <div class="text-right m-margin-bottom">
                                 <a th:if="${blog.ifOriginal==true}"  class="btn btn-info m-original disabled" >原创</a>
                                 <a th:if="${blog.ifOriginal==false}"  class="btn btn-info m-reprint disabled" >转载</a>
@@ -399,6 +399,32 @@
                 imgPre.src = url;
             }
         })
+</script>
+<!--判断是否是移动端-->
+<script type="text/javascript">
+    $(function () {
+        // function isPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone","SymbianOS", "Windows Phone", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            if(window.screen.width>=768){
+                flag = true;
+            }
+            console.log("hahahahah")
+            if(!flag){
+                $('#content-div').removeClass();
+                $('#panel-div').removeClass();
+                $('#panel-div').css("padding",0);
+            }
+            // return flag;
+        // }
+    })
 </script>
 </body>
 </html>
