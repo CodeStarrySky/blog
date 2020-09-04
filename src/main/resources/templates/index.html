@@ -26,7 +26,8 @@
                 <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px" th:each="blog : ${page.list}">
                     <!--            标题-->
                     <div class="m-padded-tb-min m-font-spaced-mini m-font-padded-left m-opacity-mini content-a">
-                       <h2 class="m-margin-none m-font-lined-mini" > <a th:href="@{/blog/}+${blog.id}" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h2>
+                       <h2 class="m-margin-none m-font-lined-mini" > <a th:href="@{'/blog/'+${blog.id}}" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h2>
+                        hahah[[${blog.id}]]
                     </div>
                     <div class="row container-fluid m-opacity-tiny" style="padding-left: 25px">
                         <div class="text-left " style="margin-top:6px;margin-right: 3px" >
@@ -41,9 +42,9 @@
                                 <span class=" glyphicon glyphicon-folder-open"
                                         aria-hidden="true">
                                 </span>
-                                <a style="padding-left: 2px;color: black" th:href="@{/type/}+${blog.type.id}">[[${blog.type.typeName}]]</a>
+                                <a style="padding-left: 2px;color: black" th:href="@{'/type/'+${blog.type.id}}">[[${blog.type.typeName}]]</a>
                             </span>
-                            <a class="label label-info m-span-label" th:if="${blog.tags!=null}"   th:each="tag : ${blog.tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]</a>
+                            <a class="label label-info m-span-label" th:if="${blog.tags!=null}"   th:each="tag : ${blog.tags}" th:href="@{'/tag/'+${tag.id}}">[[${tag.tagName}]]</a>
                         </div>
                     </div>
                     <div class=" m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3 class="m-font-lined-mini m-margin-tb-very-min" th:text="${blog.introduction}">这是博客的简介</h3></div>
@@ -57,7 +58,7 @@
             <!--        footer分页跳转-->
             <nav aria-label="Page navigation">
                 <ul class="pager text-center m-margin-tb-tiny" style="margin-bottom: 99px">
-                    <li class="previous "  th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{/pn/}+${page.pageNum-1}" class="btn m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''">
+                    <li class="previous "  th:classappend="${page.pageNum==1}?'disabled':''" ><a href="#" th:href="@{'/pn/'+${page.pageNum-1}}" class="btn m-box-shadow" th:classappend="${page.pageNum<=1}?'disabled':''">
                         <span class="glyphicon glyphicon-arrow-left m-padded-max m-font-color-blue " aria-hidden="true"></span></a>
                     </li>
                     <li>
@@ -66,7 +67,7 @@
                         </a>
                     </li>
                     <li class="next" th:classappend="${page.pageNum==page.pages}?'disabled':''">
-                        <a class="btn m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{/pn/}+${page.pageNum+1}">
+                        <a class="btn m-box-shadow" th:classappend="${page.pageNum==page.pages}?'disabled':''" href="#" th:href="@{'/pn/'+${page.pageNum+1}}">
                             <span class="glyphicon glyphicon-arrow-right m-padded-max m-font-color-blue" aria-hidden="true"></span>
                         </a>
                     </li>

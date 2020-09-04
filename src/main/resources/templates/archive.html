@@ -34,7 +34,7 @@
                                     <!-- 边框小三角 -->
                                     <div class=" m-inner"></div>
                                     <div class="m-padded-none ">
-                                        <div class="m-font-spaced-large m-font-padded-left content-a" style="margin-bottom: 5px;font-size: 16px" > <a th:href="@{/blog/}+${blog.id}" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></div>
+                                        <div class="m-font-spaced-large m-font-padded-left content-a" style="margin-bottom: 5px;font-size: 16px" > <a th:href="@{'/blog/'+${blog.id}}" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></div>
                                         <hr class="m-padded-none m-margin-none" style="margin-left: 8px;margin-right: 8px">
                                         <div class="row container-fluid m-opacity-tiny" style="padding-left: 25px">
                                             <div class="text-left " style="margin-top:6px;margin-right: 3px" >
@@ -49,9 +49,9 @@
                                                     <span class=" glyphicon glyphicon-folder-open"
                                                             aria-hidden="true">
                                                     </span>
-                                                    <a style="padding-left: 2px;color: black" th:href="@{/type/}+${blog.type.id}">[[${blog.type.typeName}]]</a>
+                                                    <a style="padding-left: 2px;color: black" th:href="@{'/type/'+${blog.type.id}}">[[${blog.type.typeName}]]</a>
                                                 </span>
-                                                <a class="label label-info m-span-label-mini "   th:each="tag : ${blog.tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]</a>
+                                                <a class="label label-info m-span-label-mini "   th:each="tag : ${blog.tags}" th:href="@{'/tag/'+${tag.id}}">[[${tag.tagName}]]</a>
                                             </div>
                                         </div>
                                     </div>

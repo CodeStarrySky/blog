@@ -42,9 +42,9 @@
                                 <span class=" glyphicon glyphicon-folder-open"
                                       aria-hidden="true">
                                 </span>
-                                <a style="padding-left: 2px;color: black" th:href="@{/type/}+${blog.type.id}">[[${blog.type.typeName}]]</a>
+                                <a style="padding-left: 2px;color: black" th:href="@{'/type/'+${blog.type.id}}">[[${blog.type.typeName}]]</a>
                             </span>
-                                <a class="label label-info m-span-label "   th:each="tag : ${blog.tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]</a>
+                                <a class="label label-info m-span-label "   th:each="tag : ${blog.tags}" th:href="@{'/tag/'+${tag.id}}">[[${tag.tagName}]]</a>
                             </div>
                         </div>
                         <div class="m-padded-tb-mini m-font-spaced  m-opacity-mini m-margin-none" style="margin-bottom: 15px"><h3 th:text="${blog.introduction}">这是博客的简介</h3></div>

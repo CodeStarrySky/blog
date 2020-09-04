@@ -26,7 +26,7 @@
                 <div class="panel panel-default panel-body m-border-radius m-box-shadow" style="margin-top: 52px" th:each="blog : ${blogs}">
                     <!--            标题-->
                     <div class="m-padded-tb-min m-font-spaced-mini m-font-padded-left m-opacity-mini content-a">
-                        <h2 class="m-margin-none m-font-lined-mini" > <a th:href="@{/blog/}+${blog.id}" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h2>
+                        <h2 class="m-margin-none m-font-lined-mini" > <a th:href="@{'/blog/'+${blog.id}}" th:text="${blog.title}">你真的理解什么是财富自由吗？</a></h2>
                     </div>
                     <div class="row container-fluid m-opacity-tiny" style="padding-left: 25px">
                         <div class="text-left " style="margin-top:6px;margin-right: 3px" >
@@ -41,9 +41,9 @@
                                 <span class=" glyphicon glyphicon-folder-open"
                                       aria-hidden="true">
                                 </span>
-                                <a style="padding-left: 2px;color: black" th:href="@{/type/}+${blog.type.id}">[[${blog.type.typeName}]]</a>
+                                <a style="padding-left: 2px;color: black" th:href="@{'/type/'+${blog.type.id}}">[[${blog.type.typeName}]]</a>
                             </span>
-                            <a class="label label-info m-span-label" th:if="${blog.tags!=null}"   th:each="tag : ${blog.tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]</a>
+                            <a class="label label-info m-span-label" th:if="${blog.tags!=null}"   th:each="tag : ${blog.tags}" th:href="@{'/tag/'+${tag.id}}">[[${tag.tagName}]]</a>
                         </div>
                     </div>
                     <div class="m-padded-tb-min m-font-spaced m-font-padded-left m-opacity-mini m-margin-none"><h3 class="m-font-lined-mini" th:text="${blog.introduction}">这是博客的简介</h3></div>

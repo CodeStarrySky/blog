@@ -151,7 +151,7 @@
                 <div class="panel panel-default panel-body m-border-radius m-margin-top m-padded-tb-tiny m-box-shadow-mini " th:each="type:${#session.getAttribute('data').types}">
                     <h4 class="m-center-block m-font-lined-tiny">
                         <a class="col-md-10 m-font-spaced m-opacity"
-                           style="padding-bottom: 8px;font-size: 18px;font-weight: bold;color: black" th:text="${type.typeName}" th:href="@{/type/}+${type.id}">技术框架</a>
+                           style="padding-bottom: 8px;font-size: 18px;font-weight: bold;color: black" th:text="${type.typeName}" th:href="@{'/type/'+${type.id}}">技术框架</a>
                         <span class="col-md-2  label label-info " style="margin-bottom: 10px" th:text="${type.count}">13</span>
                     </h4>
                 </div>
@@ -168,7 +168,7 @@
             <!-- 标签具体内容 -->
             <div class="m-opacity-mini m-div-min-height  m-margin-none text-center" >
                 <!--                    <div class="col-md-5 m-margin-tiny "><h3 ><span class="label label-info">spring boot</span></h3></div>-->
-                <a class="btn btn-info m-margin-large-mini" th:each="tag : ${#session.getAttribute('data').tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]&nbsp;&nbsp;<span class="badge">[[${tag.count}]]</span> </a>
+                <a class="btn btn-info m-margin-large-mini" th:each="tag : ${#session.getAttribute('data').tags}" th:href="@{'/tag/'+${tag.id}}">[[${tag.tagName}]]&nbsp;&nbsp;<span class="badge">[[${tag.count}]]</span> </a>
 
 
 
@@ -193,7 +193,7 @@
                 <div class="col-md-3 m-div-min-height-large m-opacity-tiny" style="border-right: 2px solid #E6E3E3">
                     <h3>最新博客</h3>
                     <div class="m-margin-tb-mini content-a" >
-                        <h5 th:each="blog,blogStat : ${#session.getAttribute('data').user.blogs}" th:if="${blogStat.count}<=3"><a href="#" th:href="@{/blog/}+${blog.id}" style="color: deepskyblue!important;" th:text="${blog.title}">最新博客1</a></h5>
+                        <h5 th:each="blog,blogStat : ${#session.getAttribute('data').user.blogs}" th:if="${blogStat.count}<=3"><a href="#" th:href="@{'/blog/'+${blog.id}}" style="color: deepskyblue!important;" th:text="${blog.title}">最新博客1</a></h5>
                     </div>
 
                 </div>

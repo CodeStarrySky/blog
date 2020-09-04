@@ -1,0 +1,379 @@
+2020-08-17 21:36:31.582  INFO 36628 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 36628 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-08-17 21:36:31.592  INFO 36628 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-08-17 21:36:37.106  WARN 36628 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 9999 is already in use
+2020-08-17 21:36:37.148 ERROR 36628 --- [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9999 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9999 or configure this application to listen on another port.
+
+2020-08-17 21:44:23.247  INFO 38892 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 38892 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-08-17 21:44:23.254  INFO 38892 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-08-17 21:44:34.742  INFO 38892 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 14.361 seconds (JVM running for 19.041)
+2020-08-17 21:45:06.534  INFO 38892 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:45:07.508 ERROR 38892 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:45:07.521  INFO 38892 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.index', args=[1, {}]}
+2020-08-17 21:45:07.709 ERROR 38892 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------index
+2020-08-17 21:45:10.510 ERROR 38892 --- [http-nio-9999-exec-5] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-9999-exec-5] Exception processing template "error/404": An error happened during template parsing (template: "class path resource [templates/error/404.html]")
+
+org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/error/404.html]")
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:241)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parseStandalone(AbstractMarkupTemplateParser.java:100)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:666)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:394)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:253)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:175)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.attoparser.ParseException: Exception evaluating SpringEL expression: "exception.message" (template: "error/404" - line 31, col 10)
+	at org.attoparser.MarkupParser.parseDocument(MarkupParser.java:393)
+	at org.attoparser.MarkupParser.parse(MarkupParser.java:257)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:230)
+	... 49 common frames omitted
+Caused by: org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression: "exception.message" (template: "error/404" - line 31, col 10)
+	at org.thymeleaf.spring5.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:290)
+	at org.thymeleaf.standard.expression.VariableExpression.executeVariableExpression(VariableExpression.java:166)
+	at org.thymeleaf.standard.expression.SimpleExpression.executeSimple(SimpleExpression.java:66)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:109)
+	at org.thymeleaf.standard.expression.AdditionExpression.executeAddition(AdditionExpression.java:96)
+	at org.thymeleaf.standard.expression.ComplexExpression.executeComplex(ComplexExpression.java:62)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:112)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:138)
+	at org.thymeleaf.standard.processor.StandardUtextTagProcessor.doProcess(StandardUtextTagProcessor.java:87)
+	at org.thymeleaf.processor.element.AbstractAttributeTagProcessor.doProcess(AbstractAttributeTagProcessor.java:74)
+	at org.thymeleaf.processor.element.AbstractElementTagProcessor.process(AbstractElementTagProcessor.java:95)
+	at org.thymeleaf.util.ProcessorConfigurationUtils$ElementTagProcessorWrapper.process(ProcessorConfigurationUtils.java:633)
+	at org.thymeleaf.engine.ProcessorTemplateHandler.handleOpenElement(ProcessorTemplateHandler.java:1314)
+	at org.thymeleaf.engine.TemplateHandlerAdapterMarkupHandler.handleOpenElementEnd(TemplateHandlerAdapterMarkupHandler.java:304)
+	at org.thymeleaf.templateparser.markup.InlinedOutputExpressionMarkupHandler$InlineMarkupAdapterPreProcessorHandler.handleOpenElementEnd(InlinedOutputExpressionMarkupHandler.java:278)
+	at org.thymeleaf.standard.inline.OutputExpressionInlinePreProcessorHandler.handleOpenElementEnd(OutputExpressionInlinePreProcessorHandler.java:186)
+	at org.thymeleaf.templateparser.markup.InlinedOutputExpressionMarkupHandler.handleOpenElementEnd(InlinedOutputExpressionMarkupHandler.java:124)
+	at org.attoparser.HtmlElement.handleOpenElementEnd(HtmlElement.java:109)
+	at org.attoparser.HtmlMarkupHandler.handleOpenElementEnd(HtmlMarkupHandler.java:297)
+	at org.attoparser.MarkupEventProcessorHandler.handleOpenElementEnd(MarkupEventProcessorHandler.java:402)
+	at org.attoparser.ParsingElementMarkupUtil.parseOpenElement(ParsingElementMarkupUtil.java:159)
+	at org.attoparser.MarkupParser.parseBuffer(MarkupParser.java:710)
+	at org.attoparser.MarkupParser.parseDocument(MarkupParser.java:301)
+	... 51 common frames omitted
+Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property or field 'message' cannot be found on null
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.readProperty(PropertyOrFieldReference.java:213)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.getValueInternal(PropertyOrFieldReference.java:104)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.access$000(PropertyOrFieldReference.java:51)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference$AccessorLValue.getValue(PropertyOrFieldReference.java:406)
+	at org.springframework.expression.spel.ast.CompoundExpression.getValueInternal(CompoundExpression.java:92)
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getValue(SpelNodeImpl.java:112)
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:337)
+	at org.thymeleaf.spring5.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:263)
+	... 73 common frames omitted
+
+2020-08-17 21:45:10.515 ERROR 38892 --- [http-nio-9999-exec-5] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] threw exception
+
+org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property or field 'message' cannot be found on null
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.readProperty(PropertyOrFieldReference.java:213)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.getValueInternal(PropertyOrFieldReference.java:104)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.access$000(PropertyOrFieldReference.java:51)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference$AccessorLValue.getValue(PropertyOrFieldReference.java:406)
+	at org.springframework.expression.spel.ast.CompoundExpression.getValueInternal(CompoundExpression.java:92)
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getValue(SpelNodeImpl.java:112)
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:337)
+	at org.thymeleaf.spring5.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:263)
+	at org.thymeleaf.standard.expression.VariableExpression.executeVariableExpression(VariableExpression.java:166)
+	at org.thymeleaf.standard.expression.SimpleExpression.executeSimple(SimpleExpression.java:66)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:109)
+	at org.thymeleaf.standard.expression.AdditionExpression.executeAddition(AdditionExpression.java:96)
+	at org.thymeleaf.standard.expression.ComplexExpression.executeComplex(ComplexExpression.java:62)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:112)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:138)
+	at org.thymeleaf.standard.processor.StandardUtextTagProcessor.doProcess(StandardUtextTagProcessor.java:87)
+	at org.thymeleaf.processor.element.AbstractAttributeTagProcessor.doProcess(AbstractAttributeTagProcessor.java:74)
+	at org.thymeleaf.processor.element.AbstractElementTagProcessor.process(AbstractElementTagProcessor.java:95)
+	at org.thymeleaf.util.ProcessorConfigurationUtils$ElementTagProcessorWrapper.process(ProcessorConfigurationUtils.java:633)
+	at org.thymeleaf.engine.ProcessorTemplateHandler.handleOpenElement(ProcessorTemplateHandler.java:1314)
+	at org.thymeleaf.engine.TemplateHandlerAdapterMarkupHandler.handleOpenElementEnd(TemplateHandlerAdapterMarkupHandler.java:304)
+	at org.thymeleaf.templateparser.markup.InlinedOutputExpressionMarkupHandler$InlineMarkupAdapterPreProcessorHandler.handleOpenElementEnd(InlinedOutputExpressionMarkupHandler.java:278)
+	at org.thymeleaf.standard.inline.OutputExpressionInlinePreProcessorHandler.handleOpenElementEnd(OutputExpressionInlinePreProcessorHandler.java:186)
+	at org.thymeleaf.templateparser.markup.InlinedOutputExpressionMarkupHandler.handleOpenElementEnd(InlinedOutputExpressionMarkupHandler.java:124)
+	at org.attoparser.HtmlElement.handleOpenElementEnd(HtmlElement.java:109)
+	at org.attoparser.HtmlMarkupHandler.handleOpenElementEnd(HtmlMarkupHandler.java:297)
+	at org.attoparser.MarkupEventProcessorHandler.handleOpenElementEnd(MarkupEventProcessorHandler.java:402)
+	at org.attoparser.ParsingElementMarkupUtil.parseOpenElement(ParsingElementMarkupUtil.java:159)
+	at org.attoparser.MarkupParser.parseBuffer(MarkupParser.java:710)
+	at org.attoparser.MarkupParser.parseDocument(MarkupParser.java:301)
+	at org.attoparser.MarkupParser.parse(MarkupParser.java:257)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:230)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parseStandalone(AbstractMarkupTemplateParser.java:100)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:666)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:394)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:253)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:175)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+
+2020-08-17 21:45:10.517 ERROR 38892 --- [http-nio-9999-exec-5] o.a.c.c.C.[Tomcat].[localhost]           : Exception Processing ErrorPage[errorCode=0, location=/error]
+
+org.springframework.web.util.NestedServletException: Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/error/404.html]")
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:103)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:712)
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:461)
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:384)
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:312)
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:394)
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:253)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:175)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:373)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing (template: "class path resource [templates/error/404.html]")
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:241)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parseStandalone(AbstractMarkupTemplateParser.java:100)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:666)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:362)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:189)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	... 38 common frames omitted
+Caused by: org.attoparser.ParseException: Exception evaluating SpringEL expression: "exception.message" (template: "error/404" - line 31, col 10)
+	at org.attoparser.MarkupParser.parseDocument(MarkupParser.java:393)
+	at org.attoparser.MarkupParser.parse(MarkupParser.java:257)
+	at org.thymeleaf.templateparser.markup.AbstractMarkupTemplateParser.parse(AbstractMarkupTemplateParser.java:230)
+	... 49 common frames omitted
+Caused by: org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression: "exception.message" (template: "error/404" - line 31, col 10)
+	at org.thymeleaf.spring5.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:290)
+	at org.thymeleaf.standard.expression.VariableExpression.executeVariableExpression(VariableExpression.java:166)
+	at org.thymeleaf.standard.expression.SimpleExpression.executeSimple(SimpleExpression.java:66)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:109)
+	at org.thymeleaf.standard.expression.AdditionExpression.executeAddition(AdditionExpression.java:96)
+	at org.thymeleaf.standard.expression.ComplexExpression.executeComplex(ComplexExpression.java:62)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:112)
+	at org.thymeleaf.standard.expression.Expression.execute(Expression.java:138)
+	at org.thymeleaf.standard.processor.StandardUtextTagProcessor.doProcess(StandardUtextTagProcessor.java:87)
+	at org.thymeleaf.processor.element.AbstractAttributeTagProcessor.doProcess(AbstractAttributeTagProcessor.java:74)
+	at org.thymeleaf.processor.element.AbstractElementTagProcessor.process(AbstractElementTagProcessor.java:95)
+	at org.thymeleaf.util.ProcessorConfigurationUtils$ElementTagProcessorWrapper.process(ProcessorConfigurationUtils.java:633)
+	at org.thymeleaf.engine.ProcessorTemplateHandler.handleOpenElement(ProcessorTemplateHandler.java:1314)
+	at org.thymeleaf.engine.TemplateHandlerAdapterMarkupHandler.handleOpenElementEnd(TemplateHandlerAdapterMarkupHandler.java:304)
+	at org.thymeleaf.templateparser.markup.InlinedOutputExpressionMarkupHandler$InlineMarkupAdapterPreProcessorHandler.handleOpenElementEnd(InlinedOutputExpressionMarkupHandler.java:278)
+	at org.thymeleaf.standard.inline.OutputExpressionInlinePreProcessorHandler.handleOpenElementEnd(OutputExpressionInlinePreProcessorHandler.java:186)
+	at org.thymeleaf.templateparser.markup.InlinedOutputExpressionMarkupHandler.handleOpenElementEnd(InlinedOutputExpressionMarkupHandler.java:124)
+	at org.attoparser.HtmlElement.handleOpenElementEnd(HtmlElement.java:109)
+	at org.attoparser.HtmlMarkupHandler.handleOpenElementEnd(HtmlMarkupHandler.java:297)
+	at org.attoparser.MarkupEventProcessorHandler.handleOpenElementEnd(MarkupEventProcessorHandler.java:402)
+	at org.attoparser.ParsingElementMarkupUtil.parseOpenElement(ParsingElementMarkupUtil.java:159)
+	at org.attoparser.MarkupParser.parseBuffer(MarkupParser.java:710)
+	at org.attoparser.MarkupParser.parseDocument(MarkupParser.java:301)
+	... 51 common frames omitted
+Caused by: org.springframework.expression.spel.SpelEvaluationException: EL1007E: Property or field 'message' cannot be found on null
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.readProperty(PropertyOrFieldReference.java:213)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.getValueInternal(PropertyOrFieldReference.java:104)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference.access$000(PropertyOrFieldReference.java:51)
+	at org.springframework.expression.spel.ast.PropertyOrFieldReference$AccessorLValue.getValue(PropertyOrFieldReference.java:406)
+	at org.springframework.expression.spel.ast.CompoundExpression.getValueInternal(CompoundExpression.java:92)
+	at org.springframework.expression.spel.ast.SpelNodeImpl.getValue(SpelNodeImpl.java:112)
+	at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:337)
+	at org.thymeleaf.spring5.expression.SPELVariableExpressionEvaluator.evaluate(SPELVariableExpressionEvaluator.java:263)
+	... 73 common frames omitted
+
+2020-08-17 21:45:13.381  INFO 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:45:13.381 ERROR 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:45:13.382  INFO 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.index', args=[1, {}]}
+2020-08-17 21:45:13.516 ERROR 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------index
+2020-08-17 21:45:14.676  INFO 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:45:14.677 ERROR 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:45:14.684  INFO 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:45:15.048 ERROR 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:45:15.625  INFO 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:45:15.672 ERROR 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:47:14.083  INFO 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:47:14.083 ERROR 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:47:14.084  INFO 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:47:14.449 ERROR 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:47:15.020  INFO 38892 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:47:15.053 ERROR 38892 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:47:32.973  INFO 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:47:32.973 ERROR 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:47:32.974  INFO 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:47:33.233 ERROR 38892 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:47:33.493  INFO 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:47:33.526 ERROR 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:48:25.936  INFO 38892 --- [http-nio-9999-exec-6] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:48:25.936 ERROR 38892 --- [http-nio-9999-exec-6] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:48:25.937  INFO 38892 --- [http-nio-9999-exec-6] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:48:26.194 ERROR 38892 --- [http-nio-9999-exec-6] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:48:26.654  INFO 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:48:26.688 ERROR 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:49:00.657  INFO 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:49:00.658 ERROR 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:49:00.660  INFO 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:49:00.915 ERROR 38892 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:49:01.290  INFO 38892 --- [http-nio-9999-exec-7] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:49:01.331 ERROR 38892 --- [http-nio-9999-exec-7] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:50:25.546  INFO 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@51c2cc7c]}
+2020-08-17 21:50:25.547 ERROR 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:50:25.547  INFO 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:50:25.860 ERROR 38892 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:50:26.709  INFO 38892 --- [http-nio-9999-exec-3] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:50:26.742 ERROR 38892 --- [http-nio-9999-exec-3] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:51:23.612  INFO 33760 --- [restartedMain] com.wch.blog.BlogApplication             : Starting BlogApplication on DESKTOP-EQIV8FQ with PID 33760 (F:\IdeaProject\blog\target\classes started by 25745 in F:\IdeaProject\blog)
+2020-08-17 21:51:23.623  INFO 33760 --- [restartedMain] com.wch.blog.BlogApplication             : The following profiles are active: pro
+2020-08-17 21:51:33.550  INFO 33760 --- [restartedMain] com.wch.blog.BlogApplication             : Started BlogApplication in 11.732 seconds (JVM running for 21.815)
+2020-08-17 21:51:46.253  INFO 33760 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@3cd6552c]}
+2020-08-17 21:51:47.804 ERROR 33760 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:51:47.818  INFO 33760 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:51:48.245 ERROR 33760 --- [http-nio-9999-exec-1] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:51:50.081  INFO 33760 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:51:50.131 ERROR 33760 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:53:31.291  INFO 33760 --- [http-nio-9999-exec-2] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@3cd6552c]}
+2020-08-17 21:53:31.292 ERROR 33760 --- [http-nio-9999-exec-2] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:53:31.292  INFO 33760 --- [http-nio-9999-exec-2] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:53:31.650 ERROR 33760 --- [http-nio-9999-exec-2] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:53:32.769  INFO 33760 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:53:32.902 ERROR 33760 --- [http-nio-9999-exec-4] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:54:32.691  INFO 33760 --- [http-nio-9999-exec-3] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@3cd6552c]}
+2020-08-17 21:54:32.691 ERROR 33760 --- [http-nio-9999-exec-3] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:54:32.692  INFO 33760 --- [http-nio-9999-exec-3] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:54:32.958 ERROR 33760 --- [http-nio-9999-exec-3] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:54:34.254  INFO 33760 --- [http-nio-9999-exec-5] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:54:34.287 ERROR 33760 --- [http-nio-9999-exec-5] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:55:45.244  INFO 33760 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@3cd6552c]}
+2020-08-17 21:55:45.244 ERROR 33760 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:55:45.245  INFO 33760 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:55:45.549 ERROR 33760 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:55:46.366  INFO 33760 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:55:46.401 ERROR 33760 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:55:51.836  INFO 33760 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@3cd6552c]}
+2020-08-17 21:55:51.837 ERROR 33760 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:55:51.837  INFO 33760 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:55:52.100 ERROR 33760 --- [http-nio-9999-exec-10] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:55:52.604  INFO 33760 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:55:52.638 ERROR 33760 --- [http-nio-9999-exec-8] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div
+2020-08-17 21:55:59.608  INFO 33760 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.getPublicData', args=[org.apache.catalina.session.StandardSessionFacade@3cd6552c]}
+2020-08-17 21:55:59.610 ERROR 33760 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------null
+2020-08-17 21:55:59.611  INFO 33760 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/blog/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.BlogShowController.blog', args=[{}, 1]}
+2020-08-17 21:55:59.871 ERROR 33760 --- [http-nio-9999-exec-9] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog
+2020-08-17 21:56:00.516  INFO 33760 --- [http-nio-9999-exec-5] com.wch.blog.aspect.LogAspect            : Request : RequestLog{url='http://localhost:9999/comments/1', ip='0:0:0:0:0:0:0:1', classMethod='com.wch.blog.controller.CommentShowController.comments', args=[1, {}]}
+2020-08-17 21:56:00.552 ERROR 33760 --- [http-nio-9999-exec-5] com.wch.blog.aspect.LogAspect            : --------------doAfterRunting-----------blog :: comments_div

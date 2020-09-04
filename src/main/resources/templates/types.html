@@ -49,9 +49,9 @@
                                                     <span class=" glyphicon glyphicon-folder-open"
                                                           aria-hidden="true">
                                                     </span>
-                                                    <a style="padding-left: 2px;color: black" th:href="@{/type/}+${blog.type.id}">[[${blog.type.typeName}]]</a>
+                                                    <a style="padding-left: 2px;color: black" th:href="@{'/type/'+${blog.type.id}}">[[${blog.type.typeName}]]</a>
                                                 </span>
-                                            <a class="label label-info m-span-label-mini "   th:each="tag : ${blog.tags}" th:href="@{/tag/}+${tag.id}">[[${tag.tagName}]]</a>
+                                            <a class="label label-info m-span-label-mini "   th:each="tag : ${blog.tags}" th:href="@{'/tag/'+${tag.id}}">[[${tag.tagName}]]</a>
                                         </div>
                                     </div>
                                 </div>
